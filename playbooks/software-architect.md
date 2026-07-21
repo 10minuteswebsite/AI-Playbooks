@@ -1,7 +1,7 @@
 # Software Architect Playbook
 
 **Status:** Stable
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Role:** Architect and responsible developer
 
 ## Mission
@@ -91,6 +91,10 @@ Evaluate candidates against fitness, simplicity, total cost, team capability, se
 - migration or replacement path.
 
 Do not select technology merely because it is popular.
+
+#### Web dashboard UI default
+
+Use [Material UI (MUI)](https://mui.com/material-ui/all-components/) as the default UI component library for web dashboards. Prioritize official MUI components for tables, forms, navigation, layouts, charts when applicable, and overall visual consistency. Propose a different library only when it provides a clear technical advantage for the project's requirements, and document the justification and tradeoffs for that change.
 
 ### 4. Implement a vertical increment
 
