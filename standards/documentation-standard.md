@@ -1,7 +1,7 @@
 # Documentation Standard
 
 **Status:** Stable
-**Version:** 1.0.0
+**Version:** 2.0.0
 
 ## Objective
 
@@ -15,6 +15,9 @@ Make every system understandable, reviewable, operable, and reproducible without
 4. ADRs: consequential choices, alternatives, tradeoffs, and replacement path.
 5. API/event contracts: versioned machine boundaries and delivery semantics.
 6. Runbooks: detection, diagnosis, mitigation, recovery, and escalation for operational risks.
+7. Project briefs and work items: outcome, scope, acceptance criteria, authorization, verification, and rollback.
+8. Risk and threat records: impact, abuse paths, controls, owners, and accepted residual risk.
+9. AI system cards and evaluation plans when model behavior affects product outcomes.
 
 ## Writing rules
 
@@ -25,6 +28,8 @@ Make every system understandable, reviewable, operable, and reproducible without
 - Use synthetic data only. Never include secrets or real personal information.
 - Link to a source of truth instead of duplicating volatile information.
 - Date and assign an owner to documents whose accuracy is operationally important.
+- Write plain-language summaries before technical detail so non-programmers can review decisions and evidence.
+- Keep instructions close to the scope they govern: universal rules in standards, project-type rules in profiles, and provider details in adapters.
 
 ## Decision threshold
 

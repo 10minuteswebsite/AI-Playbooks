@@ -25,4 +25,8 @@
 - [ ] No secrets, personal data, or real customer content are included.
 - [ ] Domain boundaries do not depend unnecessarily on a provider.
 - [ ] Relevant links, examples, and templates were checked.
+- [ ] `python3 scripts/validate_docs.py` passes.
+- [ ] `python3 scripts/scan_secrets.py` passes.
+- [ ] Applicable profiles, quality gates, security checks, and human approvals were considered.
+- [ ] AI evaluation and tool-permission evidence is included when AI behavior changed.
 - [ ] Any material decision has an ADR or an explanation of why one is unnecessary.

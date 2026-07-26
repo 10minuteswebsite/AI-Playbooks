@@ -69,10 +69,9 @@ Include a component diagram and explain the main request, event, and data flows.
 
 - Data ownership and lifecycle:
 - Organization/tenant isolation:
-- Lead and conversation scoping:
-- Shared omnichannel memory:
-- Agent DNA source and prompt derivation:
+- User/resource/purpose scoping:
 - Retention, deletion, and audit:
+- AI model, prompt, retrieval, and memory governance when applicable:
 
 ## 9. Contracts and events
 

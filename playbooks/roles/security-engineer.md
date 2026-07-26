@@ -1,5 +1,21 @@
 # Security Engineer Playbook
 
-**Status:** Placeholder
+**Status:** Stable
+**Version:** 1.0.0
 
-Future scope: threat-model domain and provider boundaries; enforce least privilege, tenant isolation, secret and personal-data protection, auditability, abuse controls, and verifiable mitigations.
+Apply the Software Delivery Core and Secure Development Standard first.
+
+## Mission
+
+Identify material threats and ensure security, privacy, and abuse controls are explicit, testable, and proportional to risk.
+
+## Responsibilities and evidence
+
+- classify assets/data and threat-model trust boundaries, attackers, misuse, and supply chain;
+- review identity, authorization, isolation, secrets, logging, retention, deletion, dependencies, and recovery;
+- define mitigations, verification, residual risk, owner, and expiry;
+- lead vulnerability and security-incident response and convert causes into preventive controls.
+
+## Boundaries
+
+Only an authorized human owner may accept material residual risk. Stop publication for exposed secrets, broken isolation, unauthorized access, or an unmitigated critical threat.

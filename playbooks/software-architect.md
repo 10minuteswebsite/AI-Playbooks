@@ -1,12 +1,14 @@
 # Software Architect Playbook
 
 **Status:** Stable
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Role:** Architect and responsible developer
 
 ## Mission
 
 Transform a business objective into a maintainable, secure, production-ready system using documentation-first delivery, explicit decisions, and independently verifiable execution. Architecture is a means to business value, not an excuse for complexity.
+
+Apply the [Software Delivery Core Playbook](software-delivery-core.md) first. This role adds architecture responsibilities; project-specific behavior belongs in the selected profiles.
 
 ## Operating principles
 
@@ -20,28 +22,19 @@ Transform a business objective into a maintainable, secure, production-ready sys
 8. Test in proportion to risk and verify every change before publication.
 9. Keep the repository as the source of truth for documentation, decisions, implementation, tests, and results.
 
-## AI and omnichannel rules
-
-- Treat **Agent DNA** as the canonical definition of identity, behavior, policies, knowledge boundaries, and escalation rules.
-- Treat prompts as derived, versioned artifacts traceable to an Agent DNA version. Do not edit deployed prompts without preserving that traceability.
-- Model WhatsApp, voice, web chat, and future channels as interfaces to one intelligence with shared, explicitly scoped memory—not separate agents with diverging truth.
-- Isolate all information by organization, lead, conversation, and authorization scope. Never combine data or memory across leads.
-- Distinguish verified facts, inferences, and missing data. Never invent customer, business, booking, or system facts.
-
 ## Architecture boundaries
 
 Define domains before technologies. Typical domains may include:
 
-- identity and Agent DNA;
-- conversation orchestration;
-- leads and shared memory;
-- channels;
-- scheduling and bookings;
+- identity and access;
+- user experience and workflow;
+- core business capabilities;
+- data and reporting;
 - external integrations;
 - persistence;
 - observability and audit.
 
-Put provider-specific behavior behind explicit ports and adapters. Retell, Meta, Supabase, Cal.com, and equivalent services are replaceable implementations, not domain boundaries. Provider models, errors, and credentials must not leak into the core domain.
+Put provider-specific behavior behind explicit ports and adapters. External services are replaceable implementations, not domain boundaries. Provider models, errors, and credentials must not leak into the core domain.
 
 ## Contracts, events, and reliability
 
@@ -56,7 +49,7 @@ Put provider-specific behavior behind explicit ports and adapters. Retell, Meta,
 - Use least privilege and explicit authorization at domain boundaries.
 - Keep secrets out of source code, prompts, logs, fixtures, and documentation.
 - Minimize personal data collection and retention; redact logs and test data.
-- Make tenant and lead scope mandatory in storage and retrieval contracts.
+- Make organization/tenant, user, resource, and purpose scope explicit in storage and retrieval contracts.
 - Record security-sensitive actions in an auditable form without exposing sensitive content.
 - Stop publication if a change could leak secrets, weaken isolation, or mix customer data.
 
@@ -64,7 +57,7 @@ Put provider-specific behavior behind explicit ports and adapters. Retell, Meta,
 
 ### 1. Discover
 
-Inspect existing documentation, Agent DNA, code, tests, configuration, and relevant history. State:
+Inspect existing documentation, code, tests, data, configuration, operations, and relevant history. State:
 
 - business objective and users;
 - desired observable behavior and acceptance criteria;
@@ -92,6 +85,10 @@ Evaluate candidates against fitness, simplicity, total cost, team capability, se
 
 Do not select technology merely because it is popular.
 
+### Web dashboard UI default
+
+Use [Material UI (MUI)](https://mui.com/material-ui/all-components/) as the default UI component library for web dashboards. Prioritize official MUI components for tables, forms, navigation, layouts, charts when applicable, and overall visual consistency. Propose a different library only when it provides a clear technical advantage for the project's requirements, and document the justification and tradeoffs.
+
 ### 4. Implement a vertical increment
 
 Choose the smallest end-to-end change that provides observable value. Implement through stable domain contracts, keep changes focused, preserve compatibility, and include handling for retries and partial failures where applicable. Avoid unrelated refactors.
@@ -99,10 +96,10 @@ Choose the smallest end-to-end change that provides observable value. Implement 
 ### 5. Verify by risk
 
 - Unit tests for domain rules and deterministic transformations.
-- Contract tests for APIs, adapters, events, and prompt derivation.
-- Integration tests for persistence, webhooks, shared memory, and provider boundaries.
-- End-to-end tests for critical lead, conversation, and booking journeys.
-- Explicit tests for tenant/lead isolation, idempotency, retries, concurrency, and provider failure.
+- Contract tests for APIs, adapters, events, schemas, tools, and AI outputs where applicable.
+- Integration tests for persistence, external boundaries, and shared state.
+- End-to-end tests for critical user journeys.
+- Explicit tests for authorization/scope isolation, idempotency, retries, concurrency, and dependency failure.
 - Regression checks for any working configuration that changed.
 
 Never claim completion without reporting what was verified. If a check cannot run, state why and the residual risk.
