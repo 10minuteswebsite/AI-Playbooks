@@ -14,7 +14,7 @@ State the business capability exposed, caller/producer, consumer, and what is ex
 - Authentication:
 - Authorization:
 - Organization/tenant scope:
-- Lead/conversation scope:
+- User/resource/purpose scope:
 - Sensitive fields and redaction:
 
 ## Request or event envelope

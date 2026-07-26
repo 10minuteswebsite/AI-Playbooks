@@ -1,0 +1,24 @@
+# Plain-Language Glossary
+
+- **Acceptance criteria:** observable conditions that prove a change solves the agreed problem.
+- **Adapter:** replaceable code that connects a domain capability to a provider or technology.
+- **ADR:** a short record of an important architecture decision, alternatives, and consequences.
+- **API:** a defined way for software components to exchange requests and results.
+- **Build:** the process that turns source files into a runnable or distributable artifact.
+- **CI:** automated checks run whenever code changes.
+- **Contract:** an explicit agreement about inputs, outputs, errors, compatibility, and ownership.
+- **Deployment:** placing a verified version into an environment where it can run.
+- **Domain:** a business capability and the rules and data it owns.
+- **Evaluation (eval):** a repeatable measurement of an AI system's behavior against examples and criteria.
+- **Idempotency:** repeating an operation has the same intended effect as performing it once.
+- **Least privilege:** granting only the access needed for the current responsibility.
+- **Module:** a cohesive unit with one clear responsibility and defined boundaries.
+- **Observability:** evidence from logs, metrics, traces, and user outcomes that explains system behavior.
+- **Prompt injection:** untrusted content attempting to redirect an AI system or misuse its tools.
+- **Pull request (PR):** a reviewable proposal to merge a set of repository changes.
+- **Regression:** previously working behavior that breaks after a change.
+- **Rollback:** restoring the last known-good version or behavior.
+- **SBOM:** an inventory of software components and dependencies in a release.
+- **Secret:** a credential such as a password, private key, or access token.
+- **Threat model:** a structured review of what must be protected, possible attackers, abuse paths, and mitigations.
+- **Vertical increment:** the smallest end-to-end change that gives a user an observable result.
