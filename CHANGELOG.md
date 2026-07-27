@@ -16,6 +16,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Changed
 
+- Software Architect Playbook 2.1 establishes proactive operational leadership, protective care, autonomy by default, and explicit finished-or-blocked interaction endings.
 - Software Architect Playbook 2.0 now builds on the universal core.
 - Omnichannel-specific guidance moved into a dedicated profile.
 - Material UI is the documented default for web dashboards with an explicit exception rule.
