@@ -27,6 +27,7 @@
 - [ ] Relevant links, examples, and templates were checked.
 - [ ] `python3 scripts/validate_docs.py` passes.
 - [ ] `python3 scripts/scan_secrets.py` passes.
+- [ ] `python3 scripts/test_project_handoff.py` passes when project workflow behavior changed.
 - [ ] Applicable profiles, quality gates, security checks, and human approvals were considered.
 - [ ] AI evaluation and tool-permission evidence is included when AI behavior changed.
 - [ ] Any material decision has an ADR or an explanation of why one is unnecessary.

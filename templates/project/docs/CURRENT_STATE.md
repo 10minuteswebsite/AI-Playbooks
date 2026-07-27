@@ -1,0 +1,41 @@
+# Current State
+
+**Status:** Ready
+**Current objective:** Establish the first approved vertical increment.
+**Active branch:** <detect from Git>
+**Last relevant commit:** <detect from Git or state none>
+**Last updated:** {{DATE}}
+**Updated by:** AI-Playbooks bootstrap
+
+## Completed
+
+- Installed the shared Codex/Claude operating structure.
+
+## In progress
+
+- None.
+
+## Pending
+
+- Confirm the product context and first work item.
+
+## Important files
+
+- `docs/PROJECT_CONTEXT.md`
+- `docs/AI_WORKFLOW.md`
+
+## Verification performed
+
+- Project handoff structure validation: pending after context is completed.
+
+## Known errors
+
+- None known.
+
+## Risks or blockers
+
+- Project-specific facts still need verification.
+
+## Next exact step
+
+Review `docs/PROJECT_CONTEXT.md` with the user's stated objective, then create the first work item in `docs/work-items/`.

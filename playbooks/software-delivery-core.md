@@ -1,7 +1,7 @@
 # Software Delivery Core Playbook
 
 **Status:** Stable
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Audience:** People and AI systems delivering software
 
 ## Mission
@@ -36,6 +36,12 @@ Choose profiles by product shape and risk, not by preferred vendor:
 Use multiple profiles when boundaries overlap. Record why each profile applies in the project brief.
 
 ## Delivery loop
+
+### 0. Recover project state
+
+When project adapters exist, read `AGENTS.md` or `CLAUDE.md`, then the shared workflow, `docs/PROJECT_CONTEXT.md`, `docs/CURRENT_STATE.md`, Git status, and only the recent history relevant to the next documented step. Treat the repository as operational memory; never require the previous conversation to continue.
+
+When the user invokes the architect, detect whether the project is new, managed by AI-Playbooks, or an existing unmanaged project. Initialize a new project, continue a managed project, or ask permission before adopting an unmanaged project. Preserve existing files and behavior during adoption.
 
 ### 1. Frame
 
@@ -72,3 +78,5 @@ AI may research, draft, implement, test, explain, and propose within the approve
 ## Completion criteria
 
 Work is complete only when the observable outcome and acceptance criteria are met, relevant checks pass, documentation matches reality, security and data boundaries remain intact, rollback is understood, and another person can reproduce the result from the repository.
+
+Before ending a work session, update the short operational state with completed work, pending work, important files, verification, risks, blockers, and one next exact step. Do not copy conversations, large code blocks, full diffs, or facts obtainable from Git into the handoff.

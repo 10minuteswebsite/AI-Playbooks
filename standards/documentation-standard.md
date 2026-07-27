@@ -1,7 +1,7 @@
 # Documentation Standard
 
 **Status:** Stable
-**Version:** 2.0.0
+**Version:** 2.1.0
 
 ## Objective
 
@@ -9,15 +9,17 @@ Make every system understandable, reviewable, operable, and reproducible without
 
 ## Required hierarchy
 
-1. README: purpose, ownership, setup, usage, verification, and links.
-2. Architecture document: business context, boundaries, flows, data, security, operations, and delivery plan.
-3. Module documents: responsibilities, contracts, ownership, failure behavior, and tests.
-4. ADRs: consequential choices, alternatives, tradeoffs, and replacement path.
-5. API/event contracts: versioned machine boundaries and delivery semantics.
-6. Runbooks: detection, diagnosis, mitigation, recovery, and escalation for operational risks.
-7. Project briefs and work items: outcome, scope, acceptance criteria, authorization, verification, and rollback.
-8. Risk and threat records: impact, abuse paths, controls, owners, and accepted residual risk.
-9. AI system cards and evaluation plans when model behavior affects product outcomes.
+1. Agent adapters: short `AGENTS.md` and `CLAUDE.md` files that point to one shared project workflow.
+2. Project memory: stable `docs/PROJECT_CONTEXT.md` and short operational `docs/CURRENT_STATE.md`.
+3. README: purpose, ownership, setup, usage, verification, and links.
+4. Architecture document: business context, boundaries, flows, data, security, operations, and delivery plan.
+5. Module documents: responsibilities, contracts, ownership, failure behavior, and tests.
+6. ADRs: consequential choices, alternatives, tradeoffs, and replacement path.
+7. API/event contracts: versioned machine boundaries and delivery semantics.
+8. Runbooks: detection, diagnosis, mitigation, recovery, and escalation for operational risks.
+9. Project briefs and work items: outcome, scope, acceptance criteria, authorization, verification, and rollback.
+10. Risk and threat records: impact, abuse paths, controls, owners, and accepted residual risk.
+11. AI system cards and evaluation plans when model behavior affects product outcomes.
 
 ## Writing rules
 
@@ -30,6 +32,8 @@ Make every system understandable, reviewable, operable, and reproducible without
 - Date and assign an owner to documents whose accuracy is operationally important.
 - Write plain-language summaries before technical detail so non-programmers can review decisions and evidence.
 - Keep instructions close to the scope they govern: universal rules in standards, project-type rules in profiles, and provider details in adapters.
+- Do not duplicate shared workflow policy between agent adapters. Keep stable facts in project context and volatile session state in current state.
+- Make every active current-state document contain one concrete next step that does not depend on conversation history.
 
 ## Decision threshold
 

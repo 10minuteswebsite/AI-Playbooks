@@ -18,6 +18,7 @@ playbooks/
   roles/                      Responsibility-specific guidance
 templates/
   ...                         Planning, architecture, risk, AI, release, and operations
+  project/                    Shared Codex/Claude project structure
 standards/
   ...                         Documentation, testing, security, AI, operations, and release
 examples/                     Worked delivery examples
@@ -25,17 +26,27 @@ examples/                     Worked delivery examples
 
 ## How to use
 
-1. Start with [Getting Started](GETTING_STARTED.md).
-2. Apply the [Software Delivery Core](playbooks/software-delivery-core.md).
-3. Select one or more [project profiles](playbooks/profiles/).
-4. Complete the project brief and risk assessment before implementation.
-5. Deliver and verify one small vertical increment at a time.
-6. Use role playbooks when a responsibility needs deeper guidance.
-7. Commit documentation, decisions, implementation, tests, and evidence together.
+For normal use, tell Codex or Claude: **“Use the architect”** / **“Usa el arquitecto.”** The architect detects whether the project is new, already managed, or requires approved adoption.
+
+The reusable installer is:
+
+```sh
+python3 scripts/bootstrap_project.py "/path/to/project"
+```
+
+For an existing unmanaged project, the first run makes no changes and requests approval. After approval, the agent runs it with `--adopt`. Existing files are preserved and conflicts are written as reviewable proposals.
+
+Then the architect:
+
+1. Applies the [Software Delivery Core](playbooks/software-delivery-core.md).
+2. Selects the relevant [project profiles](playbooks/profiles/).
+3. Reads stable context and current operational state.
+4. Delivers and verifies one small vertical increment at a time.
+5. Updates the handoff so Codex or Claude can continue without chat history.
 
 Example invocation:
 
-> Apply `playbooks/software-delivery-core.md`, select the relevant profiles, and guide me in plain language. Work in one small vertical increment, distinguish facts from assumptions, run the required checks, and stop for material risk or irreversible actions.
+> Usa el arquitecto.
 
 ## Status labels
 
@@ -66,6 +77,10 @@ Run:
 ```sh
 python3 scripts/validate_docs.py
 python3 scripts/scan_secrets.py
+python3 scripts/test_project_handoff.py
+python3 scripts/validate_global_instructions.py
 ```
+
+The global-instruction check is local-only because CI does not have access to a user's home-directory configuration.
 
 `templates/github-actions/documentation-quality.yml` is ready to copy into `.github/workflows/` to run both checks automatically after the publishing account is authorized with GitHub's `workflow` scope.
