@@ -6,6 +6,8 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Added
 
+- Shared Codex/Claude project adapters, operational memory templates, safe bootstrap installer, handoff and global-instruction validators, and end-to-end continuation tests.
+- A worked cross-agent handoff example and ADR for the shared-memory and automatic Git policy.
 - Software Delivery Core for all software projects.
 - Seven project profiles covering web, API, mobile, data/automation, AI-enabled, agentic, and omnichannel systems.
 - Guided getting-started path and plain-language glossary for non-programmers.
@@ -16,6 +18,8 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Changed
 
+- Software Architect Playbook 2.2 automatically recognizes new, managed, and existing unmanaged projects when invoked.
+- Software Delivery Core 2.1, Documentation Standard 2.1, and Git Standard 1.1 define project memory, cross-agent continuation, and approved automatic Git behavior.
 - Software Architect Playbook 2.1 establishes proactive operational leadership, protective care, autonomy by default, and explicit finished-or-blocked interaction endings.
 - Software Architect Playbook 2.0 now builds on the universal core.
 - Omnichannel-specific guidance moved into a dedicated profile.

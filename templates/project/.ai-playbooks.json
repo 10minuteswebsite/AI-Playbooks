@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "workflow": "docs/AI_WORKFLOW.md",
+  "project_context": "docs/PROJECT_CONTEXT.md",
+  "current_state": "docs/CURRENT_STATE.md",
+  "agents": ["AGENTS.md", "CLAUDE.md"]
+}

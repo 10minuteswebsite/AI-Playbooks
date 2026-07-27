@@ -23,3 +23,5 @@ jobs:
         run: python3 scripts/validate_docs.py
       - name: Scan for common secret patterns
         run: python3 scripts/scan_secrets.py
+      - name: Test project bootstrap and handoff
+        run: python3 scripts/test_project_handoff.py

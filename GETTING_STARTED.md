@@ -6,13 +6,27 @@ This guide helps a non-programmer direct AI to build software without surrenderi
 
 AI can do much of the technical work, but generated code is a proposal until verified. You remain responsible for the desired outcome, accepted risk, sensitive data, spending, publication, and irreversible actions.
 
+## The only invocation to remember
+
+Tell Codex or Claude:
+
+> Usa el arquitecto.
+
+The architect inspects the project automatically:
+
+- a new project receives the shared operating structure;
+- an already managed project continues from its documented next step;
+- an existing unmanaged project is not changed until the architect asks whether to adopt the structure and receives approval.
+
+You do not need to tell either agent to inspect Git, read memory files, preserve existing configuration, or prepare the next handoff.
+
 ## Before the first line of code
 
-1. Copy `templates/project-brief.md` into your project and complete it in plain language.
-2. Copy `templates/risk-assessment.md` and classify the project.
-3. Ask AI to identify the applicable profiles in `playbooks/software-delivery-core.md` and explain the choice.
-4. For medium- or high-risk work, complete the architecture and threat-model templates.
-5. Ask AI to propose the smallest end-to-end result a user can observe.
+1. The architect installs or verifies the shared project structure.
+2. It establishes stable project context in plain language.
+3. It classifies risk and selects applicable profiles.
+4. For medium- or high-risk work, it prepares the architecture and threat model for review.
+5. It proposes the smallest end-to-end result a user can observe.
 
 Do not begin implementation while the user, expected result, important exclusions, or acceptance criteria remain unclear.
 
