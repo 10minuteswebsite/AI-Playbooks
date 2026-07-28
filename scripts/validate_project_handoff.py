@@ -76,7 +76,7 @@ def validate(target: Path) -> list[str]:
             if required_reference not in adapter:
                 errors.append(f"{name} does not reference {required_reference}")
 
-    if "ai-playbooks-workflow:v1" not in workflow:
+    if "ai-playbooks-workflow:v" not in workflow:
         errors.append("docs/AI_WORKFLOW.md is missing the shared workflow marker")
     if "single source of truth" not in workflow:
         errors.append("shared workflow does not declare a single source of truth")

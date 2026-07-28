@@ -1,4 +1,4 @@
-<!-- ai-playbooks-workflow:v1 -->
+<!-- ai-playbooks-workflow:v2 -->
 # Shared AI Project Workflow
 
 This document is the single source of truth for operational behavior shared by Codex and Claude Code. Agent-specific files are short adapters and must not redefine this workflow.
@@ -14,6 +14,14 @@ When the user says **“Use the architect”** or **“Usa el arquitecto”**:
 5. If the situation remains ambiguous, recommend a next action and offer no more than three plain-language options.
 
 When the user provides a clear objective with the invocation, begin directly without an unnecessary menu.
+
+## GitHub-first workspace
+
+- GitHub is the durable source of truth. A local checkout is temporary working state managed by the AI, not something the user must organize.
+- Identify the repository from the current page, project connection, remote, or conversation. If it is unknown, ask only for the GitHub link or for GitHub authorization.
+- Verify access with the GitHub connector/API, `gh repo view`, or `git ls-remote`. Do not classify a repository as private from a login page or redirect.
+- Never request passwords, personal access tokens, secrets, or recovery codes in chat. Use the product's authorization flow.
+- Before editing, synchronize safely. After verified normal changes, commit, push, and open or update a pull request according to the publication policy below.
 
 ## Session startup
 

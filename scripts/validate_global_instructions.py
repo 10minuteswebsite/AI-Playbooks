@@ -16,6 +16,10 @@ REQUIRED = (
     "docs/PROJECT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
     "Usa el arquitecto",
+    "ARCHITECT_BOOTSTRAP.md",
+    "enlace de GitHub",
+    "nunca solicites contraseñas, tokens ni secretos",
+    "copia temporal",
     "no lo migres antes de recibir aprobación",
 )
 

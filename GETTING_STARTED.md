@@ -12,6 +12,12 @@ Tell Codex or Claude:
 
 > Usa el arquitecto.
 
+If this is a new chat tool or account that has never received the architect instructions, say once:
+
+> Lee y sigue https://raw.githubusercontent.com/10minuteswebsite/AI-Playbooks/main/ARCHITECT_BOOTSTRAP.md. Usa el arquitecto.
+
+You can also copy `templates/global/claude-profile-instructions.md` into Claude's profile instructions so the short phrase works in future chats.
+
 The architect inspects the project automatically:
 
 - a new project receives the shared operating structure;
@@ -19,6 +25,8 @@ The architect inspects the project automatically:
 - an existing unmanaged project is not changed until the architect asks whether to adopt the structure and receives approval.
 
 You do not need to tell either agent to inspect Git, read memory files, preserve existing configuration, or prepare the next handoff.
+
+You also do not need to work locally. The architect should identify or ask for the GitHub repository, request connection access if needed, and manage its own temporary working copy.
 
 ## Before the first line of code
 
