@@ -62,7 +62,7 @@ def is_managed(target: Path) -> bool:
         and workflow.is_file()
         and agents.is_file()
         and claude.is_file()
-        and "ai-playbooks-workflow:v1" in workflow.read_text(encoding="utf-8")
+        and "ai-playbooks-workflow:v" in workflow.read_text(encoding="utf-8")
         and "ai-playbooks-adapter:v1" in agents.read_text(encoding="utf-8")
         and "ai-playbooks-adapter:v1" in claude.read_text(encoding="utf-8")
     )

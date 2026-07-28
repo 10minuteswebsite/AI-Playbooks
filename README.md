@@ -19,6 +19,7 @@ playbooks/
 templates/
   ...                         Planning, architecture, risk, AI, release, and operations
   project/                    Shared Codex/Claude project structure
+  global/                     Copyable account-wide AI instructions
 standards/
   ...                         Documentation, testing, security, AI, operations, and release
 examples/                     Worked delivery examples
@@ -27,6 +28,12 @@ examples/                     Worked delivery examples
 ## How to use
 
 For normal use, tell Codex or Claude: **“Use the architect”** / **“Usa el arquitecto.”** The architect detects whether the project is new, already managed, or requires approved adoption.
+
+If the AI does not already know the architect, give it the public bootstrap once:
+
+> Lee y sigue https://raw.githubusercontent.com/10minuteswebsite/AI-Playbooks/main/ARCHITECT_BOOTSTRAP.md. Usa el arquitecto.
+
+The architect works GitHub-first. It identifies or requests the repository, verifies access, asks for GitHub authorization when necessary, and manages any temporary checkout itself. The user does not need to clone repositories or organize local project folders.
 
 The reusable installer is:
 
@@ -78,6 +85,7 @@ Run:
 python3 scripts/validate_docs.py
 python3 scripts/scan_secrets.py
 python3 scripts/test_project_handoff.py
+python3 scripts/test_github_first_architect.py
 python3 scripts/validate_global_instructions.py
 ```
 

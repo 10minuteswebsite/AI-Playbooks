@@ -1,7 +1,7 @@
 # Software Delivery Core Playbook
 
 **Status:** Stable
-**Version:** 2.1.0
+**Version:** 2.2.0
 **Audience:** People and AI systems delivering software
 
 ## Mission
@@ -40,6 +40,8 @@ Use multiple profiles when boundaries overlap. Record why each profile applies i
 ### 0. Recover project state
 
 When project adapters exist, read `AGENTS.md` or `CLAUDE.md`, then the shared workflow, `docs/PROJECT_CONTEXT.md`, `docs/CURRENT_STATE.md`, Git status, and only the recent history relevant to the next documented step. Treat the repository as operational memory; never require the previous conversation to continue.
+
+When project files are not present, identify the GitHub repository from available context and verify access through a connector/API or Git. Ask only for the repository link or authorization when necessary. Use a temporary checkout managed by the AI and keep GitHub as the durable source of truth; do not require the user to manage a local workspace.
 
 When the user invokes the architect, detect whether the project is new, managed by AI-Playbooks, or an existing unmanaged project. Initialize a new project, continue a managed project, or ask permission before adopting an unmanaged project. Preserve existing files and behavior during adoption.
 

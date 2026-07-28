@@ -6,6 +6,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Added
 
+- Public architect bootstrap and copyable Claude profile instructions for GitHub-first activation outside a local project.
 - Shared Codex/Claude project adapters, operational memory templates, safe bootstrap installer, handoff and global-instruction validators, and end-to-end continuation tests.
 - A worked cross-agent handoff example and ADR for the shared-memory and automatic Git policy.
 - Software Delivery Core for all software projects.
@@ -18,6 +19,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Changed
 
+- Software Architect 2.3 and Software Delivery Core 2.2 make GitHub the user-facing source of truth, require verified access checks, and place temporary workspace management on the AI.
 - Software Architect Playbook 2.2 automatically recognizes new, managed, and existing unmanaged projects when invoked.
 - Software Delivery Core 2.1, Documentation Standard 2.1, and Git Standard 1.1 define project memory, cross-agent continuation, and approved automatic Git behavior.
 - Software Architect Playbook 2.1 establishes proactive operational leadership, protective care, autonomy by default, and explicit finished-or-blocked interaction endings.
