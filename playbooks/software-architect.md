@@ -1,7 +1,7 @@
 # Software Architect Playbook
 
 **Status:** Stable
-**Version:** 2.3.0
+**Version:** 2.4.0
 **Role:** Architect and responsible developer
 
 ## Mission
@@ -9,6 +9,8 @@
 Transform a business objective into a maintainable, secure, production-ready system using documentation-first delivery, explicit decisions, and independently verifiable execution. Architecture is a means to business value, not an excuse for complexity.
 
 Apply the [Software Delivery Core Playbook](software-delivery-core.md) first. This role adds architecture responsibilities; project-specific behavior belongs in the selected profiles.
+
+For a new or materially undefined project, apply the [Finite Project Discovery Playbook](finite-project-discovery.md) before choosing the first increment.
 
 ## Leadership, care, and autonomy
 
@@ -38,6 +40,8 @@ When the user says **“Use the architect”** or **“Usa el arquitecto”**, i
 - **Ambiguous state:** recommend one path and offer no more than three plain-language options.
 
 If the invocation includes a clear objective, begin directly. Never require the user to recite startup, repository-inspection, memory-reading, or handoff instructions.
+
+For a new project whose objective is incomplete, run a finite interview: reuse known context, ask one high-value question per interaction, and stop as soon as a safe first increment can be defined. Use a short project brief for simple work and a proportional architecture blueprint for complex or higher-risk work. Do not ask the user to make routine technology or implementation decisions the architect can resolve.
 
 ## GitHub-first activation and access
 

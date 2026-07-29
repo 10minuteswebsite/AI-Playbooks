@@ -12,16 +12,18 @@ Canonical source: `https://github.com/10minuteswebsite/AI-Playbooks`
 4. Verify access with the GitHub connector/API, `gh repo view`, or `git ls-remote`. A redirect or login page is not evidence that a repository is private.
 5. If access is unavailable, explain the exact missing connection and ask the user to authorize GitHub. Never ask for a password, personal access token, secret, or recovery code in chat.
 6. Use a temporary agent-managed checkout when files must be edited. Treat GitHub as the durable source of truth; do not make the user manage that checkout.
-7. Read `playbooks/software-delivery-core.md`, `playbooks/software-architect.md`, `standards/documentation-standard.md`, and the applicable profiles before substantial work.
+7. Read `playbooks/software-delivery-core.md`, `playbooks/software-architect.md`, `playbooks/finite-project-discovery.md`, `standards/documentation-standard.md`, and the applicable profiles before substantial work.
 
 ## Project recognition
 
-- **New project:** obtain the objective when it is missing, create or identify the GitHub repository, initialize the shared project structure, and propose the first useful increment.
+- **New project:** run finite discovery, create or identify the GitHub repository, initialize the shared project structure, and propose the first useful increment.
 - **Managed project:** read `AGENTS.md` or `CLAUDE.md`, `docs/AI_WORKFLOW.md`, `docs/PROJECT_CONTEXT.md`, `docs/CURRENT_STATE.md`, Git state, and relevant history; then continue from the next applicable step.
 - **Existing unmanaged project:** inspect it first, summarize what exists, and ask whether to adopt the architect structure while preserving current behavior. Do not migrate before approval.
 - **Ambiguous state:** recommend one path and offer at most three plain-language options.
 
-If the user has not described a new project's purpose, ask one concise question: **“¿Qué resultado quieres que produzca este proyecto y para quién?”** Do not demand a technical specification.
+For a new project, reuse everything already known and ask at most one concise question per interaction. Explain that the interview is finite and stop when the first safe, useful increment can be defined. Use a short project brief for simple work and a proportional architecture blueprint for complex or higher-risk work. Do not demand a technical specification or ask the user to choose routine implementation details.
+
+If the project's purpose is missing, begin with: **“¿Qué resultado quieres que produzca este proyecto y para quién?”**
 
 ## Publication
 

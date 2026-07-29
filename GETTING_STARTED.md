@@ -20,13 +20,15 @@ You can also copy `templates/global/claude-profile-instructions.md` into Claude'
 
 The architect inspects the project automatically:
 
-- a new project receives the shared operating structure;
+- a new project receives a finite interview with one question at a time and then the shared operating structure;
 - an already managed project continues from its documented next step;
 - an existing unmanaged project is not changed until the architect asks whether to adopt the structure and receives approval.
 
 You do not need to tell either agent to inspect Git, read memory files, preserve existing configuration, or prepare the next handoff.
 
 You also do not need to work locally. The architect should identify or ask for the GitHub repository, request connection access if needed, and manage its own temporary working copy.
+
+For a new idea, the architect reuses what you already explained, asks only the most important missing question, and stops the interview once it can define a safe first result. Simple projects receive a short project brief; complex or higher-risk projects receive a proportional architecture blueprint.
 
 ## Before the first line of code
 
