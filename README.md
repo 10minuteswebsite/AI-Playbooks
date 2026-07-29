@@ -14,6 +14,7 @@ REFERENCES.md                 Standards and research baselines
 playbooks/
   software-delivery-core.md   Universal delivery workflow
   software-architect.md       Architecture role
+  finite-project-discovery.md Finite, adaptive new-project interview
   profiles/                   Project-type guidance
   roles/                      Responsibility-specific guidance
 templates/
@@ -46,10 +47,11 @@ For an existing unmanaged project, the first run makes no changes and requests a
 Then the architect:
 
 1. Applies the [Software Delivery Core](playbooks/software-delivery-core.md).
-2. Selects the relevant [project profiles](playbooks/profiles/).
-3. Reads stable context and current operational state.
-4. Delivers and verifies one small vertical increment at a time.
-5. Updates the handoff so Codex or Claude can continue without chat history.
+2. Uses [Finite Project Discovery](playbooks/finite-project-discovery.md) when a new idea needs definition.
+3. Selects the relevant [project profiles](playbooks/profiles/).
+4. Reads stable context and current operational state.
+5. Delivers and verifies one small vertical increment at a time.
+6. Updates the handoff so Codex or Claude can continue without chat history.
 
 Example invocation:
 
@@ -86,6 +88,7 @@ python3 scripts/validate_docs.py
 python3 scripts/scan_secrets.py
 python3 scripts/test_project_handoff.py
 python3 scripts/test_github_first_architect.py
+python3 scripts/test_finite_project_discovery.py
 python3 scripts/validate_global_instructions.py
 ```
 

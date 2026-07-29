@@ -1,7 +1,7 @@
 # Software Delivery Core Playbook
 
 **Status:** Stable
-**Version:** 2.2.0
+**Version:** 2.3.0
 **Audience:** People and AI systems delivering software
 
 ## Mission
@@ -47,7 +47,7 @@ When the user invokes the architect, detect whether the project is new, managed 
 
 ### 1. Frame
 
-Complete the project brief and risk assessment. Identify the smallest useful outcome, exclusions, dependencies, unknowns, and working configuration to preserve.
+For a new or undefined project, use the [Finite Project Discovery Playbook](finite-project-discovery.md). Complete the project brief and risk assessment. Identify the smallest useful outcome, exclusions, dependencies, unknowns, and working configuration to preserve. Ask only one user question per interaction and end discovery when the sufficiency test passes.
 
 ### 2. Design proportionally
 
