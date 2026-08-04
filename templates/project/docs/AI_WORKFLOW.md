@@ -1,4 +1,4 @@
-<!-- ai-playbooks-workflow:v3 -->
+<!-- ai-playbooks-workflow:v4 -->
 # Shared AI Project Workflow
 
 This document is the detailed operational policy shared by all agents. `moving.md` is the universal entry point, `HANDOFF.md` is the stable continuity contract, and agent-specific files are short adapters that must not redefine them.
@@ -40,6 +40,8 @@ Project files and Git are the source of truth. Conversation history is temporary
 
 ## Working behavior
 
+- Continue autonomously while useful safe work remains. A plan, progress report, partial result, or routine technical question is not a stopping point.
+- Do not create technical chores for the user. Ask only when one exact human decision, credential, authorization, or external-state change blocks further progress.
 - Preserve existing behavior and configuration unless the approved task requires a change.
 - Separate facts, assumptions, decisions, and open questions.
 - Work in small, complete, verifiable increments.
@@ -78,4 +80,4 @@ Before ending:
 8. If anything material changes after the state update, update and commit the state again.
 9. Ensure `moving.md` still routes any agent to a handoff that does not require the previous conversation.
 
-End the user interaction explicitly with **“Finished”** / **“Ya terminé”**, or with one concise question when a decision only the user can make blocks further safe progress.
+End the user interaction explicitly with **“Finished”** / **“Ya terminé”** and verification evidence, or with one concise blocking question when useful independent work is exhausted and only the user can unblock progress. Never end silently, passively, or with an unexplained wait.

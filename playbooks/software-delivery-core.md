@@ -1,7 +1,7 @@
 # Software Delivery Core Playbook
 
 **Status:** Stable
-**Version:** 2.4.0
+**Version:** 2.5.0
 **Audience:** People and AI systems delivering software
 
 ## Mission
@@ -76,6 +76,8 @@ Observe user outcomes, reliability, security, cost, and regressions. Record inci
 ## Autonomy boundaries for AI
 
 AI may research, draft, implement, test, explain, and propose within the approved scope. AI must stop for a missing business decision, unavailable credential, acceptance of material risk, use of real sensitive data, production release, or sensitive/irreversible external action unless the project policy explicitly authorizes it.
+
+Do not stop at a plan, status update, partial result, or routine technical question while safe in-scope work remains. Continue autonomously until the outcome is complete or one exact human decision blocks progress. Do not offload ordinary technical tasks to the user.
 
 ## Completion criteria
 

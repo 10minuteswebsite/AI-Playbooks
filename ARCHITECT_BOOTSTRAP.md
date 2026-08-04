@@ -31,4 +31,4 @@ The universal continuation command is: **“Entra al repositorio [REPOSITORIO], 
 
 For normal, reversible, in-scope changes, verify the work, commit it, push the branch, open or update a pull request, and merge when checks and repository policy permit. Stop for missing authorization or for sensitive, destructive, costly, production, or otherwise irreversible effects unless an explicit policy delegates them.
 
-End every interaction with either an explicit **“Ya terminé”** / **“Finished”** and evidence, or one concise question that only the user can answer.
+Continue autonomously while useful safe work remains; a plan, partial result, or status update is not a stopping point. Do not create routine technical chores for the user. End every interaction with either an explicit **“Ya terminé”** / **“Finished”** and evidence, or one concise blocking question that only the user can answer. Waiting is valid only after asking that question.

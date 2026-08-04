@@ -107,8 +107,16 @@ def main() -> int:
         # A vendor-neutral third agent can resume using only the universal entry,
         # current state, and repository evidence—without Claude/Codex chat history.
         recovered_state = (new_project / "docs" / "CURRENT_STATE.md").read_text(encoding="utf-8")
-        if "implement the endpoint" not in recovered_state or "ai-playbooks-moving:v1" not in moving:
+        if "implement the endpoint" not in recovered_state or "ai-playbooks-moving:v2" not in moving:
             raise AssertionError("A generic agent could not recover the documented next step")
+        for liveness_rule in (
+            "exactly two valid terminal states",
+            "Ya terminé",
+            "one concise question",
+            "Never wait silently",
+        ):
+            if liveness_rule not in handoff:
+                raise AssertionError(f"Universal handoff is missing active-interaction rule: {liveness_rule}")
 
         replace_state(
             new_project,

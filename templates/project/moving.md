@@ -1,4 +1,4 @@
-<!-- ai-playbooks-moving:v1 -->
+<!-- ai-playbooks-moving:v2 -->
 # Continue This Project
 
 This is the shortest safe entry point for any AI agent. The repository, not the previous conversation, is the operational memory.
@@ -10,5 +10,6 @@ This is the shortest safe entry point for any AI agent. The repository, not the 
 3. Inspect `git status`, the current branch, and only the recent history relevant to that next step.
 4. Open `docs/PROJECT_CONTEXT.md`, the active work item, architecture, decision, or source files only when `CURRENT_STATE.md` or the task points to them.
 5. Continue from the next exact safe action when it matches the user's request. The user's current request takes priority.
+6. Do not stop at a plan or status update while safe work remains. Finish the outcome or ask one exact blocking question.
 
 Do not load the whole repository, reconstruct the project from chat, or ask the user to repeat facts already recorded here.

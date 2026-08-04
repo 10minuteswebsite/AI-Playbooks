@@ -103,7 +103,7 @@ def validate(target: Path) -> list[str]:
     if "Conversation history is temporary context" not in workflow:
         errors.append("shared workflow still depends on conversation history")
 
-    if "ai-playbooks-moving:v1" not in moving:
+    if "ai-playbooks-moving:v2" not in moving:
         errors.append("moving.md is missing the universal entry marker")
     for required_reference in ("HANDOFF.md", "docs/CURRENT_STATE.md", "git status"):
         if required_reference not in moving:
@@ -113,13 +113,16 @@ def validate(target: Path) -> list[str]:
     if "AGENTS.md" in moving or "CLAUDE.md" in moving:
         errors.append("moving.md depends on an agent-specific adapter")
 
-    if "ai-playbooks-handoff:v1" not in handoff:
+    if "ai-playbooks-handoff:v2" not in handoff:
         errors.append("HANDOFF.md is missing the universal handoff marker")
     for required_rule in (
         "Codex, Claude, and any other agent",
         "Conversation history is optional context",
         "Read progressively",
         "Mandatory session close",
+        "Active interaction contract",
+        "exactly two valid terminal states",
+        "Waiting is valid only after asking that blocking question",
         "docs/CURRENT_STATE.md",
     ):
         if required_rule not in handoff:
