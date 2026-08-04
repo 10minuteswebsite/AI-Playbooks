@@ -21,6 +21,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Changed
 
+- Software Architect 2.6, Software Delivery Core 2.5, and the universal handoff contract prohibit silent or passive stopping: agents must continue to completion or ask one exact blocking question.
 - Software Architect 2.5, Software Delivery Core 2.4, and Documentation Standard 2.2 make mandatory session-state updates and repository-based continuation independent of Codex or Claude.
 - Software Architect 2.4 and Software Delivery Core 2.3 apply finite discovery to new or materially undefined projects without imposing a universal waterfall approval gate.
 - Software Architect 2.3 and Software Delivery Core 2.2 make GitHub the user-facing source of truth, require verified access checks, and place temporary workspace management on the AI.

@@ -1,4 +1,4 @@
-<!-- ai-playbooks-handoff:v1 -->
+<!-- ai-playbooks-handoff:v2 -->
 # Universal Agent Handoff
 
 This contract applies to Codex, Claude, and any other agent working in this repository.
@@ -21,6 +21,15 @@ Conversation history is optional context and must never be required for continua
 - Do not copy conversations, full diffs, large code blocks, or Git-recoverable history into handoff documents.
 - Complete and verify one focused increment at a time. Record material decisions in ADRs instead of hiding them in chat.
 - Use repository-native commands and policies. Never assume a tool, model, vendor, or agent-specific feature is available.
+
+## Active interaction contract
+
+- Never become silent, idle, or stop at a plan, partial result, progress report, or statement of intent while useful safe work remains.
+- Do not assign routine technical management to the user. Continue autonomously when the answer can be discovered or the choice is safe, reversible, and within scope.
+- Every interaction has exactly two valid terminal states:
+  1. **Finished:** the requested outcome is complete; say **“Ya terminé”** / **“Finished”** and provide verification evidence.
+  2. **Human input required:** useful independent work is exhausted; state the exact blocker and ask one concise question that only the user can answer.
+- Waiting is valid only after asking that blocking question. Never wait silently or imply that the user must guess what to do next.
 
 ## Mandatory session close
 
