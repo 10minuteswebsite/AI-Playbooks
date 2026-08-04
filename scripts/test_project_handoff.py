@@ -49,6 +49,10 @@ def replace_state(project: Path, *, agent: str, status: str, objective: str, nex
                 "",
                 "- Acceptance verification.",
                 "",
+                "## Decisions this session",
+                "",
+                "- Continue through the repository handoff; no product decision was made.",
+                "",
                 "## Important files",
                 "",
                 "- `docs/PROJECT_CONTEXT.md`",
@@ -82,6 +86,12 @@ def main() -> int:
         new_project = root / "new-project"
         run(sys.executable, str(BOOTSTRAP), str(new_project))
         run(sys.executable, str(VALIDATE), str(new_project))
+        moving = (new_project / "moving.md").read_text(encoding="utf-8")
+        handoff = (new_project / "HANDOFF.md").read_text(encoding="utf-8")
+        if "any AI agent" not in moving or "any other agent" not in handoff:
+            raise AssertionError("Universal-agent handoff instructions were not installed")
+        if "AGENTS.md" in moving or "CLAUDE.md" in moving:
+            raise AssertionError("Universal entry depends on a vendor-specific adapter")
 
         replace_state(
             new_project,
@@ -93,6 +103,12 @@ def main() -> int:
         work_item = new_project / "docs" / "work-items" / "health-endpoint.md"
         work_item.write_text("# Health endpoint\n\nReturn an observable synthetic status response.\n", encoding="utf-8")
         run(sys.executable, str(VALIDATE), str(new_project))
+
+        # A vendor-neutral third agent can resume using only the universal entry,
+        # current state, and repository evidence—without Claude/Codex chat history.
+        recovered_state = (new_project / "docs" / "CURRENT_STATE.md").read_text(encoding="utf-8")
+        if "implement the endpoint" not in recovered_state or "ai-playbooks-moving:v1" not in moving:
+            raise AssertionError("A generic agent could not recover the documented next step")
 
         replace_state(
             new_project,

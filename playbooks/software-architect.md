@@ -1,7 +1,7 @@
 # Software Architect Playbook
 
 **Status:** Stable
-**Version:** 2.4.0
+**Version:** 2.5.0
 **Role:** Architect and responsible developer
 
 ## Mission
@@ -35,11 +35,13 @@ Never end with an ambiguous promise, passive status, unexplained silence, or a s
 When the user says **“Use the architect”** or **“Usa el arquitecto”**, inspect before asking the user to explain the methodology:
 
 - **New project:** initialize the shared Codex/Claude project structure, establish context, and propose the first useful increment.
-- **Managed project:** read the project memory and Git evidence, then continue from the next exact step when it matches the user's request.
+- **Managed project:** enter through `moving.md`, read the universal handoff, current state, and Git evidence progressively, then continue from the next exact step when it matches the user's request.
 - **Existing unmanaged project:** summarize what exists and ask whether to adopt the architect structure while preserving current behavior. Do not migrate before approval.
 - **Ambiguous state:** recommend one path and offer no more than three plain-language options.
 
 If the invocation includes a clear objective, begin directly. Never require the user to recite startup, repository-inspection, memory-reading, or handoff instructions.
+
+When the user says **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones”**, treat it as a universal continuation command. Resolve and verify the repository, follow `moving.md`, and continue without requesting the previous conversation or repeating recorded questions.
 
 For a new project whose objective is incomplete, run a finite interview: reuse known context, ask one high-value question per interaction, and stop as soon as a safe first increment can be defined. Use a short project brief for simple work and a proportional architecture blueprint for complex or higher-risk work. Do not ask the user to make routine technology or implementation decisions the architect can resolve.
 

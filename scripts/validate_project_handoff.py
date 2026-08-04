@@ -4,12 +4,16 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
 
 
 REQUIRED_FILES = (
+    ".ai-playbooks.json",
+    "moving.md",
+    "HANDOFF.md",
     "AGENTS.md",
     "CLAUDE.md",
     "docs/AI_WORKFLOW.md",
@@ -60,37 +64,80 @@ def validate(target: Path) -> list[str]:
 
     agents = (target / "AGENTS.md").read_text(encoding="utf-8")
     claude = (target / "CLAUDE.md").read_text(encoding="utf-8")
+    moving = (target / "moving.md").read_text(encoding="utf-8")
+    handoff = (target / "HANDOFF.md").read_text(encoding="utf-8")
     workflow = (target / "docs" / "AI_WORKFLOW.md").read_text(encoding="utf-8")
     context = (target / "docs" / "PROJECT_CONTEXT.md").read_text(encoding="utf-8")
     current = (target / "docs" / "CURRENT_STATE.md").read_text(encoding="utf-8")
+    try:
+        manifest = json.loads((target / ".ai-playbooks.json").read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        manifest = {}
+        errors.append(".ai-playbooks.json is not valid JSON")
+
+    expected_manifest = {
+        "entrypoint": "moving.md",
+        "handoff": "HANDOFF.md",
+        "current_state": "docs/CURRENT_STATE.md",
+        "compatible_agents": "any",
+    }
+    for key, expected in expected_manifest.items():
+        if manifest.get(key) != expected:
+            errors.append(f".ai-playbooks.json must define {key} as {expected}")
 
     for name, adapter in (("AGENTS.md", agents), ("CLAUDE.md", claude)):
-        if "ai-playbooks-adapter:v1" not in adapter:
+        if "ai-playbooks-adapter:v" not in adapter:
             errors.append(f"{name} is missing the managed adapter marker")
         for required_reference in (
-            "docs/AI_WORKFLOW.md",
-            "docs/PROJECT_CONTEXT.md",
+            "moving.md",
+            "HANDOFF.md",
             "docs/CURRENT_STATE.md",
-            "git status",
         ):
             if required_reference not in adapter:
                 errors.append(f"{name} does not reference {required_reference}")
 
     if "ai-playbooks-workflow:v" not in workflow:
         errors.append("docs/AI_WORKFLOW.md is missing the shared workflow marker")
-    if "single source of truth" not in workflow:
-        errors.append("shared workflow does not declare a single source of truth")
+    if "detailed operational policy shared by all agents" not in workflow:
+        errors.append("shared workflow is not declared agent-neutral")
     if "Conversation history is temporary context" not in workflow:
         errors.append("shared workflow still depends on conversation history")
+
+    if "ai-playbooks-moving:v1" not in moving:
+        errors.append("moving.md is missing the universal entry marker")
+    for required_reference in ("HANDOFF.md", "docs/CURRENT_STATE.md", "git status"):
+        if required_reference not in moving:
+            errors.append(f"moving.md does not reference {required_reference}")
+    if len(moving) > 2500:
+        errors.append("moving.md is too long for a minimal progressive entry point")
+    if "AGENTS.md" in moving or "CLAUDE.md" in moving:
+        errors.append("moving.md depends on an agent-specific adapter")
+
+    if "ai-playbooks-handoff:v1" not in handoff:
+        errors.append("HANDOFF.md is missing the universal handoff marker")
+    for required_rule in (
+        "Codex, Claude, and any other agent",
+        "Conversation history is optional context",
+        "Read progressively",
+        "Mandatory session close",
+        "docs/CURRENT_STATE.md",
+    ):
+        if required_rule not in handoff:
+            errors.append(f"HANDOFF.md is missing required continuity rule: {required_rule}")
 
     status_match = re.search(r"^\*\*Status:\*\*\s*(.+)$", current, re.MULTILINE)
     status = status_match.group(1).strip().lower() if status_match else ""
     next_step = section_value(current, "Next exact step")
+    decisions = section_value(current, "Decisions this session")
     if status in {"active", "ready", "paused"}:
         if not next_step or next_step.lower() in {"none", "n/a", "unknown", "tbd"} or "<" in next_step:
             errors.append("CURRENT_STATE.md must define a concrete next exact step while work is active")
+    if not decisions:
+        errors.append("CURRENT_STATE.md must record session decisions or explicitly state that none were made")
 
     for relative, text in (
+        ("moving.md", moving),
+        ("HANDOFF.md", handoff),
         ("AGENTS.md", agents),
         ("CLAUDE.md", claude),
         ("docs/AI_WORKFLOW.md", workflow),
@@ -104,8 +151,8 @@ def validate(target: Path) -> list[str]:
             if not email.lower().endswith(("@example.com", "@example.invalid")):
                 errors.append(f"{relative} contains a possible personal email address")
 
-    if "docs/AI_WORKFLOW.md" not in agents or "docs/AI_WORKFLOW.md" not in claude:
-        errors.append("Codex and Claude do not share the same workflow source")
+    if "moving.md" not in agents or "moving.md" not in claude:
+        errors.append("Codex and Claude do not share the universal entry point")
     return errors
 
 

@@ -1,7 +1,7 @@
-<!-- ai-playbooks-workflow:v2 -->
+<!-- ai-playbooks-workflow:v3 -->
 # Shared AI Project Workflow
 
-This document is the single source of truth for operational behavior shared by Codex and Claude Code. Agent-specific files are short adapters and must not redefine this workflow.
+This document is the detailed operational policy shared by all agents. `moving.md` is the universal entry point, `HANDOFF.md` is the stable continuity contract, and agent-specific files are short adapters that must not redefine them.
 
 ## Architect invocation
 
@@ -15,6 +15,8 @@ When the user says **“Use the architect”** or **“Usa el arquitecto”**:
 
 When the user provides a clear objective with the invocation, begin directly without an unnecessary menu.
 
+The command **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones”** activates the same continuation behavior for any agent. Do not request the previous conversation; follow the progressive route defined in `moving.md`.
+
 ## GitHub-first workspace
 
 - GitHub is the durable source of truth. A local checkout is temporary working state managed by the AI, not something the user must organize.
@@ -27,13 +29,12 @@ When the user provides a clear objective with the invocation, begin directly wit
 
 Before substantive work:
 
-1. Read the permanent project instructions in `AGENTS.md` or `CLAUDE.md`.
-2. Read `docs/PROJECT_CONTEXT.md`.
-3. Read `docs/CURRENT_STATE.md`.
-4. Inspect `git status` without altering user changes.
-5. Review only the recent commits relevant to the current objective.
-6. Identify active work and the next exact step.
-7. Read only the files needed for that step; expand scope only when evidence requires it.
+1. Read `moving.md`.
+2. Read `HANDOFF.md` and `docs/CURRENT_STATE.md`.
+3. Inspect `git status` without altering user changes.
+4. Review only the recent commits relevant to the current objective.
+5. Identify active work and the next exact step.
+6. Read `docs/PROJECT_CONTEXT.md` and only the work item, decisions, architecture, code, or tests needed for that step; expand scope only when evidence requires it.
 
 Project files and Git are the source of truth. Conversation history is temporary context, never operational memory.
 
@@ -43,7 +44,8 @@ Project files and Git are the source of truth. Conversation history is temporary
 - Separate facts, assumptions, decisions, and open questions.
 - Work in small, complete, verifiable increments.
 - Keep `docs/PROJECT_CONTEXT.md` stable and concise; update it only when durable project facts change.
-- Keep `docs/CURRENT_STATE.md` short, current, and sufficient for another agent to resume without the prior conversation.
+- Keep `moving.md` and `HANDOFF.md` stable and agent-neutral. Do not place session history in them.
+- Keep `docs/CURRENT_STATE.md` short, current, and sufficient for another agent to resume without the prior conversation. Record decisions made during the session or link their ADRs.
 - Store architecture in `docs/architecture/`, decisions in `docs/decisions/`, and active delivery records in `docs/work-items/`.
 - Do not paste conversations, large code blocks, full diffs, or information that Git can provide into memory documents.
 
@@ -69,12 +71,11 @@ Before ending:
 1. Leave the project stable when possible.
 2. Run relevant verification.
 3. Review the final diff.
-4. Commit completed work, or document exactly why it cannot be committed.
-5. Update `docs/CURRENT_STATE.md` last.
-6. Record what was completed and what remains.
-7. Record important files and tests with results.
-8. Record known errors, risks, and blockers.
-9. Write one next exact step that another agent can execute.
-10. Ensure the handoff does not require the previous conversation.
+4. Record what was completed, what remains, important files, verification results, decisions, known errors, risks, and blockers.
+5. Update `docs/CURRENT_STATE.md` with that evidence and one next exact step.
+6. Commit completed work together with the updated state, or document exactly why it cannot be committed.
+7. Publish according to the Git policy, or record the exact publication blocker.
+8. If anything material changes after the state update, update and commit the state again.
+9. Ensure `moving.md` still routes any agent to a handoff that does not require the previous conversation.
 
 End the user interaction explicitly with **“Finished”** / **“Ya terminé”**, or with one concise question when a decision only the user can make blocks further safe progress.

@@ -19,7 +19,7 @@ playbooks/
   roles/                      Responsibility-specific guidance
 templates/
   ...                         Planning, architecture, risk, AI, release, and operations
-  project/                    Shared Codex/Claude project structure
+  project/                    Universal cross-agent project structure
   global/                     Copyable account-wide AI instructions
 standards/
   ...                         Documentation, testing, security, AI, operations, and release
@@ -35,6 +35,12 @@ If the AI does not already know the architect, give it the public bootstrap once
 > Lee y sigue https://raw.githubusercontent.com/10minuteswebsite/AI-Playbooks/main/ARCHITECT_BOOTSTRAP.md. Usa el arquitecto.
 
 The architect works GitHub-first. It identifies or requests the repository, verifies access, asks for GitHub authorization when necessary, and manages any temporary checkout itself. The user does not need to clone repositories or organize local project folders.
+
+Every newly bootstrapped project includes a universal agent entry point. To move between Codex, Claude, or another repository-capable agent, say:
+
+> Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
+
+`moving.md` routes the agent to the stable `HANDOFF.md` contract and short `docs/CURRENT_STATE.md`. The agent then reads only the work item, decisions, architecture, code, and tests required for the next exact step; GitHub retains the detailed, verifiable history.
 
 The reusable installer is:
 

@@ -18,6 +18,14 @@ Claude reads the project adapters, shared workflow, project context, current sta
 
 Claude commits and pushes the completed documentation increment. It does not copy the conversation into the handoff.
 
+## Any agent continues
+
+The user can switch to Codex, Claude, or another repository-capable agent and say:
+
+> Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
+
+The agent reads `moving.md`, `HANDOFF.md`, and `docs/CURRENT_STATE.md`, inspects the relevant Git evidence, and loads only the work item and files required for the next exact step. It does not need either earlier conversation.
+
 ## Codex continues
 
 The user opens Codex and says only:

@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-07-27
 **Decision owners:** Repository owner
-**Supersedes / superseded by:** None
+**Supersedes / superseded by:** Extended by [ADR-0002](0002-universal-moving-handoff.md)
 
 ## Context
 
