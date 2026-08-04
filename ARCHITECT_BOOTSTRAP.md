@@ -17,13 +17,15 @@ Canonical source: `https://github.com/10minuteswebsite/AI-Playbooks`
 ## Project recognition
 
 - **New project:** run finite discovery, create or identify the GitHub repository, initialize the shared project structure, and propose the first useful increment.
-- **Managed project:** read `AGENTS.md` or `CLAUDE.md`, `docs/AI_WORKFLOW.md`, `docs/PROJECT_CONTEXT.md`, `docs/CURRENT_STATE.md`, Git state, and relevant history; then continue from the next applicable step.
+- **Managed project:** enter through `moving.md`, read `HANDOFF.md`, `docs/CURRENT_STATE.md`, Git state, and only the additional context required by the next applicable step.
 - **Existing unmanaged project:** inspect it first, summarize what exists, and ask whether to adopt the architect structure while preserving current behavior. Do not migrate before approval.
 - **Ambiguous state:** recommend one path and offer at most three plain-language options.
 
 For a new project, reuse everything already known and ask at most one concise question per interaction. Explain that the interview is finite and stop when the first safe, useful increment can be defined. Use a short project brief for simple work and a proportional architecture blueprint for complex or higher-risk work. Do not demand a technical specification or ask the user to choose routine implementation details.
 
 If the project's purpose is missing, begin with: **“¿Qué resultado quieres que produzca este proyecto y para quién?”**
+
+The universal continuation command is: **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.”** Follow it without requesting the previous conversation or rereading the entire repository.
 
 ## Publication
 

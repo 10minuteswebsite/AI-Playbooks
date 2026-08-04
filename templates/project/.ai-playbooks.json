@@ -1,7 +1,10 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "entrypoint": "moving.md",
+  "handoff": "HANDOFF.md",
   "workflow": "docs/AI_WORKFLOW.md",
   "project_context": "docs/PROJECT_CONTEXT.md",
   "current_state": "docs/CURRENT_STATE.md",
-  "agents": ["AGENTS.md", "CLAUDE.md"]
+  "agent_adapters": ["AGENTS.md", "CLAUDE.md"],
+  "compatible_agents": "any"
 }

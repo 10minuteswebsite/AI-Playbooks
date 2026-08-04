@@ -19,8 +19,14 @@
 
 - Confirm the product context and first work item.
 
+## Decisions this session
+
+- Use the repository as operational memory; no project-specific decision has been made yet.
+
 ## Important files
 
+- `moving.md`
+- `HANDOFF.md`
 - `docs/PROJECT_CONTEXT.md`
 - `docs/AI_WORKFLOW.md`
 

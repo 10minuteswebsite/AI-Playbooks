@@ -28,6 +28,14 @@ You do not need to tell either agent to inspect Git, read memory files, preserve
 
 You also do not need to work locally. The architect should identify or ask for the GitHub repository, request connection access if needed, and manage its own temporary working copy.
 
+## Moving between AI agents
+
+When you switch from Claude to Codex, from Codex to Claude, or to another agent, say:
+
+> Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
+
+Replace `[REPOSITORIO]` with the GitHub link or `owner/name`. You do not need to paste the old conversation. The new agent reads the brief entry, the universal handoff, the current state, and only the files needed for the recorded next step.
+
 For a new idea, the architect reuses what you already explained, asks only the most important missing question, and stops the interview once it can define a safe first result. Simple projects receive a short project brief; complex or higher-risk projects receive a proportional architecture blueprint.
 
 ## Before the first line of code

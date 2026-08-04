@@ -6,6 +6,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Added
 
+- Universal `moving.md` entry point, agent-neutral `HANDOFF.md` contract, progressive context-loading rules, ADR-0002, and third-agent continuation coverage.
 - Finite Project Discovery Playbook with one-question-at-a-time interviews, adaptive question ceilings, a sufficiency test, and proportional project briefs or architecture blueprints.
 - Public architect bootstrap and copyable Claude profile instructions for GitHub-first activation outside a local project.
 - Shared Codex/Claude project adapters, operational memory templates, safe bootstrap installer, handoff and global-instruction validators, and end-to-end continuation tests.
@@ -20,6 +21,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Changed
 
+- Software Architect 2.5, Software Delivery Core 2.4, and Documentation Standard 2.2 make mandatory session-state updates and repository-based continuation independent of Codex or Claude.
 - Software Architect 2.4 and Software Delivery Core 2.3 apply finite discovery to new or materially undefined projects without imposing a universal waterfall approval gate.
 - Software Architect 2.3 and Software Delivery Core 2.2 make GitHub the user-facing source of truth, require verified access checks, and place temporary workspace management on the AI.
 - Software Architect Playbook 2.2 automatically recognizes new, managed, and existing unmanaged projects when invoked.
