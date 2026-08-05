@@ -12,6 +12,7 @@ from pathlib import Path
 
 REQUIRED_FILES = (
     ".ai-playbooks.json",
+    "TODO.md",
     "moving.md",
     "HANDOFF.md",
     "AGENTS.md",
@@ -69,6 +70,7 @@ def validate(target: Path) -> list[str]:
     workflow = (target / "docs" / "AI_WORKFLOW.md").read_text(encoding="utf-8")
     context = (target / "docs" / "PROJECT_CONTEXT.md").read_text(encoding="utf-8")
     current = (target / "docs" / "CURRENT_STATE.md").read_text(encoding="utf-8")
+    todo = (target / "TODO.md").read_text(encoding="utf-8")
     try:
         manifest = json.loads((target / ".ai-playbooks.json").read_text(encoding="utf-8"))
     except json.JSONDecodeError:
@@ -78,6 +80,7 @@ def validate(target: Path) -> list[str]:
     expected_manifest = {
         "entrypoint": "moving.md",
         "handoff": "HANDOFF.md",
+        "backlog": "TODO.md",
         "current_state": "docs/CURRENT_STATE.md",
         "compatible_agents": "any",
     }
@@ -103,9 +106,9 @@ def validate(target: Path) -> list[str]:
     if "Conversation history is temporary context" not in workflow:
         errors.append("shared workflow still depends on conversation history")
 
-    if "ai-playbooks-moving:v2" not in moving:
+    if "ai-playbooks-moving:v3" not in moving:
         errors.append("moving.md is missing the universal entry marker")
-    for required_reference in ("HANDOFF.md", "docs/CURRENT_STATE.md", "git status"):
+    for required_reference in ("HANDOFF.md", "docs/CURRENT_STATE.md", "TODO.md", "git status"):
         if required_reference not in moving:
             errors.append(f"moving.md does not reference {required_reference}")
     if len(moving) > 2500:
@@ -113,7 +116,7 @@ def validate(target: Path) -> list[str]:
     if "AGENTS.md" in moving or "CLAUDE.md" in moving:
         errors.append("moving.md depends on an agent-specific adapter")
 
-    if "ai-playbooks-handoff:v2" not in handoff:
+    if "ai-playbooks-handoff:v3" not in handoff:
         errors.append("HANDOFF.md is missing the universal handoff marker")
     for required_rule in (
         "Codex, Claude, and any other agent",
@@ -123,24 +126,54 @@ def validate(target: Path) -> list[str]:
         "Active interaction contract",
         "exactly two valid terminal states",
         "Waiting is valid only after asking that blocking question",
+        "TODO.md",
         "docs/CURRENT_STATE.md",
     ):
         if required_rule not in handoff:
             errors.append(f"HANDOFF.md is missing required continuity rule: {required_rule}")
 
+    if "ai-playbooks-todo:v1" not in todo:
+        errors.append("TODO.md is missing the managed backlog marker")
+    for heading in (
+        "Product objective",
+        "Initial development plan",
+        "Now",
+        "Next",
+        "Later",
+        "Blocked",
+        "Recently completed",
+        "Maintenance rules",
+    ):
+        if not section_value(todo, heading):
+            errors.append(f"TODO.md is missing or has an empty section: {heading}")
+    definitions = re.findall(r"\*\*(TODO-\d{3,})\s+—", todo)
+    if not definitions:
+        errors.append("TODO.md must define at least one actionable TODO-NNN item")
+    if len(definitions) != len(set(definitions)):
+        errors.append("TODO.md contains duplicate task definitions")
+
     status_match = re.search(r"^\*\*Status:\*\*\s*(.+)$", current, re.MULTILINE)
     status = status_match.group(1).strip().lower() if status_match else ""
     next_step = section_value(current, "Next exact step")
     decisions = section_value(current, "Decisions this session")
+    active_match = re.search(r"^\*\*Active backlog item:\*\*\s*(.+)$", current, re.MULTILINE)
+    active_item = active_match.group(1).strip() if active_match else ""
     if status in {"active", "ready", "paused"}:
         if not next_step or next_step.lower() in {"none", "n/a", "unknown", "tbd"} or "<" in next_step:
             errors.append("CURRENT_STATE.md must define a concrete next exact step while work is active")
+        if not re.fullmatch(r"TODO-\d{3,}", active_item):
+            errors.append("CURRENT_STATE.md must identify one active TODO-NNN item while work is active")
+        elif active_item not in definitions:
+            errors.append("CURRENT_STATE.md references an active backlog item not defined in TODO.md")
+        if active_item and active_item not in next_step:
+            errors.append("CURRENT_STATE.md next exact step must reference the active backlog item")
     if not decisions:
         errors.append("CURRENT_STATE.md must record session decisions or explicitly state that none were made")
 
     for relative, text in (
         ("moving.md", moving),
         ("HANDOFF.md", handoff),
+        ("TODO.md", todo),
         ("AGENTS.md", agents),
         ("CLAUDE.md", claude),
         ("docs/AI_WORKFLOW.md", workflow),

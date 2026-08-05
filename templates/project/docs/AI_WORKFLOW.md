@@ -1,4 +1,4 @@
-<!-- ai-playbooks-workflow:v4 -->
+<!-- ai-playbooks-workflow:v5 -->
 # Shared AI Project Workflow
 
 This document is the detailed operational policy shared by all agents. `moving.md` is the universal entry point, `HANDOFF.md` is the stable continuity contract, and agent-specific files are short adapters that must not redefine them.
@@ -30,10 +30,10 @@ The command **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las i
 Before substantive work:
 
 1. Read `moving.md`.
-2. Read `HANDOFF.md` and `docs/CURRENT_STATE.md`.
+2. Read `HANDOFF.md`, `docs/CURRENT_STATE.md`, and the `Now` and `Blocked` sections of `TODO.md`.
 3. Inspect `git status` without altering user changes.
 4. Review only the recent commits relevant to the current objective.
-5. Identify active work and the next exact step.
+5. Identify the active `TODO-NNN` item and next exact step.
 6. Read `docs/PROJECT_CONTEXT.md` and only the work item, decisions, architecture, code, or tests needed for that step; expand scope only when evidence requires it.
 
 Project files and Git are the source of truth. Conversation history is temporary context, never operational memory.
@@ -47,6 +47,7 @@ Project files and Git are the source of truth. Conversation history is temporary
 - Work in small, complete, verifiable increments.
 - Keep `docs/PROJECT_CONTEXT.md` stable and concise; update it only when durable project facts change.
 - Keep `moving.md` and `HANDOFF.md` stable and agent-neutral. Do not place session history in them.
+- Keep the initial plan and complete known backlog in `TODO.md`. Give actionable items stable IDs, record discovered work without expanding current scope, and keep completed history in GitHub.
 - Keep `docs/CURRENT_STATE.md` short, current, and sufficient for another agent to resume without the prior conversation. Record decisions made during the session or link their ADRs.
 - Store architecture in `docs/architecture/`, decisions in `docs/decisions/`, and active delivery records in `docs/work-items/`.
 - Do not paste conversations, large code blocks, full diffs, or information that Git can provide into memory documents.
@@ -73,11 +74,12 @@ Before ending:
 1. Leave the project stable when possible.
 2. Run relevant verification.
 3. Review the final diff.
-4. Record what was completed, what remains, important files, verification results, decisions, known errors, risks, and blockers.
-5. Update `docs/CURRENT_STATE.md` with that evidence and one next exact step.
-6. Commit completed work together with the updated state, or document exactly why it cannot be committed.
-7. Publish according to the Git policy, or record the exact publication blocker.
-8. If anything material changes after the state update, update and commit the state again.
-9. Ensure `moving.md` still routes any agent to a handoff that does not require the previous conversation.
+4. Record newly discovered or changed work in `TODO.md`; move only recently completed items to its completion section.
+5. Record what was completed, what remains, important files, verification results, decisions, known errors, risks, and blockers.
+6. Update `docs/CURRENT_STATE.md` with the active `TODO-NNN` item, that evidence, and one next exact step.
+7. Commit completed work together with the updated backlog and state, or document exactly why it cannot be committed.
+8. Publish according to the Git policy, or record the exact publication blocker.
+9. If anything material changes after the updates, update and commit the backlog and state again.
+10. Ensure `moving.md` still routes any agent to a handoff that does not require the previous conversation.
 
 End the user interaction explicitly with **“Finished”** / **“Ya terminé”** and verification evidence, or with one concise blocking question when useful independent work is exhausted and only the user can unblock progress. Never end silently, passively, or with an unexplained wait.

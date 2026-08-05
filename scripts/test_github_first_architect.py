@@ -33,7 +33,7 @@ def main() -> int:
         assert "GitHub" in text
         assert "temporary" in text
     assert "login page is not evidence" in bootstrap
-    assert "ai-playbooks-workflow:v4" in workflow
+    assert "ai-playbooks-workflow:v5" in workflow
 
     print("GitHub-first architect tests passed.")
     return 0

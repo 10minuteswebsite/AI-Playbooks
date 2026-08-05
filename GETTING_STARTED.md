@@ -36,6 +36,8 @@ When you switch from Claude to Codex, from Codex to Claude, or to another agent,
 
 Replace `[REPOSITORIO]` with the GitHub link or `owner/name`. You do not need to paste the old conversation. The new agent reads the brief entry, the universal handoff, the current state, and only the files needed for the recorded next step.
 
+`TODO.md` preserves the initial development plan and every known pending task. When an agent discovers additional work, it records the task there without interrupting or silently expanding the active increment. `docs/CURRENT_STATE.md` points to the one backlog item being executed now.
+
 For a new idea, the architect reuses what you already explained, asks only the most important missing question, and stops the interview once it can define a safe first result. Simple projects receive a short project brief; complex or higher-risk projects receive a proportional architecture blueprint.
 
 ## Before the first line of code

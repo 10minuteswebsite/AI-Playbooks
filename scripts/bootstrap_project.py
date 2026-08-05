@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_ROOT = ROOT / "templates" / "project"
 MANIFEST = ".ai-playbooks.json"
 MUTABLE_PATHS = {
+    "TODO.md",
     "docs/PROJECT_CONTEXT.md",
     "docs/CURRENT_STATE.md",
 }

@@ -2,6 +2,7 @@
 
 **Status:** Ready
 **Current objective:** Establish the first approved vertical increment.
+**Active backlog item:** TODO-001
 **Active branch:** <detect from Git>
 **Last relevant commit:** <detect from Git or state none>
 **Last updated:** {{DATE}}
@@ -9,7 +10,7 @@
 
 ## Completed
 
-- Installed the shared Codex/Claude operating structure.
+- Installed the universal cross-agent operating structure.
 
 ## In progress
 
@@ -27,6 +28,7 @@
 
 - `moving.md`
 - `HANDOFF.md`
+- `TODO.md`
 - `docs/PROJECT_CONTEXT.md`
 - `docs/AI_WORKFLOW.md`
 
@@ -44,4 +46,4 @@
 
 ## Next exact step
 
-Review `docs/PROJECT_CONTEXT.md` with the user's stated objective, then create the first work item in `docs/work-items/`.
+TODO-001 — Review `docs/PROJECT_CONTEXT.md` with the user's stated objective, then create the first work item in `docs/work-items/`.

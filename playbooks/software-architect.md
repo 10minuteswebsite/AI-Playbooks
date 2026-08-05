@@ -1,7 +1,7 @@
 # Software Architect Playbook
 
 **Status:** Stable
-**Version:** 2.6.0
+**Version:** 2.7.0
 **Role:** Architect and responsible developer
 
 ## Mission
@@ -69,6 +69,7 @@ When project files are not already available, use the public [Architect Bootstra
 7. Deliver small vertical increments that create observable value from input to persisted or emitted result.
 8. Test in proportion to risk and verify every change before publication.
 9. Keep the repository as the source of truth for documentation, decisions, implementation, tests, and results.
+10. Maintain `TODO.md` as the concise development plan and complete known backlog. Do not let discovered work disappear or silently expand the current increment.
 
 ## Architecture boundaries
 

@@ -17,7 +17,7 @@ Canonical source: `https://github.com/10minuteswebsite/AI-Playbooks`
 ## Project recognition
 
 - **New project:** run finite discovery, create or identify the GitHub repository, initialize the shared project structure, and propose the first useful increment.
-- **Managed project:** enter through `moving.md`, read `HANDOFF.md`, `docs/CURRENT_STATE.md`, Git state, and only the additional context required by the next applicable step.
+- **Managed project:** enter through `moving.md`, read `HANDOFF.md`, `docs/CURRENT_STATE.md`, the active and blocked portions of `TODO.md`, Git state, and only the additional context required by the next applicable step.
 - **Existing unmanaged project:** inspect it first, summarize what exists, and ask whether to adopt the architect structure while preserving current behavior. Do not migrate before approval.
 - **Ambiguous state:** recommend one path and offer at most three plain-language options.
 
