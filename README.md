@@ -40,7 +40,7 @@ Every newly bootstrapped project includes a universal agent entry point. To move
 
 > Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
 
-`moving.md` routes the agent to the stable `HANDOFF.md` contract and short `docs/CURRENT_STATE.md`. The agent then reads only the work item, decisions, architecture, code, and tests required for the next exact step; GitHub retains the detailed, verifiable history.
+`moving.md` routes the agent to the stable `HANDOFF.md` contract, short `docs/CURRENT_STATE.md`, and repository-native `TODO.md`. `TODO.md` holds the initial plan and complete known backlog; current state identifies only the active item and next exact step. The agent then reads only the work item, decisions, architecture, code, and tests required for that step; GitHub retains the detailed, verifiable history.
 
 The reusable installer is:
 

@@ -1,7 +1,7 @@
 # Documentation Standard
 
 **Status:** Stable
-**Version:** 2.2.0
+**Version:** 2.3.0
 
 ## Objective
 
@@ -12,16 +12,17 @@ Make every system understandable, reviewable, operable, and reproducible without
 1. Universal entry: short `moving.md` that routes any agent without duplicating project history.
 2. Collaboration contract: stable, agent-neutral `HANDOFF.md` linked to the shared project workflow.
 3. Agent adapters: short optional `AGENTS.md`, `CLAUDE.md`, or equivalent files that point to the universal entry.
-4. Project memory: stable `docs/PROJECT_CONTEXT.md` and short operational `docs/CURRENT_STATE.md`.
-5. README: purpose, ownership, setup, usage, verification, and links.
-6. Architecture document: business context, boundaries, flows, data, security, operations, and delivery plan.
-7. Module documents: responsibilities, contracts, ownership, failure behavior, and tests.
-8. ADRs: consequential choices, alternatives, tradeoffs, and replacement path.
-9. API/event contracts: versioned machine boundaries and delivery semantics.
-10. Runbooks: detection, diagnosis, mitigation, recovery, and escalation for operational risks.
-11. Project briefs and work items: outcome, scope, acceptance criteria, authorization, verification, and rollback.
-12. Risk and threat records: impact, abuse paths, controls, owners, and accepted residual risk.
-13. AI system cards and evaluation plans when model behavior affects product outcomes.
+4. Project plan and backlog: concise root `TODO.md` with stable item identifiers, priorities, dependencies, and observable outcomes.
+5. Project memory: stable `docs/PROJECT_CONTEXT.md` and short operational `docs/CURRENT_STATE.md` linked to the active backlog item.
+6. README: purpose, ownership, setup, usage, verification, and links.
+7. Architecture document: business context, boundaries, flows, data, security, operations, and delivery plan.
+8. Module documents: responsibilities, contracts, ownership, failure behavior, and tests.
+9. ADRs: consequential choices, alternatives, tradeoffs, and replacement path.
+10. API/event contracts: versioned machine boundaries and delivery semantics.
+11. Runbooks: detection, diagnosis, mitigation, recovery, and escalation for operational risks.
+12. Project briefs and work items: outcome, scope, acceptance criteria, authorization, verification, and rollback.
+13. Risk and threat records: impact, abuse paths, controls, owners, and accepted residual risk.
+14. AI system cards and evaluation plans when model behavior affects product outcomes.
 
 ## Writing rules
 
@@ -37,6 +38,7 @@ Make every system understandable, reviewable, operable, and reproducible without
 - Do not duplicate shared workflow policy between agent adapters. Keep stable facts in project context and volatile session state in current state.
 - Keep `moving.md` short, stable, and navigational. Keep collaboration rules in `HANDOFF.md`; never turn either file into a session diary.
 - Apply progressive disclosure: read the entry and current state first, then load only documentation and code required by the next exact step.
+- Keep the initial plan and all known pending work in `TODO.md`; keep only the active item and immediate operational evidence in `CURRENT_STATE.md`.
 - Make every active current-state document contain one concrete next step that does not depend on conversation history.
 
 ## Decision threshold

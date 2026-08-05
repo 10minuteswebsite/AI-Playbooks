@@ -1,7 +1,7 @@
 # Software Delivery Core Playbook
 
 **Status:** Stable
-**Version:** 2.5.0
+**Version:** 2.6.0
 **Audience:** People and AI systems delivering software
 
 ## Mission
@@ -39,7 +39,7 @@ Use multiple profiles when boundaries overlap. Record why each profile applies i
 
 ### 0. Recover project state
 
-When a managed project exists, begin with `moving.md`, then read `HANDOFF.md`, `docs/CURRENT_STATE.md`, Git status, and only the recent history relevant to the next documented step. Load durable context, work items, architecture, decisions, code, and tests progressively as the step requires. Treat the repository as operational memory; never require the previous conversation to continue.
+When a managed project exists, begin with `moving.md`, then read `HANDOFF.md`, `docs/CURRENT_STATE.md`, the active and blocked portions of `TODO.md`, Git status, and only the recent history relevant to the next documented step. Load durable context, work items, architecture, decisions, code, and tests progressively as the step requires. Treat the repository as operational memory; never require the previous conversation to continue.
 
 When project files are not present, identify the GitHub repository from available context and verify access through a connector/API or Git. Ask only for the repository link or authorization when necessary. Use a temporary checkout managed by the AI and keep GitHub as the durable source of truth; do not require the user to manage a local workspace.
 
@@ -55,7 +55,7 @@ Create only the documentation justified by risk. Define domain boundaries, data 
 
 ### 3. Plan a vertical increment
 
-Create a work item that can normally be implemented and reviewed in one day and released independently. Include acceptance criteria, verification, affected boundaries, risk, and rollback. Split work that mixes unrelated outcomes.
+Maintain the initial development plan and known backlog in `TODO.md`. Give actionable items stable `TODO-NNN` identifiers and observable outcomes. Record newly discovered work without silently expanding the active scope. Select one `Now` item, then create a work item that can normally be implemented and reviewed in one day and released independently. Include acceptance criteria, verification, affected boundaries, risk, and rollback. Split work that mixes unrelated outcomes.
 
 ### 4. Implement safely
 
@@ -83,4 +83,4 @@ Do not stop at a plan, status update, partial result, or routine technical quest
 
 Work is complete only when the observable outcome and acceptance criteria are met, relevant checks pass, documentation matches reality, security and data boundaries remain intact, rollback is understood, and another person can reproduce the result from the repository.
 
-Before ending every substantive work session, update the short operational state with completed work, pending work, decisions, important files, verification, risks, blockers, and one next exact step. Do not copy conversations, large code blocks, full diffs, or facts obtainable from Git into the handoff. Never leave the state stale after a later material change.
+Before ending every substantive work session, update `TODO.md` with discovered, reprioritized, blocked, or recently completed work and update the short operational state with the active backlog item, completed work, pending work, decisions, important files, verification, risks, blockers, and one next exact step. Do not copy conversations, large code blocks, full diffs, or facts obtainable from Git into the handoff. Never leave the backlog or state stale after a later material change.

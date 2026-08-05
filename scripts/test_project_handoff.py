@@ -32,6 +32,7 @@ def replace_state(project: Path, *, agent: str, status: str, objective: str, nex
                 "",
                 f"**Status:** {status}",
                 f"**Current objective:** {objective}",
+                f"**Active backlog item:** {'TODO-001' if status.lower() in {'active', 'ready', 'paused'} else 'None'}",
                 "**Active branch:** main",
                 "**Last relevant commit:** none",
                 "**Last updated:** 2026-01-01",
@@ -71,7 +72,7 @@ def replace_state(project: Path, *, agent: str, status: str, objective: str, nex
                 "",
                 "## Next exact step",
                 "",
-                next_step,
+                f"TODO-001 — {next_step}" if status.lower() in {"active", "ready", "paused"} else next_step,
                 "",
             )
         ),
@@ -88,10 +89,14 @@ def main() -> int:
         run(sys.executable, str(VALIDATE), str(new_project))
         moving = (new_project / "moving.md").read_text(encoding="utf-8")
         handoff = (new_project / "HANDOFF.md").read_text(encoding="utf-8")
+        todo_path = new_project / "TODO.md"
+        todo = todo_path.read_text(encoding="utf-8")
         if "any AI agent" not in moving or "any other agent" not in handoff:
             raise AssertionError("Universal-agent handoff instructions were not installed")
         if "AGENTS.md" in moving or "CLAUDE.md" in moving:
             raise AssertionError("Universal entry depends on a vendor-specific adapter")
+        if "TODO-001" not in todo or "Initial development plan" not in todo:
+            raise AssertionError("Project plan and backlog were not installed")
 
         replace_state(
             new_project,
@@ -107,7 +112,7 @@ def main() -> int:
         # A vendor-neutral third agent can resume using only the universal entry,
         # current state, and repository evidence—without Claude/Codex chat history.
         recovered_state = (new_project / "docs" / "CURRENT_STATE.md").read_text(encoding="utf-8")
-        if "implement the endpoint" not in recovered_state or "ai-playbooks-moving:v2" not in moving:
+        if "implement the endpoint" not in recovered_state or "ai-playbooks-moving:v3" not in moving:
             raise AssertionError("A generic agent could not recover the documented next step")
         for liveness_rule in (
             "exactly two valid terminal states",
@@ -117,6 +122,19 @@ def main() -> int:
         ):
             if liveness_rule not in handoff:
                 raise AssertionError(f"Universal handoff is missing active-interaction rule: {liveness_rule}")
+
+        todo_path.write_text(
+            todo.replace(
+                "## Later\n\n- None recorded.",
+                "## Later\n\n- [ ] **TODO-002 — Add a synthetic readiness endpoint**\n"
+                "  - Priority: Later\n"
+                "  - Outcome: A separately verifiable readiness signal.\n"
+                "  - Dependencies: TODO-001 completion.\n"
+                "  - Work item: Not selected.",
+            ),
+            encoding="utf-8",
+        )
+        run(sys.executable, str(VALIDATE), str(new_project))
 
         replace_state(
             new_project,

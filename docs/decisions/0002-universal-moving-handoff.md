@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-08-04
 **Decision owners:** Repository owner
-**Supersedes / superseded by:** Extends [ADR-0001](0001-cross-agent-project-memory.md)
+**Supersedes / superseded by:** Extends [ADR-0001](0001-cross-agent-project-memory.md); extended by [ADR-0003](0003-project-plan-and-backlog.md)
 
 ## Context
 
