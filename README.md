@@ -28,7 +28,7 @@ examples/                     Worked delivery examples
 
 ## How to use
 
-For normal use, tell Codex or Claude: **“Use the architect”** / **“Usa el arquitecto.”** The architect detects whether the project is new, already managed, or requires approved adoption.
+For normal use, tell Codex, Claude Code, OpenCode, or another repository-capable agent: **“Use the architect”** / **“Usa el arquitecto.”** The architect detects whether the project is new, already managed, or requires approved adoption.
 
 If the AI does not already know the architect, give it the public bootstrap once:
 
@@ -36,7 +36,7 @@ If the AI does not already know the architect, give it the public bootstrap once
 
 The architect works GitHub-first. It identifies or requests the repository, verifies access, asks for GitHub authorization when necessary, and manages any temporary checkout itself. The user does not need to clone repositories or organize local project folders.
 
-Every newly bootstrapped project includes a universal agent entry point. To move between Codex, Claude, or another repository-capable agent, say:
+Every newly bootstrapped project includes a universal agent entry point. To move between Codex, Claude, OpenCode, or another repository-capable agent, say:
 
 > Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
 

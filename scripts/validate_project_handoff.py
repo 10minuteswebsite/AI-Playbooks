@@ -12,6 +12,7 @@ from pathlib import Path
 
 REQUIRED_FILES = (
     ".ai-playbooks.json",
+    "opencode.json",
     "TODO.md",
     "moving.md",
     "HANDOFF.md",
@@ -71,11 +72,24 @@ def validate(target: Path) -> list[str]:
     context = (target / "docs" / "PROJECT_CONTEXT.md").read_text(encoding="utf-8")
     current = (target / "docs" / "CURRENT_STATE.md").read_text(encoding="utf-8")
     todo = (target / "TODO.md").read_text(encoding="utf-8")
+    opencode = (target / "opencode.json").read_text(encoding="utf-8")
     try:
         manifest = json.loads((target / ".ai-playbooks.json").read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         manifest = {}
         errors.append(".ai-playbooks.json is not valid JSON")
+    try:
+        opencode_config = json.loads(opencode)
+    except json.JSONDecodeError:
+        opencode_config = {}
+        errors.append("opencode.json is not valid JSON")
+
+    if opencode_config.get("$schema") != "https://opencode.ai/config.json":
+        errors.append("opencode.json must use the official OpenCode schema")
+    instructions = opencode_config.get("instructions")
+    bootstrap_url = "https://raw.githubusercontent.com/10minuteswebsite/AI-Playbooks/main/ARCHITECT_BOOTSTRAP.md"
+    if not isinstance(instructions, list) or bootstrap_url not in instructions:
+        errors.append("opencode.json must load the canonical remote ARCHITECT_BOOTSTRAP.md")
 
     expected_manifest = {
         "entrypoint": "moving.md",
@@ -179,6 +193,7 @@ def validate(target: Path) -> list[str]:
         ("docs/AI_WORKFLOW.md", workflow),
         ("docs/PROJECT_CONTEXT.md", context),
         ("docs/CURRENT_STATE.md", current),
+        ("opencode.json", opencode),
     ):
         for name, pattern in SECRET_PATTERNS.items():
             if pattern.search(text):

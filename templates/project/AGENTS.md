@@ -1,5 +1,5 @@
 <!-- ai-playbooks-adapter:v2 -->
-# Codex Project Instructions
+# Project Instructions
 
 `moving.md` is the universal entry point and `HANDOFF.md` is the stable continuity contract. Follow them before substantive work.
 
@@ -11,4 +11,4 @@ At the start of every task:
 4. Inspect Git as directed there.
 5. Load only the additional context required for the next exact step.
 
-Do not depend on conversation history for project state and do not duplicate the universal handoff or shared workflow in this file.
+Do not depend on conversation history for project state and do not duplicate the universal handoff or shared workflow in this file. This adapter is compatible with Codex, OpenCode, and other agents that read `AGENTS.md`.
