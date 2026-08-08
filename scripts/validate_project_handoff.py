@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate that a project can be handed between Codex and Claude without chat history."""
+"""Validate that an OpenCode project can resume without conversation history."""
 
 from __future__ import annotations
 
@@ -92,11 +92,13 @@ def validate(target: Path) -> list[str]:
         errors.append("opencode.json must load the canonical remote ARCHITECT_BOOTSTRAP.md")
 
     expected_manifest = {
+        "schema_version": 4,
         "entrypoint": "moving.md",
         "handoff": "HANDOFF.md",
         "backlog": "TODO.md",
         "current_state": "docs/CURRENT_STATE.md",
-        "compatible_agents": "any",
+        "compatible_agents": "legacy-adapters-and-opencode",
+        "primary_platform": "opencode",
     }
     for key, expected in expected_manifest.items():
         if manifest.get(key) != expected:
@@ -115,8 +117,8 @@ def validate(target: Path) -> list[str]:
 
     if "ai-playbooks-workflow:v" not in workflow:
         errors.append("docs/AI_WORKFLOW.md is missing the shared workflow marker")
-    if "detailed operational policy shared by all agents" not in workflow:
-        errors.append("shared workflow is not declared agent-neutral")
+    if "detailed operational policy for OpenCode" not in workflow:
+        errors.append("shared workflow is not declared OpenCode-first")
     if "Conversation history is temporary context" not in workflow:
         errors.append("shared workflow still depends on conversation history")
 
@@ -133,7 +135,7 @@ def validate(target: Path) -> list[str]:
     if "ai-playbooks-handoff:v3" not in handoff:
         errors.append("HANDOFF.md is missing the universal handoff marker")
     for required_rule in (
-        "Codex, Claude, and any other agent",
+        "OpenCode and its selected models",
         "Conversation history is optional context",
         "Read progressively",
         "Mandatory session close",
@@ -203,7 +205,7 @@ def validate(target: Path) -> list[str]:
                 errors.append(f"{relative} contains a possible personal email address")
 
     if "moving.md" not in agents or "moving.md" not in claude:
-        errors.append("Codex and Claude do not share the universal entry point")
+        errors.append("The legacy compatibility adapters do not share the OpenCode entry point")
     return errors
 
 

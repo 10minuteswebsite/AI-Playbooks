@@ -1,7 +1,7 @@
 <!-- ai-playbooks-handoff:v3 -->
 # Universal Agent Handoff
 
-This contract applies to Codex, Claude, and any other agent working in this repository.
+This contract applies to OpenCode and its selected models. Legacy adapters may point here, but switching platforms is not part of the current workflow.
 
 ## Source-of-truth hierarchy
 
@@ -12,7 +12,7 @@ This contract applies to Codex, Claude, and any other agent working in this repo
 5. `TODO.md` for the development plan and complete known backlog.
 6. Git and GitHub for detailed history, diffs, reviews, checks, and publication evidence.
 
-Conversation history is optional context and must never be required for continuation.
+Conversation history is optional context and must never be required for continuation. Changing models inside OpenCode does not change project state.
 
 ## Continuity rules
 

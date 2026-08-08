@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate that Codex and Claude share one global AI-Playbooks bootstrap."""
+"""Legacy check for optional Codex and Claude compatibility instructions."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ REQUIRED = (
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Validate global Codex/Claude bootstrap consistency")
+    parser = argparse.ArgumentParser(description="Validate legacy Codex/Claude bootstrap consistency")
     parser.add_argument("--codex", type=Path, default=Path.home() / ".codex" / "AGENTS.md")
     parser.add_argument("--claude", type=Path, default=Path.home() / ".claude" / "CLAUDE.md")
     return parser.parse_args()
@@ -57,7 +57,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print("Global Codex/Claude instructions share the same AI-Playbooks bootstrap.")
+    print("Legacy Codex/Claude instructions share the same AI-Playbooks bootstrap.")
     return 0
 
 

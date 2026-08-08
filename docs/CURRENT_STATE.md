@@ -1,17 +1,17 @@
 # Current State
 
-**Status:** complete
-**Active backlog item:** None
-**Last verified:** 2026-08-07
+**Status:** active
+**Active backlog item:** TODO-004
+**Last verified:** 2026-08-08
 
 ## Objective
 
-Prepare AI-Playbooks for provider-neutral continuation with OpenCode while retaining Codex and Claude compatibility. This is documentation and configuration work only.
+Maintain AI-Playbooks as an OpenCode-first methodology. Model changes happen inside OpenCode; Codex/Claude handoff is historical compatibility only. This is documentation and configuration work only.
 
 ## Verified repository state
 
 - Canonical repository: `10minuteswebsite/AI-Playbooks`.
-- Current branch: `migration/opencode_prep`.
+- Current branch: `agent/opencode-first-method`.
 - Recent main history includes the universal handoff, active-interaction, and TODO backlog releases through `ca459dc`.
 - No application runtime, deployment manifest, or application dependencies are present in the repository; functional application code is out of scope.
 - Existing project templates already provide `moving.md`, `HANDOFF.md`, `TODO.md`, `AGENTS.md`, `CLAUDE.md`, progressive workflow, current state, and validation.
@@ -23,6 +23,8 @@ Prepare AI-Playbooks for provider-neutral continuation with OpenCode while retai
 - Reviewed the canonical playbooks, templates, scripts, recent commits, and repository status.
 - Confirmed OpenCode's current configuration schema and remote `instructions` support from its official documentation.
 - Added root-level provider-neutral project instructions and continuity memory plus `opencode.json` with the public canonical bootstrap URL.
+- Replaced current user guidance and templates that required switching between platforms; preserved legacy adapters and historical ADRs.
+- Added ADR-0005 defining OpenCode as the primary operating model.
 
 ### Decisions
 
@@ -33,13 +35,13 @@ Prepare AI-Playbooks for provider-neutral continuation with OpenCode while retai
 ### Verification
 
 - Completed: repository and history inspection; official OpenCode schema documentation review.
-- Passed: JSON parse, documentation validation, secret scan, project handoff tests, GitHub-first architect tests, finite discovery tests, global-instruction validation, and `git diff --check`.
-- Commit published: `prepare repository for OpenCode migration` (see GitHub history).
-- Draft pull request: [#10](https://github.com/10minuteswebsite/AI-Playbooks/pull/10).
+- Passed: JSON parse, documentation validation, secret scan, project handoff tests, GitHub-first architect tests, finite discovery tests, legacy compatibility validation, and `git diff --check`.
+- Commit created: `make OpenCode the primary architect platform` (see GitHub history).
+- Pending: push and pull request.
 
 ## Next exact step
 
-Review and merge pull request [#10](https://github.com/10minuteswebsite/AI-Playbooks/pull/10) when repository policy permits.
+Push the OpenCode-first TODO-004 commit and open its pull request, then record the resulting URL and verification evidence here.
 
 ## Important files
 

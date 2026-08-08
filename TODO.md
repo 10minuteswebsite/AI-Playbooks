@@ -8,12 +8,15 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 ## Initial development plan
 
 - Phase 0 — Verify the canonical workflow, project memory, migration requirements, and validation evidence.
-- Phase 1 — Add provider-neutral OpenCode loading while preserving existing adapters.
-- Phase 2 — Verify handoff, documentation, secret scanning, and publication readiness.
+- Phase 1 — Operate OpenCode as the primary platform with model changes inside the same project.
+- Phase 2 — Preserve only useful legacy compatibility files and keep the repository memory protocol platform-independent.
 
 ## Now
 
-- None recorded.
+- [ ] **TODO-004 — Publish OpenCode-first operating guidance**
+  - Priority: Highest
+  - Outcome: Current instructions no longer require switching platforms; OpenCode and model continuity are explicit.
+  - Verification: documentation, secret, handoff, JSON, and regression checks.
 
 ## Next
 
@@ -34,6 +37,8 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 
 - Added the universal moving/handoff protocol and repository backlog in prior releases.
 - **TODO-001 — Complete provider-neutral OpenCode migration preparation** — OpenCode configuration, root continuity memory, template support, ADR, and validators completed; all checks passed.
+- **TODO-003 — Adopt OpenCode-first operating guidance** — Current documentation and templates no longer require switching between platforms; legacy files remain preserved for compatibility.
+- **TODO-004 — Publish OpenCode-first operating guidance** — Documentation and validation updates completed; publication pending.
 
 ## Maintenance rules
 

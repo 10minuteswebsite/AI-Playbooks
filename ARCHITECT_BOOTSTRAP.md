@@ -1,6 +1,6 @@
 # Architect Bootstrap
 
-Use this public entry point when a user says **“Use the architect”** or **“Usa el arquitecto”** and no project-level architect instructions are available. It is intentionally vendor-neutral and can be loaded by Codex, Claude Code, OpenCode, or another repository-capable agent.
+Use this public entry point when a user says **“Use the architect”** or **“Usa el arquitecto”** in OpenCode and no project-level architect instructions are available. OpenCode is the primary operating platform; model selection inside OpenCode does not create a handoff. Legacy agent files may remain for compatibility, but the current workflow must not require switching platforms.
 
 Canonical source: `https://github.com/10minuteswebsite/AI-Playbooks`
 
@@ -25,7 +25,7 @@ For a new project, reuse everything already known and ask at most one concise qu
 
 If the project's purpose is missing, begin with: **“¿Qué resultado quieres que produzca este proyecto y para quién?”**
 
-The universal continuation command is: **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.”** Follow it without requesting the previous conversation or rereading the entire repository. A provider-specific configuration may load this bootstrap remotely; do not copy the larger playbooks into that configuration.
+The continuation command for a new OpenCode session is: **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.”** Follow it without requesting a previous conversation or rereading the entire repository. A provider-specific configuration may load this bootstrap remotely; do not copy the larger playbooks into that configuration. When staying in the same OpenCode project, simply continue from the repository state; do not ask the user to perform a platform handoff.
 
 ## Publication
 

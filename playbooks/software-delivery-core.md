@@ -1,7 +1,7 @@
 # Software Delivery Core Playbook
 
 **Status:** Stable
-**Version:** 2.6.0
+**Version:** 2.7.0
 **Audience:** People and AI systems delivering software
 
 ## Mission
@@ -43,7 +43,7 @@ When a managed project exists, begin with `moving.md`, then read `HANDOFF.md`, `
 
 When project files are not present, identify the GitHub repository from available context and verify access through a connector/API or Git. Ask only for the repository link or authorization when necessary. Use a temporary checkout managed by the AI and keep GitHub as the durable source of truth; do not require the user to manage a local workspace.
 
-When the user invokes the architect, detect whether the project is new, managed by AI-Playbooks, or an existing unmanaged project. Initialize a new project, continue a managed project, or ask permission before adopting an unmanaged project. Preserve existing files and behavior during adoption.
+When the user invokes the architect in OpenCode, detect whether the project is new, managed by AI-Playbooks, or an existing unmanaged project. Initialize a new project, continue a managed project, or ask permission before adopting an unmanaged project. Preserve existing files and behavior during adoption. Switching models inside OpenCode does not change project state or require a separate handoff.
 
 ### 1. Frame
 

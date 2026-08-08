@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install the AI-Playbooks project memory and cross-agent handoff structure."""
+"""Install the AI-Playbooks OpenCode project memory and compatibility structure."""
 
 from __future__ import annotations
 

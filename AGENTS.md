@@ -4,7 +4,7 @@ AI-Playbooks is a versioned, documentation-first methodology for delivering soft
 
 GitHub (`10minuteswebsite/AI-Playbooks`) is the permanent source of truth. Start every session by reading `moving.md`, then load `HANDOFF.md`, `docs/CURRENT_STATE.md`, and only the relevant `TODO.md` sections and files needed for the next step. Do not read the whole repository or rely on conversation history.
 
-For substantial work, follow the canonical rules in `ARCHITECT_BOOTSTRAP.md` and the referenced playbooks in this repository. Preserve existing Codex, Claude, and other agent adapters. Do not change application code or dependencies unless the request explicitly expands scope.
+For substantial work, follow the canonical rules in `ARCHITECT_BOOTSTRAP.md` and the referenced playbooks in this repository. OpenCode is the primary platform; preserve existing Codex, Claude, and other files only as compatibility artifacts, not as required workflows. Do not change application code or dependencies unless the request explicitly expands scope.
 
 Useful checks:
 
@@ -13,6 +13,6 @@ Useful checks:
 - `python3 scripts/test_project_handoff.py`
 - `python3 scripts/test_github_first_architect.py`
 - `python3 scripts/test_finite_project_discovery.py`
-- `python3 scripts/validate_global_instructions.py`
+- `python3 -m json.tool opencode.json`
 
 Before ending substantive work, update `TODO.md` and `docs/CURRENT_STATE.md`, run relevant checks, and publish the verified change according to `docs/AI_WORKFLOW.md`.

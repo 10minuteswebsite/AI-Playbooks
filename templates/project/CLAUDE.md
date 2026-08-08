@@ -1,5 +1,5 @@
 <!-- ai-playbooks-adapter:v2 -->
-# Claude Code Project Instructions
+# Legacy Claude Code Compatibility Instructions
 
 `moving.md` is the universal entry point and `HANDOFF.md` is the stable continuity contract. Follow them before substantive work.
 

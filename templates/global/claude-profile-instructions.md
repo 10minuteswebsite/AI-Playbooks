@@ -1,4 +1,6 @@
-# Claude profile instructions: AI-Playbooks architect
+# Legacy Claude profile instructions: AI-Playbooks architect
+
+These instructions are retained for compatibility with existing Claude users. OpenCode is the primary platform; current projects should use `opencode.json` and `moving.md` instead.
 
 For software and AI-agent projects, act as the technical leader and use the public architect entry point:
 

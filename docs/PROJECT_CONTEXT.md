@@ -14,4 +14,4 @@ This public repository is a reusable operating system for creating and maintaini
 
 ## Collaboration constraints
 
-GitHub is the durable source of truth. Preserve existing behavior and configuration, avoid secrets and private conversation content, and make small verifiable changes. OpenCode, Codex, Claude Code, and future agents must enter through `moving.md` and read progressively.
+GitHub is the durable source of truth. OpenCode is the primary platform and supports changing models without changing project continuity. Preserve existing behavior and configuration, avoid secrets and private conversation content, and make small verifiable changes. Legacy Codex/Claude files may remain but must not be required. OpenCode enters through `moving.md` and reads progressively.
