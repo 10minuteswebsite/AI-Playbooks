@@ -32,7 +32,7 @@ class Result:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Install shared Codex/Claude project instructions without overwriting existing files."
+        description="Install shared provider-neutral project instructions without overwriting existing files."
     )
     parser.add_argument("target", type=Path, help="Project directory to initialize or adopt")
     parser.add_argument(

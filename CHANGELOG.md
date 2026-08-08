@@ -6,6 +6,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Added
 
+- OpenCode migration support: a schema-valid `opencode.json` template that lazily loads the public canonical bootstrap, plus provider-neutral root continuity documents for this repository.
 - Repository-native `TODO.md` template for the initial development plan and complete known backlog, with stable task IDs, scope controls, validation, and ADR-0003.
 - Universal `moving.md` entry point, agent-neutral `HANDOFF.md` contract, progressive context-loading rules, ADR-0002, and third-agent continuation coverage.
 - Finite Project Discovery Playbook with one-question-at-a-time interviews, adaptive question ceilings, a sufficiency test, and proportional project briefs or architecture blueprints.
