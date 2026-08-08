@@ -35,7 +35,7 @@ Complete this from the verified objective in `docs/PROJECT_CONTEXT.md`.
 
 ## Recently completed
 
-- Installed the universal cross-agent project structure.
+- Installed the OpenCode project structure and compatibility files.
 
 ## Maintenance rules
 

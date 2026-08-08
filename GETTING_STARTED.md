@@ -8,7 +8,7 @@ AI can do much of the technical work, but generated code is a proposal until ver
 
 ## The only invocation to remember
 
-Tell Codex or Claude:
+Tell OpenCode:
 
 > Usa el arquitecto.
 
@@ -16,7 +16,7 @@ If this is a new chat tool or account that has never received the architect inst
 
 > Lee y sigue https://raw.githubusercontent.com/10minuteswebsite/AI-Playbooks/main/ARCHITECT_BOOTSTRAP.md. Usa el arquitecto.
 
-You can also copy `templates/global/claude-profile-instructions.md` into Claude's profile instructions so the short phrase works in future chats.
+OpenCode reads the project `opencode.json` and loads the canonical bootstrap. The legacy Claude profile template remains only for existing users; it is not required for the current workflow.
 
 The architect inspects the project automatically:
 
@@ -24,19 +24,19 @@ The architect inspects the project automatically:
 - an already managed project continues from its documented next step;
 - an existing unmanaged project is not changed until the architect asks whether to adopt the structure and receives approval.
 
-You do not need to tell either agent to inspect Git, read memory files, preserve existing configuration, or prepare the next handoff.
+You do not need to tell OpenCode to inspect Git, read memory files, preserve existing configuration, or prepare a platform handoff.
 
 You also do not need to work locally. The architect should identify or ask for the GitHub repository, request connection access if needed, and manage its own temporary working copy.
 
-## Moving between AI agents
+## Starting or resuming in OpenCode
 
-When you switch from Claude to Codex, from Codex to Claude, or to another agent, say:
+When you open a new OpenCode session for an existing repository, say:
 
 > Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
 
-Replace `[REPOSITORIO]` with the GitHub link or `owner/name`. You do not need to paste the old conversation. The new agent reads the brief entry, the universal handoff, the current state, and only the files needed for the recorded next step.
+Replace `[REPOSITORIO]` with the GitHub link or `owner/name`. You do not need to paste the old conversation or explain which model was used before. OpenCode reads the brief entry, the handoff, the current state, and only the files needed for the recorded next step.
 
-`TODO.md` preserves the initial development plan and every known pending task. When an agent discovers additional work, it records the task there without interrupting or silently expanding the active increment. `docs/CURRENT_STATE.md` points to the one backlog item being executed now.
+`TODO.md` preserves the initial development plan and every known pending task. When OpenCode discovers additional work, it records the task there without interrupting or silently expanding the active increment. `docs/CURRENT_STATE.md` points to the one backlog item being executed now. Changing models inside OpenCode does not change this state.
 
 For a new idea, the architect reuses what you already explained, asks only the most important missing question, and stops the interview once it can define a safe first result. Simple projects receive a short project brief; complex or higher-risk projects receive a proportional architecture blueprint.
 

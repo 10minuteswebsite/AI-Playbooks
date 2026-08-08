@@ -10,7 +10,7 @@
 
 ## Completed
 
-- Installed the universal cross-agent operating structure.
+- Installed the OpenCode operating structure and retained compatibility files.
 
 ## In progress
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise new-project, legacy-adoption, handoff, and continuation behavior end to end."""
+"""Exercise OpenCode project bootstrap, adoption, handoff, and continuation behavior."""
 
 from __future__ import annotations
 
@@ -91,8 +91,8 @@ def main() -> int:
         handoff = (new_project / "HANDOFF.md").read_text(encoding="utf-8")
         todo_path = new_project / "TODO.md"
         todo = todo_path.read_text(encoding="utf-8")
-        if "any AI agent" not in moving or "any other agent" not in handoff:
-            raise AssertionError("Universal-agent handoff instructions were not installed")
+        if "shortest safe entry point for OpenCode" not in moving or "OpenCode and its selected models" not in handoff:
+            raise AssertionError("OpenCode handoff instructions were not installed")
         if "AGENTS.md" in moving or "CLAUDE.md" in moving:
             raise AssertionError("Universal entry depends on a vendor-specific adapter")
         if "TODO-001" not in todo or "Initial development plan" not in todo:
@@ -100,17 +100,17 @@ def main() -> int:
 
         replace_state(
             new_project,
-            agent="Claude Code",
+            agent="OpenCode",
             status="Active",
             objective="Implement a synthetic health endpoint.",
-            next_step="Codex: implement the endpoint described in docs/work-items/health-endpoint.md.",
+            next_step="OpenCode: implement the endpoint described in docs/work-items/health-endpoint.md.",
         )
         work_item = new_project / "docs" / "work-items" / "health-endpoint.md"
         work_item.write_text("# Health endpoint\n\nReturn an observable synthetic status response.\n", encoding="utf-8")
         run(sys.executable, str(VALIDATE), str(new_project))
 
         # A vendor-neutral third agent can resume using only the universal entry,
-        # current state, and repository evidence—without Claude/Codex chat history.
+        # current state, and repository evidence—without conversation history.
         recovered_state = (new_project / "docs" / "CURRENT_STATE.md").read_text(encoding="utf-8")
         if "implement the endpoint" not in recovered_state or "ai-playbooks-moving:v3" not in moving:
             raise AssertionError("A generic agent could not recover the documented next step")
@@ -138,7 +138,7 @@ def main() -> int:
 
         replace_state(
             new_project,
-            agent="Codex",
+            agent="OpenCode",
             status="Complete",
             objective="Implement a synthetic health endpoint.",
             next_step="No active work. Select the next approved work item.",
@@ -167,7 +167,7 @@ def main() -> int:
             raise AssertionError("A merge proposal was not created for conflicting instructions")
         run(sys.executable, str(BOOTSTRAP), str(conflict), expected=2)
 
-    print("End-to-end project bootstrap and cross-agent handoff tests passed.")
+    print("End-to-end OpenCode project bootstrap and continuation tests passed.")
     return 0
 
 

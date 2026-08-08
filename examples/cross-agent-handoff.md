@@ -1,47 +1,29 @@
-# Example: Claude and Codex Handoff
+# Example: OpenCode Session and Model Continuity
+
+This example retains its historical filename for links already shared. The current workflow uses one OpenCode project; changing models inside that project does not require copying conversations or performing a platform handoff.
 
 ## User invocation
 
-The user says only:
+The user says:
 
 > Usa el arquitecto. Quiero una página que muestre el estado del servicio.
 
-## Claude begins
+## OpenCode begins
 
-Claude reads the project adapters, shared workflow, project context, current state, Git status, and relevant commits. It creates a work item for a synthetic health endpoint, documents the contract, and updates `docs/CURRENT_STATE.md`:
+OpenCode loads `opencode.json`, follows the canonical bootstrap, reads `moving.md`, `HANDOFF.md`, `docs/CURRENT_STATE.md`, the active `TODO.md` item, and only the relevant files. It creates or updates the work item for a synthetic health endpoint and records the exact next step.
 
-- completed: architecture and contract;
-- active objective: deliver the health endpoint;
-- important files: contract and work item;
-- verification: documentation validation passed;
-- next exact step: implement the endpoint and its contract test.
+## Change models without losing state
 
-Claude commits and pushes the completed documentation increment. It does not copy the conversation into the handoff.
+The user may select another model in the same OpenCode project. The model reads the same repository state and continues from the recorded next step. No conversation export, platform switch, or repeated project explanation is needed.
 
-## Any agent continues
+## Start a new OpenCode session
 
-The user can switch to Codex, Claude, or another repository-capable agent and say:
+The user can say:
 
 > Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
 
-The agent reads `moving.md`, `HANDOFF.md`, and `docs/CURRENT_STATE.md`, inspects the relevant Git evidence, and loads only the work item and files required for the next exact step. It does not need either earlier conversation.
-
-## Codex continues
-
-The user opens Codex and says only:
-
-> Usa el arquitecto.
-
-Codex detects a managed project, reads the same shared memory, confirms Git state, and implements the documented next step. It runs the contract test, reviews the diff, updates current state, commits, pushes, and opens or updates the pull request.
-
-## Claude resumes
-
-The user later returns to Claude and again says:
-
-> Usa el arquitecto.
-
-Claude reads that implementation and tests are complete. If the change is normal, reversible, and all checks pass, it may complete the approved automatic merge. It then records no active work and identifies the next product decision without requiring either previous conversation.
+OpenCode recovers the work from GitHub, verifies Git state, loads only the necessary context, implements the documented step, runs the relevant checks, updates current state, and publishes according to repository policy.
 
 ## Evidence
 
-`python3 scripts/test_project_handoff.py` reproduces this lifecycle with temporary new, legacy, and conflicting projects. It verifies that legacy files are preserved, adoption requires approval, both agents share one workflow, active state has a concrete next step, and continuation does not depend on chat history.
+`python3 scripts/test_project_handoff.py` verifies that a managed project recovers its active task from repository memory without conversation history. Legacy `AGENTS.md` and `CLAUDE.md` files remain preserved for compatibility but are not required by this workflow.

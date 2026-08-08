@@ -1,7 +1,7 @@
 # Documentation Standard
 
 **Status:** Stable
-**Version:** 2.3.0
+**Version:** 2.4.0
 
 ## Objective
 
@@ -11,7 +11,7 @@ Make every system understandable, reviewable, operable, and reproducible without
 
 1. Universal entry: short `moving.md` that routes any agent without duplicating project history.
 2. Collaboration contract: stable, agent-neutral `HANDOFF.md` linked to the shared project workflow.
-3. Agent adapters: short optional `AGENTS.md`, `CLAUDE.md`, or equivalent files that point to the universal entry.
+3. OpenCode project instructions: `opencode.json` loading the canonical bootstrap; legacy `AGENTS.md`, `CLAUDE.md`, or equivalent adapters may remain for compatibility but are not the primary workflow.
 4. Project plan and backlog: concise root `TODO.md` with stable item identifiers, priorities, dependencies, and observable outcomes.
 5. Project memory: stable `docs/PROJECT_CONTEXT.md` and short operational `docs/CURRENT_STATE.md` linked to the active backlog item.
 6. README: purpose, ownership, setup, usage, verification, and links.

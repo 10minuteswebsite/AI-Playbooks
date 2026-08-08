@@ -1,11 +1,11 @@
 <!-- ai-playbooks-workflow:v5 -->
-# Shared AI Project Workflow
+# OpenCode Project Workflow
 
-This document is the detailed operational policy shared by all agents. `moving.md` is the universal entry point, `HANDOFF.md` is the stable continuity contract, and agent-specific files are short adapters that must not redefine them.
+This document is the detailed operational policy for OpenCode and its selected models. `moving.md` is the entry point, `HANDOFF.md` is the stable continuity contract, and legacy agent-specific files are optional adapters that must not redefine them.
 
 ## Architect invocation
 
-When the user says **“Use the architect”** or **“Usa el arquitecto”**:
+When the user says **“Use the architect”** or **“Usa el arquitecto”** in OpenCode:
 
 1. Inspect the project instructions, memory documents, Git state, and relevant history.
 2. If this structure is already installed, continue from the next exact step when it aligns with the user's request.
@@ -15,7 +15,7 @@ When the user says **“Use the architect”** or **“Usa el arquitecto”**:
 
 When the user provides a clear objective with the invocation, begin directly without an unnecessary menu.
 
-The command **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones”** activates the same continuation behavior for any agent. Do not request the previous conversation; follow the progressive route defined in `moving.md`.
+The command **“Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones”** activates continuation in a new OpenCode session. Do not request a previous conversation; follow the progressive route defined in `moving.md`. Changing models within the same OpenCode project requires no handoff.
 
 ## GitHub-first workspace
 
@@ -36,7 +36,7 @@ Before substantive work:
 5. Identify the active `TODO-NNN` item and next exact step.
 6. Read `docs/PROJECT_CONTEXT.md` and only the work item, decisions, architecture, code, or tests needed for that step; expand scope only when evidence requires it.
 
-Project files and Git are the source of truth. Conversation history is temporary context, never operational memory.
+Project files and Git are the source of truth. Conversation history is temporary context, never operational memory. OpenCode is the primary platform; legacy adapters are compatibility only.
 
 ## Working behavior
 

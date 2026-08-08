@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "entrypoint": "moving.md",
   "handoff": "HANDOFF.md",
   "backlog": "TODO.md",
@@ -7,5 +7,6 @@
   "project_context": "docs/PROJECT_CONTEXT.md",
   "current_state": "docs/CURRENT_STATE.md",
   "agent_adapters": ["AGENTS.md", "CLAUDE.md"],
-  "compatible_agents": "any"
+  "compatible_agents": "legacy-adapters-and-opencode",
+  "primary_platform": "opencode"
 }

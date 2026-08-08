@@ -6,6 +6,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Added
 
+- OpenCode-first operating model ADR and updated guidance so model changes inside OpenCode do not require platform handoffs.
 - OpenCode migration support: a schema-valid `opencode.json` template that lazily loads the public canonical bootstrap, plus provider-neutral root continuity documents for this repository.
 - Repository-native `TODO.md` template for the initial development plan and complete known backlog, with stable task IDs, scope controls, validation, and ADR-0003.
 - Universal `moving.md` entry point, agent-neutral `HANDOFF.md` contract, progressive context-loading rules, ADR-0002, and third-agent continuation coverage.
@@ -23,7 +24,7 @@ All notable changes to stable playbooks and standards are recorded here.
 
 ### Changed
 
-- Software Architect 2.7, Software Delivery Core 2.6, Documentation Standard 2.3, and the universal handoff keep backlog and active state separate while making session updates mandatory.
+- Software Architect 2.8, Software Delivery Core 2.7, Documentation Standard 2.4, and the universal handoff keep backlog and active state separate while making OpenCode the primary operating platform and session updates mandatory.
 - Software Architect 2.6, Software Delivery Core 2.5, and the universal handoff contract prohibit silent or passive stopping: agents must continue to completion or ask one exact blocking question.
 - Software Architect 2.5, Software Delivery Core 2.4, and Documentation Standard 2.2 make mandatory session-state updates and repository-based continuation independent of Codex or Claude.
 - Software Architect 2.4 and Software Delivery Core 2.3 apply finite discovery to new or materially undefined projects without imposing a universal waterfall approval gate.

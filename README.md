@@ -19,7 +19,7 @@ playbooks/
   roles/                      Responsibility-specific guidance
 templates/
   ...                         Planning, architecture, risk, AI, release, and operations
-  project/                    Universal cross-agent project structure
+  project/                    OpenCode project structure and compatibility files
   global/                     Copyable account-wide AI instructions
 standards/
   ...                         Documentation, testing, security, AI, operations, and release
@@ -28,7 +28,7 @@ examples/                     Worked delivery examples
 
 ## How to use
 
-For normal use, tell Codex, Claude Code, OpenCode, or another repository-capable agent: **“Use the architect”** / **“Usa el arquitecto.”** The architect detects whether the project is new, already managed, or requires approved adoption.
+For normal use in OpenCode, tell the architect: **“Usa el arquitecto.”** The architect detects whether the project is new, already managed, or requires approved adoption. Select or change models inside OpenCode as needed; do not restart the methodology or copy context between platforms.
 
 If the AI does not already know the architect, give it the public bootstrap once:
 
@@ -36,11 +36,11 @@ If the AI does not already know the architect, give it the public bootstrap once
 
 The architect works GitHub-first. It identifies or requests the repository, verifies access, asks for GitHub authorization when necessary, and manages any temporary checkout itself. The user does not need to clone repositories or organize local project folders.
 
-Every newly bootstrapped project includes a universal agent entry point. To move between Codex, Claude, OpenCode, or another repository-capable agent, say:
+Every newly bootstrapped project includes a compact OpenCode entry point. When starting a new OpenCode session, say:
 
 > Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.
 
-`moving.md` routes the agent to the stable `HANDOFF.md` contract, short `docs/CURRENT_STATE.md`, and repository-native `TODO.md`. `TODO.md` holds the initial plan and complete known backlog; current state identifies only the active item and next exact step. The agent then reads only the work item, decisions, architecture, code, and tests required for that step; GitHub retains the detailed, verifiable history.
+`moving.md` routes OpenCode to the stable `HANDOFF.md` contract, short `docs/CURRENT_STATE.md`, and repository-native `TODO.md`. `TODO.md` holds the initial plan and complete known backlog; current state identifies only the active item and next exact step. OpenCode then reads only the work item, decisions, architecture, code, and tests required for that step; GitHub retains the detailed, verifiable history.
 
 The reusable installer is:
 
@@ -57,7 +57,7 @@ Then the architect:
 3. Selects the relevant [project profiles](playbooks/profiles/).
 4. Reads stable context and current operational state.
 5. Delivers and verifies one small vertical increment at a time.
-6. Updates the handoff so Codex or Claude can continue without chat history.
+6. Updates the repository state so a later OpenCode session or model can continue without chat history.
 
 Example invocation:
 
