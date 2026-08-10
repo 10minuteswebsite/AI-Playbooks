@@ -5,11 +5,10 @@ This repository is the canonical method for software and AI-agent delivery. It c
 
 ## Current work
 
-- Branch: `agent/opencode-first-method`.
+- Branch: `main` (current work happens on short-lived feature branches from `main`).
 - Objective: keep the repository and generated project structure optimized for OpenCode, with model changes handled inside the same platform.
 - Completed in this increment: audited current references; updated current playbooks, bootstrap, guides, templates, examples, validators, project manifest, and ADR-0005.
-- Commit created: `make OpenCode the primary architect platform` (see GitHub history).
-- Pending: publish the verified branch and pull request.
+- Published: PR #11 merged into `main` as commit `83cd69c`; TODO-004 marked completed.
 
 ## Decisions and constraints
 
@@ -20,8 +19,8 @@ This repository is the canonical method for software and AI-agent delivery. It c
 
 ## Continuation
 
-Read `docs/CURRENT_STATE.md`, then `TODO.md` item `TODO-004`. Use the current diff and recent history as evidence. Do not reconstruct this work from chat.
+Read `docs/CURRENT_STATE.md`, then the current `TODO.md`. The OpenCode-first increment (TODO-004) is merged in `main`; use the current diff and recent history as evidence. Do not reconstruct this work from chat.
 
 ## Session close
 
-Update the backlog and current state with real verification results, review the diff, commit, push, and open the requested pull request. End with “Ya terminé” and evidence, or ask one exact blocking question.
+Update the backlog and current state with real verification results, review the diff, commit, push, and open the requested pull request without merging automatically. End with “Ya terminé” and evidence, or ask one exact blocking question.
