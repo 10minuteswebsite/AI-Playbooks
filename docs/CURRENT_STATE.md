@@ -1,8 +1,8 @@
 # Current State
 
 **Status:** active
-**Active backlog item:** TODO-004
-**Last verified:** 2026-08-08
+**Active backlog item:** none
+**Last verified:** 2026-08-10
 
 ## Objective
 
@@ -11,37 +11,35 @@ Maintain AI-Playbooks as an OpenCode-first methodology. Model changes happen ins
 ## Verified repository state
 
 - Canonical repository: `10minuteswebsite/AI-Playbooks`.
-- Current branch: `agent/opencode-first-method`.
-- Recent main history includes the universal handoff, active-interaction, and TODO backlog releases through `ca459dc`.
+- Branch `main` is current and includes the OpenCode-first release merged as PR #11 (commit `83cd69c`).
+- Recent main history includes the universal handoff, active-interaction, and TODO backlog releases through `83cd69c`.
 - No application runtime, deployment manifest, or application dependencies are present in the repository; functional application code is out of scope.
 - Existing project templates already provide `moving.md`, `HANDOFF.md`, `TODO.md`, `AGENTS.md`, `CLAUDE.md`, progressive workflow, current state, and validation.
 
-## This session
+## Completed session memory
 
 ### Completed
 
-- Reviewed the canonical playbooks, templates, scripts, recent commits, and repository status.
-- Confirmed OpenCode's current configuration schema and remote `instructions` support from its official documentation.
+- PR #11 `make OpenCode the primary architect platform` is merged into `main` (commit `83cd69c`).
 - Added root-level provider-neutral project instructions and continuity memory plus `opencode.json` with the public canonical bootstrap URL.
 - Replaced current user guidance and templates that required switching between platforms; preserved legacy adapters and historical ADRs.
 - Added ADR-0005 defining OpenCode as the primary operating model.
 
 ### Decisions
 
+- OpenCode is the primary operating platform per ADR-0005; Codex and Claude remain only historical compatibility artifacts.
 - OpenCode loads only the short remote `ARCHITECT_BOOTSTRAP.md`; large playbooks remain lazy and repository-controlled.
 - Existing agent-specific files are preserved; no provider-specific behavior is removed.
 - No keys, tokens, dependencies, application code, or deployment settings are introduced.
 
 ### Verification
 
-- Completed: repository and history inspection; official OpenCode schema documentation review.
 - Passed: JSON parse, documentation validation, secret scan, project handoff tests, GitHub-first architect tests, finite discovery tests, legacy compatibility validation, and `git diff --check`.
-- Commit created: `make OpenCode the primary architect platform` (see GitHub history).
-- Pending: push and pull request.
+- The OpenCode-first PR #11 was merged into `main`; no publication steps remain pending.
 
 ## Next exact step
 
-Push the OpenCode-first TODO-004 commit and open its pull request, then record the resulting URL and verification evidence here.
+No active backlog item. Continue maintenance work recorded in `TODO.md` when a new safe increment is defined.
 
 ## Important files
 

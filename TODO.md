@@ -13,10 +13,7 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 
 ## Now
 
-- [ ] **TODO-004 — Publish OpenCode-first operating guidance**
-  - Priority: Highest
-  - Outcome: Current instructions no longer require switching platforms; OpenCode and model continuity are explicit.
-  - Verification: documentation, secret, handoff, JSON, and regression checks.
+- None active.
 
 ## Next
 
@@ -38,7 +35,7 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 - Added the universal moving/handoff protocol and repository backlog in prior releases.
 - **TODO-001 — Complete provider-neutral OpenCode migration preparation** — OpenCode configuration, root continuity memory, template support, ADR, and validators completed; all checks passed.
 - **TODO-003 — Adopt OpenCode-first operating guidance** — Current documentation and templates no longer require switching between platforms; legacy files remain preserved for compatibility.
-- **TODO-004 — Publish OpenCode-first operating guidance** — Documentation and validation updates completed; publication pending.
+- **TODO-004 — Publish OpenCode-first operating guidance** — Published and merged into `main` as PR #11 (commit `83cd69c`); OpenCode is the primary platform per ADR-0005 and Codex/Claude remain historical compatibility only. All checks passed.
 
 ## Maintenance rules
 
