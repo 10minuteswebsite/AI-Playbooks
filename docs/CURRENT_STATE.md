@@ -35,11 +35,13 @@ Maintain AI-Playbooks as an OpenCode-first methodology. Model changes happen ins
 
 ### Verification
 
-- Passed: existing JSON/documentation/secret/handoff/architect/discovery checks; interoperability fixture and final diff checks remain pending.
+- Passed: JSON, documentation, secret, handoff, architect, discovery, interoperability fixture, and final diff checks.
+- Commit pushed and remotely verified: `1d1ca54`.
+- Pull Request: [#14](https://github.com/10minuteswebsite/AI-Playbooks/pull/14), draft, `agent-handoff-check` passing.
 
 ## Next exact step
 
-Complete validation for TODO-005, then publish the canonical branch and PR without merging or deploying.
+Human review of PR #14 is the next step; do not merge or deploy as part of this task.
 
 ## Important files
 

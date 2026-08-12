@@ -8,7 +8,9 @@ This repository is the canonical method for software and AI-agent delivery. It c
 - Branch: `standard/agent-interoperability-v1`.
 - Objective: publish Agent Interoperability Standard v1 and reusable handoff enforcement assets for the canonical repository and Enrutador pilot.
 - Completed: canonical standard, ADR-0006, PR template, reusable adapters, and handoff-check workflow prepared.
-- Pending: validate, commit, push, and open the canonical PR; then implement and publish the Enrutador pilot PR.
+- Commit pushed: `1d1ca54` (`add agent interoperability standard v1`).
+- Pull Request: [#14](https://github.com/10minuteswebsite/AI-Playbooks/pull/14), draft and open.
+- Pending: human review of the canonical PR; the Enrutador pilot PR is also open.
 
 ## Decisions and constraints
 
