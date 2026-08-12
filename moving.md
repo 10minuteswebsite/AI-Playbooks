@@ -1,7 +1,7 @@
 <!-- ai-playbooks-moving:v3 -->
 # Continue AI-Playbooks
 
-GitHub is the permanent memory and source of truth. OpenCode is the primary platform; do not depend on a previous conversation or on which model ran the last session.
+GitHub is the permanent memory and source of truth. OpenCode is the primary platform; do not depend on a previous conversation or on which model ran the last session. For interoperability work, apply `docs/standards/agent-interoperability-v1.md`.
 
 1. Read `HANDOFF.md`.
 2. Read `docs/CURRENT_STATE.md` and the `Now` and `Blocked` sections of `TODO.md`.

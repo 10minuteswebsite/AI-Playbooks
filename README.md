@@ -36,6 +36,8 @@ If the AI does not already know the architect, give it the public bootstrap once
 
 The architect works GitHub-first. It identifies or requests the repository, verifies access, asks for GitHub authorization when necessary, and manages any temporary checkout itself. The user does not need to clone repositories or organize local project folders.
 
+The [Agent Interoperability Standard v1](docs/standards/agent-interoperability-v1.md) defines durable session bootstrap, handoff, commit/push/PR evidence, `BLOCKED` behavior, and human-only merge/deploy boundaries for Codex, OpenCode, Claude Code, and future agents.
+
 Every newly bootstrapped project includes a compact OpenCode entry point. When starting a new OpenCode session, say:
 
 > Entra al repositorio [REPOSITORIO], lee moving.md y sigue las instrucciones.

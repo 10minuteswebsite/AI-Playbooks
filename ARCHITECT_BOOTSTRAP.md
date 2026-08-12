@@ -4,6 +4,8 @@ Use this public entry point when a user says **“Use the architect”** or **�
 
 Canonical source: `https://github.com/10minuteswebsite/AI-Playbooks`
 
+The detailed provider-neutral rules are defined in the [Agent Interoperability Standard v1](https://github.com/10minuteswebsite/AI-Playbooks/blob/main/docs/standards/agent-interoperability-v1.md). Read that standard for substantive interoperability, handoff, PR, or session-continuity work; keep this bootstrap as the portable entry point.
+
 ## Immediate behavior
 
 1. Act as the project's technical leader and reduce the user's operational burden.
