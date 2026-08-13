@@ -13,11 +13,10 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 
 ## Now
 
-- [ ] **TODO-006 — Publish the canonical Arquitecto Omnicanal skill**
+- [x] **TODO-006 — Publish the canonical Arquitecto Omnicanal skill**
   - Priority: High
-  - Outcome: PR #15 is independently approved and human-merged, making the candidate shared skill source canonical.
-  - Dependency: Independent rereview of the requested corrections and human merge authorization.
-  - Current evidence: structural validator, 10 mutation tests, dedicated CI workflow, documentation suite, secret scan, handoff checks, and syntax validation pass locally; remote CI pending the next pushed commit.
+  - Outcome: PR #15 was independently approved and human-merged, making the shared skill source canonical in `main`.
+  - Evidence: merged PR #15 at commit `07ca88de7ae1086a542beadd97b81dc5d2b8834f`; `skills/omnichannel-agent-architect/` is present on `main`.
 
 ## Next
 
@@ -36,6 +35,7 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 
 ## Recently completed
 
+- **TODO-006 — Publish the canonical Arquitecto Omnicanal skill** — Merged into `main` as PR #15 (commit `07ca88d`); `skills/omnichannel-agent-architect/` is now the canonical shared source.
 - Added the universal moving/handoff protocol and repository backlog in prior releases.
 - **TODO-001 — Complete provider-neutral OpenCode migration preparation** — OpenCode configuration, root continuity memory, template support, ADR, and validators completed; all checks passed.
 - **TODO-003 — Adopt OpenCode-first operating guidance** — Current documentation and templates no longer require switching between platforms; legacy files remain preserved for compatibility.

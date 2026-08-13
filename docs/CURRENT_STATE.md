@@ -1,17 +1,17 @@
 # Current State
 
-**Status:** isolated mutation regression fixed; awaiting remote CI and third independent review
-**Active backlog item:** TODO-006
+**Status:** PR #15 merged; post-merge documentation closure in progress
+**Active backlog item:** post-merge documentation closure for TODO-006
 **Last verified:** 2026-08-13
 
 ## Objective
 
-Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the single GitHub-canonical skill shared by Codex, Claude Code, and OpenCode after independent approval and human merge. This is documentation and skill packaging work only.
+Record that PR #15 made the Arquitecto Omnicanal v2 skill the single GitHub-canonical skill shared by Codex, Claude Code, and OpenCode. This is documentation and skill packaging work only.
 
 ## Verified repository state
 
 - Canonical repository: `10minuteswebsite/AI-Playbooks`.
-- Branch `agent/canonical-omnichannel-architect-skill` starts from current `main` commit `044ea9c`.
+- PR #15 is merged into `main` at commit `07ca88de7ae1086a542beadd97b81dc5d2b8834f`.
 - Agent Interoperability Standard v1 is merged in PR #14 at `044ea9c`.
 - No application runtime, deployment manifest, or application dependencies are present in the repository; functional application code is out of scope.
 - Existing project templates provide `moving.md`, `HANDOFF.md`, `TODO.md`, `docs/PROJECT_CONTEXT.md`, `docs/CURRENT_STATE.md`, `AGENTS.md`, `CLAUDE.md`, progressive workflow, current state, and validation. The skill documents the complete current bootstrap set, including README, PR template, optional adapters, and agent-handoff-check when applicable.
@@ -22,7 +22,7 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 
 - Reviewed the merged Agent Interoperability Standard v1, ADR-0006, repository instructions, and durable state before editing.
 - Added the complete installed Arquitecto Omnicanal v2 skill under `skills/omnichannel-agent-architect/`, including its operational references, installation guidance, and agent metadata.
-- Proposed that repository folder as the candidate canonical source shared by Codex, Claude Code, and OpenCode after human-approved merge.
+- The repository folder is now the canonical source shared by Codex, Claude Code, and OpenCode.
 - PR #11 `make OpenCode the primary architect platform` is merged into `main` (commit `83cd69c`).
 - Added root-level provider-neutral project instructions and continuity memory plus `opencode.json` with the public canonical bootstrap URL.
 - Replaced current user guidance and templates that required switching between platforms; preserved legacy adapters and historical ADRs.
@@ -37,7 +37,7 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 
 ### Decisions
 
-- `skills/omnichannel-agent-architect/` is the candidate canonical skill source in PR #15; it becomes canonical only after human-approved merge. Local/product-managed installations remain replaceable copies.
+- `skills/omnichannel-agent-architect/` is the canonical skill source in `main` after human-approved merge of PR #15. Local/product-managed installations remain replaceable copies.
 - The skill preserves GitHub-first durable state, provider-neutral continuation, human-only merge/deploy, and existing omnichannel architecture principles.
 - OpenCode is the primary operating platform per ADR-0005; Codex and Claude remain only historical compatibility artifacts.
 - OpenCode loads only the short remote `ARCHITECT_BOOTSTRAP.md`; large playbooks remain lazy and repository-controlled.
@@ -48,11 +48,11 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 
 - Passed after the validator changes: documentation validation (94 Markdown files), secret scan, project handoff/bootstrap, GitHub-first architect, finite discovery, global instruction consistency, structural validation of real content, all 10 mutation tests, agent-handoff-check fixtures, JSON syntax, skill/agent/workflow YAML syntax, and `git diff --check`.
 - The agent-handoff-check fixture suite passed its positive case and correctly rejected its expected negative case missing `## Durable handoff`.
-- Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15), draft, targeting `main`; no merge or deployment performed.
+- Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15) is merged into `main`; no deployment performed.
 
 ## Next exact step
 
-Commit and push the strengthened validator to the existing Draft PR #15, wait for remote CI, then obtain a third independent review. TODO-006 remains active until human-approved merge; do not merge or deploy without explicit human approval.
+Review and merge the small post-merge documentation closure PR when authorized; do not deploy.
 
 ## Important files
 
@@ -61,4 +61,4 @@ Commit and push the strengthened validator to the existing Draft PR #15, wait fo
 - `ARCHITECT_BOOTSTRAP.md`: public canonical entry point.
 - `templates/project/`: files installed into managed projects.
 - `scripts/`: executable validation and bootstrap behavior.
-- `skills/omnichannel-agent-architect/`: proposed canonical Arquitecto Omnicanal skill source in PR #15.
+- `skills/omnichannel-agent-architect/`: canonical Arquitecto Omnicanal skill source in `main`.
