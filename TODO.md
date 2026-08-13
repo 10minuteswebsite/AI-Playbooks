@@ -13,10 +13,11 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 
 ## Now
 
-- [ ] **TODO-005 — Publish Agent Interoperability Standard v1**
-  - Priority: Highest
-  - Outcome: Canonical standard, reusable assets, and enforcement workflow are pushed and available in a Pull Request without merge or deploy.
-  - Verification: documentation, secret, handoff, shell fixture, and diff checks.
+- [ ] **TODO-006 — Publish the canonical Arquitecto Omnicanal skill**
+  - Priority: High
+  - Outcome: PR #15 is independently approved and human-merged, making the candidate shared skill source canonical.
+  - Dependency: Independent rereview of the requested corrections and human merge authorization.
+  - Current evidence: structural validator, 10 mutation tests, dedicated CI workflow, documentation suite, secret scan, handoff checks, and syntax validation pass locally; remote CI pending the next pushed commit.
 
 ## Next
 
@@ -39,7 +40,7 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 - **TODO-001 — Complete provider-neutral OpenCode migration preparation** — OpenCode configuration, root continuity memory, template support, ADR, and validators completed; all checks passed.
 - **TODO-003 — Adopt OpenCode-first operating guidance** — Current documentation and templates no longer require switching between platforms; legacy files remain preserved for compatibility.
 - **TODO-004 — Publish OpenCode-first operating guidance** — Published and merged into `main` as PR #11 (commit `83cd69c`); OpenCode is the primary platform per ADR-0005 and Codex/Claude remain historical compatibility only. All checks passed.
-- **TODO-005 — Publish Agent Interoperability Standard v1** — Canonical standard and reusable assets prepared; pilot publication remains pending.
+- **TODO-005 — Publish Agent Interoperability Standard v1** — Merged into `main` as PR #14 (commit `044ea9c`); the canonical standard and reusable enforcement assets are published.
 
 ## Maintenance rules
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Arquitecto Omnicanal"
+  short_description: "Arquitectura autónoma, segura y documentada"
+  default_prompt: "Usa $omnichannel-agent-architect para crear, continuar, inspeccionar, revisar, implementar, depurar o migrar este proyecto con handoff GitHub-first. Trata GitHub como la fuente durable de verdad y reconstruye automáticamente el estado desde el repositorio y su documentación, sin depender de chats anteriores; preserva interoperabilidad entre Codex, Claude Code y OpenCode. Verifica y publica cambios reversibles en la rama/PR autorizados, pero nunca hagas merge ni deploy sin autorización humana."

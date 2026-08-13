@@ -17,6 +17,8 @@ playbooks/
   finite-project-discovery.md Finite, adaptive new-project interview
   profiles/                   Project-type guidance
   roles/                      Responsibility-specific guidance
+skills/
+  omnichannel-agent-architect/ Candidate shared Architect skill (PR #15)
 templates/
   ...                         Planning, architecture, risk, AI, release, and operations
   project/                    OpenCode project structure and compatibility files
@@ -37,6 +39,8 @@ If the AI does not already know the architect, give it the public bootstrap once
 The architect works GitHub-first. It identifies or requests the repository, verifies access, asks for GitHub authorization when necessary, and manages any temporary checkout itself. The user does not need to clone repositories or organize local project folders.
 
 The [Agent Interoperability Standard v1](docs/standards/agent-interoperability-v1.md) defines durable session bootstrap, handoff, commit/push/PR evidence, `BLOCKED` behavior, and human-only merge/deploy boundaries for Codex, OpenCode, Claude Code, and future agents.
+
+PR #15 proposes [`skills/omnichannel-agent-architect/`](skills/omnichannel-agent-architect/) as the single shared Arquitecto Omnicanal skill source. It becomes canonical only after a human-approved merge. Codex, Claude Code, and OpenCode installations will then use that same version; product-local copies remain operational installations, not independent sources of truth.
 
 Every newly bootstrapped project includes a compact OpenCode entry point. When starting a new OpenCode session, say:
 
@@ -97,8 +101,17 @@ python3 scripts/scan_secrets.py
 python3 scripts/test_project_handoff.py
 python3 scripts/test_github_first_architect.py
 python3 scripts/test_finite_project_discovery.py
+python3 scripts/test_omnichannel_architect_skill.py
 python3 scripts/validate_global_instructions.py
 ```
+
+The Omnichannel Architect check validates structural invariants and runs mutation
+tests against deliberately invalid temporary copies. Secret scanning, diff and
+dependency review, functional testing, deployment review, and human PR review
+remain separate checks as described in the skill's validation reference.
+
+Changes to the skill package or its validator run automatically through
+`.github/workflows/omnichannel-architect-validation.yml`.
 
 The global-instruction check is local-only because CI does not have access to a user's home-directory configuration.
 
