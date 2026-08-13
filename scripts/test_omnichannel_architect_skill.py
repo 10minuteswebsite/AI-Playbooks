@@ -186,20 +186,33 @@ def validate_moving(root: Path) -> None:
 
 def validate_canonicality(root: Path) -> None:
     install = read(root, "skills/omnichannel-agent-architect/INSTALL.md")
-    skill_compatibility = section(
-        read(root, SKILL), "11. Compatibilidad multiagente", str(SKILL)
-    )
+    readme = read(root, "README.md")
     context = read(root, "docs/PROJECT_CONTEXT.md")
-    for source, text in (
-        ("INSTALL.md", install),
-        (f"{SKILL} compatibility section", skill_compatibility),
-        ("docs/PROJECT_CONTEXT.md", context),
-    ):
-        require_regex(text, r"(candidate|proposed).*canonical", source)
-        require_regex(
-            text,
-            r"(?:becomes?|vuelve).*can[oó]nic[ao].*(?:after.*human-approved.*merge|despu[eé]s.*merge aprobado)",
-            source,
+    todo = read(root, "TODO.md")
+    current_state = read(root, "docs/CURRENT_STATE.md")
+    post_merge = bool(
+        re.search(r"PR #15\s+(?:was human-approved and )?merged into `main`", readme, re.I)
+        and re.search(r"PR #15\s+is merged into `main`", current_state, re.I)
+        and re.search(r"^- \[[xX]\] \*\*TODO-006\b", todo, re.M)
+    )
+    if post_merge:
+        for source, text in (("README.md", readme), ("INSTALL.md", install), ("docs/PROJECT_CONTEXT.md", context)):
+            require_regex(text, r"skills/omnichannel-agent-architect/", source)
+            require_regex(text, r"(?:canonical|can[oó]nica).*(?:main|source|fuente)", source)
+        require_regex(install, r"(?:now|ahora)\s+the\s+canonical\s+skill\s+source|canonical\s+skill\s+source;", "INSTALL.md")
+        require_regex(install, r"PR #15.*(?:merged|fusionado).*`main`", "INSTALL.md")
+        require_regex(todo, r"^- \[[xX]\] \*\*TODO-006\b", "TODO.md")
+    else:
+        require_regex(todo, r"^- \[ \] \*\*TODO-006\b", "TODO.md")
+        if re.search(r"^- \[[xX]\].*TODO-006\b", todo, re.MULTILINE):
+            raise ValidationError("TODO.md: TODO-006 cannot be completed before the merge evidence")
+        for source, text in (("INSTALL.md", install), ("docs/PROJECT_CONTEXT.md", context)):
+            require_regex(text, r"(?:candidate|proposed).*canonical", source)
+            require_regex(text, r"(?:becomes?|vuelve).*can[oó]nic[ao].*(?:after.*human-approved.*merge|despu[eé]s.*merge aprobado)", source)
+        forbid_regex(
+            "\n".join((readme, install, context, todo)),
+            r"(?:is|es|ahora es|now)\s+(?:the |la )?effective\s+canonical|(?:is|es|ahora es|now)\s+(?:the |la )?canonical\s+source.*(?:main|effective)",
+            "pre-merge canonicality policy",
         )
     package = "\n".join(
         path.read_text(encoding="utf-8")
@@ -211,9 +224,9 @@ def validate_canonicality(root: Path) -> None:
         r"(?:draft\s+)?\b(?:branch|rama|PR|pull request)\b.{0,50}\b(?:is|es|becomes?|se vuelve)\b.{0,20}(?:the |la )?(?:effective )?(?:canonical|can[oó]nic[ao])",
         "skill canonicality policy",
     )
-    todo = read(root, "TODO.md")
-    require_regex(todo, r"^- \[ \] \*\*TODO-006\b", "TODO.md Now")
-    if re.search(r"^- \[[xX]\].*TODO-006\b", todo, re.MULTILINE):
+    open_items = re.findall(r"^- \[ \].*TODO-006\b", todo, re.MULTILINE)
+    completed_items = re.findall(r"^- \[[xX]\].*TODO-006\b", todo, re.MULTILINE)
+    if len(open_items) > 1 or len(completed_items) > 1 or (open_items and completed_items):
         raise ValidationError("TODO.md: TODO-006 cannot be open and completed simultaneously")
 
 
@@ -345,8 +358,8 @@ MUTATIONS = (
         "premature-canonicality",
         Path("skills/omnichannel-agent-architect/INSTALL.md"),
         replace_once(
-            "that directory is the proposed canonical skill source. It becomes canonical after the human-approved merge",
-            "that Draft PR branch is the effective canonical skill source. It becomes canonical after the human-approved merge",
+            "That directory is now the canonical skill source; future changes happen there first",
+            "That Draft PR branch is now the effective canonical skill source; future changes happen there first",
         ),
     ),
     Mutation(
@@ -375,6 +388,60 @@ MUTATIONS = (
         lambda text: text + "\nInstall from `/Users/mariodavila/private-skill`.\n",
     ),
 )
+
+
+def replace_all(text: str, replacements: list[tuple[str, str]]) -> str:
+    for old, new in replacements:
+        if old not in text:
+            raise AssertionError(f"state fixture expected text {old!r}")
+        text = text.replace(old, new)
+    return text
+
+
+def run_canonicality_state_tests(root: Path) -> list[str]:
+    """Exercise candidate and post-merge canonicality as semantic states."""
+    cases = {
+        "candidate-state-canonical-claim": (False, [
+            ("PR #15 was human-approved and merged into `main`.", "PR #15 proposes the skill for `main`."),
+        ]),
+        "candidate-state-todo-completed": (False, [
+            ("PR #15 is merged into `main`", "PR #15 is awaiting human-approved merge into `main`"),
+        ]),
+        "candidate-state-correct": (True, [
+            ("PR #15 was human-approved and merged into `main`.", "PR #15 proposes the skill for `main`."),
+            ("PR #15 is merged into `main`", "PR #15 is awaiting human-approved merge into `main`"),
+            ("- [x] **TODO-006", "- [ ] **TODO-006"),
+            ("That directory is now the canonical skill source; future changes happen there first", "That directory is the proposed canonical skill source. It becomes canonical after the human-approved merge"),
+            ("canonical shared skill source merged by PR #15", "candidate canonical shared skill source proposed by PR #15"),
+            ("PR #15 established `skills/omnichannel-agent-architect/` as the single source shared by the three supported agent clients.", "PR #15 proposes `skills/omnichannel-agent-architect/` as the candidate canonical source. It becomes canonical after the human-approved merge."),
+        ]),
+        "post-merge-canonical-state": (True, []),
+        "post-merge-candidate-only": (False, [
+            ("That directory is now the canonical skill source; future changes happen there first", "That directory is the proposed candidate skill source; it remains pending merge"),
+        ]),
+    }
+    results: list[str] = []
+    with tempfile.TemporaryDirectory(prefix="omnichannel-canonicality-") as temp:
+        for name, (should_pass, replacements) in cases.items():
+            fixture = Path(temp) / name
+            shutil.copytree(root, fixture, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            if replacements:
+                for relative in ("README.md", "TODO.md", "docs/CURRENT_STATE.md", "docs/PROJECT_CONTEXT.md", "skills/omnichannel-agent-architect/INSTALL.md"):
+                    path = fixture / relative
+                    text = path.read_text(encoding="utf-8")
+                    applicable = [(old, new) for old, new in replacements if old in text]
+                    path.write_text(replace_all(text, applicable), encoding="utf-8")
+            try:
+                validate_canonicality(fixture)
+            except ValidationError:
+                if should_pass:
+                    raise AssertionError(f"canonicality state {name!r} was rejected")
+                results.append(name)
+            else:
+                if not should_pass:
+                    raise AssertionError(f"canonicality state {name!r} was incorrectly accepted")
+                results.append(name)
+    return results
 
 
 def run_mutations(root: Path) -> list[tuple[str, str]]:
@@ -417,6 +484,8 @@ def main() -> int:
     for name, reason in results:
         print(f"MUTATION DETECTED: {name}: {reason}")
     print(f"Mutation testing passed: {len(results)}/{len(MUTATIONS)} invalid variants rejected.")
+    state_results = run_canonicality_state_tests(ROOT)
+    print(f"Canonicality state tests passed: {len(state_results)}/5 candidate/post-merge cases.")
     return 0
 
 
