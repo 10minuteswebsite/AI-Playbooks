@@ -33,6 +33,7 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 - Added 10 mutation tests using only the Python standard library and temporary copies; each required invalid variant is rejected.
 - Added `.github/workflows/omnichannel-architect-validation.yml` so skill/validator changes run as a dedicated remote check.
 - Clarified that structural validation does not replace secret scanning, diff/dependency review, functional testing, deployment review, or human review.
+- Corrected a contradiction exposed by remote CI: `agent-handoff-check` now requires `HANDOFF.md`, `TODO.md`, and `docs/CURRENT_STATE.md` for substantive changes instead of requiring a mutable update to stable, navigational `moving.md`.
 
 ### Decisions
 

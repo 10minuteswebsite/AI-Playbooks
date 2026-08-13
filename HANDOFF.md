@@ -7,7 +7,7 @@ This repository is the canonical method for software and AI-agent delivery. It c
 
 - Branch: `agent/canonical-omnichannel-architect-skill`.
 - Objective: correct PR #15 so the installed Arquitecto Omnicanal v2 skill can become the canonical shared source for Codex, Claude Code, and OpenCode after independent approval and human merge.
-- Completed: reviewed merged interoperability PR #14, added the complete installed skill, resolved the substantive review findings, and replaced the superficial regression check with a section-aware structural validator plus 10 mutation tests. Added dedicated path-filtered CI and documented the boundary between automated invariants, separate PR checks, and human review. Applicable local validations pass.
+- Completed: reviewed merged interoperability PR #14, added the complete installed skill, resolved the substantive review findings, and replaced the superficial regression check with a section-aware structural validator plus 10 mutation tests. Added dedicated path-filtered CI and documented the boundary between automated invariants, separate PR checks, and human review. Corrected `agent-handoff-check` so substantive changes require the mutable durable-state files rather than forcing changes to stable `moving.md`. Applicable local validations pass.
 - Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15), draft, targeting `main`.
 - Pending: push the validator commit, wait for its remote checks, then obtain a third independent review of PR #15. TODO-006 remains active until human-approved merge; merge is outside this task and no deployment applies.
 

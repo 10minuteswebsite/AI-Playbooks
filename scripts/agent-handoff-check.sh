@@ -14,7 +14,7 @@ grep -Eiq 'Result:[[:space:]]*[^[:space:]]|[[:space:]](pass|passed|success|succe
 changed="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")"
 substantive='(^|/)(src|api|app|lib|test|tests)/|(^|/)(package\.json|package-lock\.json|vercel\.json|supabase/|\.github/workflows/)'
 if grep -Eq "$substantive" <<<"$changed"; then
-  for file in moving.md TODO.md docs/CURRENT_STATE.md; do
+  for file in HANDOFF.md TODO.md docs/CURRENT_STATE.md; do
     grep -qx "$file" <<<"$changed" || { echo "Substantive PR must include $file" >&2; exit 1; }
   done
 fi
