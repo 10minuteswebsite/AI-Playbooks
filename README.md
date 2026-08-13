@@ -101,6 +101,7 @@ python3 scripts/scan_secrets.py
 python3 scripts/test_project_handoff.py
 python3 scripts/test_github_first_architect.py
 python3 scripts/test_finite_project_discovery.py
+python3 scripts/test_omnichannel_architect_skill.py
 python3 scripts/validate_global_instructions.py
 ```
 

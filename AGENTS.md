@@ -13,6 +13,7 @@ Useful checks:
 - `python3 scripts/test_project_handoff.py`
 - `python3 scripts/test_github_first_architect.py`
 - `python3 scripts/test_finite_project_discovery.py`
+- `python3 scripts/test_omnichannel_architect_skill.py`
 - `python3 -m json.tool opencode.json`
 
 Before ending substantive work, update `TODO.md` and `docs/CURRENT_STATE.md`, run relevant checks, and publish the verified change according to `docs/AI_WORKFLOW.md`.

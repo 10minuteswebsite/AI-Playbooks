@@ -196,7 +196,7 @@ AI-Playbooks es la **autoridad durable**.
 Para implementación real:
 
 1. Sincronizar/leer la última rama base deseada, normalmente `main`.
-2. Crear una rama dedicada a la tarea.
+2. Crear una rama dedicada a la tarea o continuar la rama autorizada de un PR existente.
 3. Inspeccionar antes de editar.
 4. Mantener alcance acotado.
 5. Preservar arquitectura existente salvo que la tarea exija cambiarla.
@@ -442,7 +442,7 @@ Cuando se cree un repo nuevo bajo este estándar, iniciar con:
 - `.github/pull_request_template.md`
 - `CLAUDE.md` cuando aplique
 - `opencode.json` cuando aplique
-- `agent-handoff-check` cuando el estándar canónico lo requiera
+- `agent-handoff-check` cuando corresponda según el estándar canónico vigente
 
 Leer siempre la versión actual de AI-Playbooks antes de generar plantillas.
 

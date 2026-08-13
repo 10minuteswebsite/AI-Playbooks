@@ -42,7 +42,7 @@ New 10minuteswebsite project should start with:
 - .github/pull_request_template.md
 - CLAUDE.md when applicable
 - opencode.json when applicable
-- agent-handoff-check when the canonical standard requires it
+- agent-handoff-check when applicable under the current canonical standard
 
 Read current AI-Playbooks standard before generating these.
 

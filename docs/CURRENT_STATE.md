@@ -29,6 +29,7 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 - Added ADR-0005 defining OpenCode as the primary operating model.
 - Added Agent Interoperability Standard v1, ADR-0006, reusable instructions/PR assets, and the `agent-handoff-check` workflow/script.
 - Corrected PR #15 routing precedence, new-repository bootstrap requirements, `moving.md` semantics, pre-merge canonicality language, OpenAI agent behavior, and cross-document consistency after independent review returned `CHANGES REQUIRED`.
+- Added `scripts/test_omnichannel_architect_skill.py`, a dependency-free regression check covering every review finding and the explicit scope exclusions.
 
 ### Decisions
 
@@ -41,7 +42,7 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 
 ### Verification
 
-- Passed after the corrections: documentation validation (94 Markdown files), secret scan, project handoff/bootstrap, GitHub-first architect, finite discovery, global instruction consistency, agent-handoff-check fixtures, JSON syntax, skill/agent YAML syntax, and `git diff --check`.
+- Passed after the corrections: documentation validation (94 Markdown files), secret scan, project handoff/bootstrap, GitHub-first architect, finite discovery, global instruction consistency, the dedicated Omnichannel Architect regression check, agent-handoff-check fixtures and direct PR evidence, JSON syntax, skill/agent YAML syntax, and `git diff --check`.
 - The agent-handoff-check fixture suite passed its positive case and correctly rejected its expected negative case missing `## Durable handoff`.
 - Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15), draft, targeting `main`; no merge or deployment performed.
 
