@@ -7,8 +7,9 @@ This repository is the canonical method for software and AI-agent delivery. It c
 
 - Branch: `agent/canonical-omnichannel-architect-skill`.
 - Objective: publish the installed Arquitecto Omnicanal v2 skill as the canonical shared source for Codex, Claude Code, and OpenCode.
-- Completed: reviewed merged interoperability PR #14 and added the complete installed skill plus the minimal canonical-source documentation.
-- Pending: validations, commit, push, remote SHA verification, Pull Request, and human review.
+- Completed: reviewed merged interoperability PR #14, added the complete installed skill plus minimal canonical-source documentation, and passed all applicable validations.
+- Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15), draft, targeting `main`.
+- Pending: human review and authorized merge only; no deployment applies.
 
 ## Decisions and constraints
 

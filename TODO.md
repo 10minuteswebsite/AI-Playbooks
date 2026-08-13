@@ -13,10 +13,7 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 
 ## Now
 
-- [ ] **TODO-006 — Publish the canonical Arquitecto Omnicanal skill**
-  - Priority: Highest
-  - Outcome: The complete shared skill is versioned in `skills/omnichannel-agent-architect/` and available in a Pull Request without merge or deploy.
-  - Verification: installed-source parity, documentation, secret, handoff, interoperability, and diff checks.
+- None recorded.
 
 ## Next
 
@@ -40,6 +37,7 @@ Provide reusable, provider-neutral, documentation-first operating rules and temp
 - **TODO-003 — Adopt OpenCode-first operating guidance** — Current documentation and templates no longer require switching between platforms; legacy files remain preserved for compatibility.
 - **TODO-004 — Publish OpenCode-first operating guidance** — Published and merged into `main` as PR #11 (commit `83cd69c`); OpenCode is the primary platform per ADR-0005 and Codex/Claude remain historical compatibility only. All checks passed.
 - **TODO-005 — Publish Agent Interoperability Standard v1** — Merged into `main` as PR #14 (commit `044ea9c`); the canonical standard and reusable enforcement assets are published.
+- **TODO-006 — Publish the canonical Arquitecto Omnicanal skill** — Complete installed skill published for human review in PR #15; all applicable validations passed, with no merge or deploy.
 
 ## Maintenance rules
 
