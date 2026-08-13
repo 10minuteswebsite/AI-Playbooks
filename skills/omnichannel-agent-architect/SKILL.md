@@ -279,7 +279,7 @@ Actualizar cuando cambie:
 
 ## `HANDOFF.md`
 
-Mantener el contrato de colaboración y la continuidad universal conforme a la convención local. El estado operativo mutable de la sesión debe vivir principalmente aquí, en `TODO.md` y en `docs/CURRENT_STATE.md`.
+Mantener el contrato de colaboración y la continuidad universal conforme a la convención local. El estado operativo mutable de la sesión debe vivir principalmente en `HANDOFF.md`, `TODO.md` y `docs/CURRENT_STATE.md`.
 
 El objetivo no es escribir una novela.
 

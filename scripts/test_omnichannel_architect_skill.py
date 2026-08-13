@@ -1,61 +1,122 @@
 #!/usr/bin/env python3
-"""Regression checks for the proposed Arquitecto Omnicanal skill in PR #15."""
+"""Structural validator and mutation tests for the Omnichannel Architect skill.
 
+This check validates deterministic, repository-local invariants. It intentionally
+does not replace the repository secret scan, diff/dependency review, functional
+testing, deployment review, or human review of the pull request.
+"""
+
+from __future__ import annotations
+
+import re
+import shutil
+import tempfile
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = ROOT / "skills" / "omnichannel-agent-architect"
+SKILL = Path("skills/omnichannel-agent-architect/SKILL.md")
+ROUTING = Path("skills/omnichannel-agent-architect/references/repository-routing.md")
+CREATION = Path("skills/omnichannel-agent-architect/references/repository-creation.md")
+HANDOFF = Path("skills/omnichannel-agent-architect/references/handoff.md")
+VALIDATION = Path("skills/omnichannel-agent-architect/references/validation.md")
+OPENAI = Path("skills/omnichannel-agent-architect/agents/openai.yaml")
 
 
-def read(relative_path: str) -> str:
-    return (ROOT / relative_path).read_text(encoding="utf-8")
+class ValidationError(AssertionError):
+    """A structural invariant is missing or contradictory."""
+
+
+def read(root: Path, relative_path: Path | str) -> str:
+    return (root / relative_path).read_text(encoding="utf-8")
+
+
+def section(text: str, heading: str, source: str) -> str:
+    """Return one Markdown section, including its nested subsections."""
+    lines = text.splitlines(keepends=True)
+    headings: list[tuple[int, int, str]] = []
+    in_fence = False
+    for index, line in enumerate(lines):
+        if re.match(r"^\s*(```|~~~)", line):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        match = re.match(r"^(?P<marks>#+)\s+(?P<title>.+?)\s*$", line)
+        if match:
+            headings.append((index, len(match.group("marks")), match.group("title")))
+    selected = next((item for item in headings if item[2] == heading), None)
+    if selected is None:
+        raise ValidationError(f"{source}: missing section {heading!r}")
+    start, level, _ = selected
+    end = next(
+        (index for index, next_level, _ in headings if index > start and next_level <= level),
+        len(lines),
+    )
+    return "".join(lines[start:end])
 
 
 def require(text: str, fragment: str, source: str) -> None:
     if fragment not in text:
-        raise AssertionError(f"{source} is missing required text: {fragment}")
+        raise ValidationError(f"{source}: missing required text {fragment!r}")
 
 
-def require_any(text: str, fragments: tuple[str, ...], source: str) -> None:
-    if not any(fragment in text for fragment in fragments):
-        raise AssertionError(f"{source} is missing one of required texts: {fragments}")
+def require_regex(text: str, pattern: str, source: str) -> None:
+    if not re.search(pattern, text, re.IGNORECASE | re.MULTILINE):
+        raise ValidationError(f"{source}: missing required pattern {pattern!r}")
 
 
-def require_order(text: str, fragments: list[str], source: str) -> None:
-    positions = [text.find(fragment) for fragment in fragments]
-    if -1 in positions or positions != sorted(positions):
-        raise AssertionError(f"{source} does not preserve required order: {fragments}")
+def forbid_regex(text: str, pattern: str, source: str) -> None:
+    match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
+    if match:
+        line = text.count("\n", 0, match.start()) + 1
+        raise ValidationError(f"{source}:{line}: forbidden pattern {pattern!r}")
 
 
-def main() -> None:
-    skill = read("skills/omnichannel-agent-architect/SKILL.md")
-    routing = read(
-        "skills/omnichannel-agent-architect/references/repository-routing.md"
-    )
-    creation = read(
-        "skills/omnichannel-agent-architect/references/repository-creation.md"
-    )
-    handoff = read("skills/omnichannel-agent-architect/references/handoff.md")
-    openai = read("skills/omnichannel-agent-architect/agents/openai.yaml")
+def require_order(text: str, patterns: list[str], source: str) -> None:
+    positions: list[int] = []
+    for pattern in patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if not match:
+            raise ValidationError(f"{source}: missing ordered pattern {pattern!r}")
+        positions.append(match.start())
+    if positions != sorted(positions) or len(set(positions)) != len(positions):
+        raise ValidationError(f"{source}: semantic precedence is out of order")
 
+
+def validate_routing(root: Path) -> None:
+    skill_routing = section(read(root, SKILL), "2. Resolución de repositorios", str(SKILL))
+    reference_rules = section(read(root, ROUTING), "Rules", str(ROUTING))
+    ordered = [
+        r"owner/repo.*expl[ií]cit",
+        r"URL GitHub.*expl[ií]cit",
+        r"alias o proyecto.*expl[ií]cit",
+        r"repositorio activo.*solamente cuando.*no existe.*intenci[oó]n expl[ií]cita",
+        r"b[uú]squeda GitHub",
+        r"preguntar.*ambig",
+    ]
+    require_order(skill_routing, ordered, f"{SKILL} routing section")
     require_order(
-        skill,
+        reference_rules,
         [
-            "`owner/repo` explícito",
-            "URL GitHub explícita",
-            "Alias o proyecto explícitamente mencionado",
-            "Repositorio activo de la tarea/herramienta",
-            "Búsqueda GitHub por nombre",
-            "Preguntar si sigue existiendo ambigüedad",
+            r"explicit owner/repo",
+            r"explicit GitHub URL",
+            r"alias or project explicitly named",
+            r"active tool repository only when.*no repository/project intent",
+            r"GitHub search",
+            r"ambiguous mapping.*ask",
         ],
-        "SKILL.md routing",
+        f"{ROUTING} Rules section",
     )
-    require(routing, "`continúa con el enrutador`", "repository-routing.md")
-    require(routing, "even when another repository is active", "repository-routing.md")
-    require(skill, "preguntar antes de actuar", "SKILL.md routing conflict rule")
+    require(skill_routing, "continúa con el enrutador", f"{SKILL} routing section")
 
-    for required_path in (
+
+def validate_creation(root: Path) -> None:
+    skill_creation = section(read(root, SKILL), "13. Proyectos nuevos", str(SKILL))
+    reference_bootstrap = section(read(root, CREATION), "Bootstrap", str(CREATION))
+    unconditional = (
         "README.md",
         "AGENTS.md",
         "moving.md",
@@ -64,77 +125,288 @@ def main() -> None:
         "docs/PROJECT_CONTEXT.md",
         "docs/CURRENT_STATE.md",
         ".github/pull_request_template.md",
-        "CLAUDE.md",
-        "opencode.json",
-        "agent-handoff-check",
+    )
+    for source, text in (
+        (f"{SKILL} new-project section", skill_creation),
+        (f"{CREATION} Bootstrap section", reference_bootstrap),
     ):
-        require(skill, required_path, "SKILL.md new-repository bootstrap")
-        require(creation, required_path, "repository-creation.md bootstrap")
-
-    for source_name, source in (("SKILL.md", skill), ("handoff.md", handoff)):
-        require(source, "short" if source_name == "handoff.md" else "corto", source_name)
-        require(
+        for path in unconditional:
+            require(text, path, source)
+        for path in ("CLAUDE.md", "opencode.json"):
+            require_regex(
+                text,
+                rf"{re.escape(path)}.*(cuando|when) (app?li\w*|correspond\w*)",
+                source,
+            )
+        require_regex(
+            text,
+            r"agent-handoff-check.*(cuando|when).*(correspond|apli|standard)",
             source,
-            "mutable operational diary" if source_name == "handoff.md" else "diario de sesión",
-            source_name,
-        )
-        require(source, "HANDOFF.md", source_name)
-        require(source, "TODO.md", source_name)
-        require(source, "docs/CURRENT_STATE.md", source_name)
-
-    for relative_path in (
-        "README.md",
-        "HANDOFF.md",
-        "TODO.md",
-        "docs/PROJECT_CONTEXT.md",
-        "docs/CURRENT_STATE.md",
-    ):
-        document = read(relative_path)
-        require(document, "PR #15", relative_path)
-        if relative_path != "TODO.md":
-            require(document.lower(), "merge", relative_path)
-
-    for relative_path in (
-        "skills/omnichannel-agent-architect/INSTALL.md",
-        "skills/omnichannel-agent-architect/SKILL.md",
-    ):
-        document = read(relative_path).lower()
-        require(document, "candidate canonical", relative_path)
-        require_any(
-            document,
-            ("human-approved merge", "merge aprobado"),
-            relative_path,
         )
 
-    todo = read("TODO.md")
-    require(todo, "- [ ] **TODO-006", "TODO.md")
 
-    for behavior in (
-        "crear",
-        "continuar",
-        "inspeccionar",
-        "revisar",
-        "implementar",
-        "depurar",
-        "migrar",
-        "handoff GitHub-first",
-        "fuente durable de verdad",
-        "sin depender de chats anteriores",
-        "Codex, Claude Code y OpenCode",
-        "nunca hagas merge ni deploy sin autorización humana",
+def validate_moving(root: Path) -> None:
+    skill_handoff = section(read(root, SKILL), "8. Handoff durable obligatorio", str(SKILL))
+    skill_moving = section(skill_handoff, "`moving.md`", f"{SKILL} handoff section")
+    reference_moving = section(read(root, HANDOFF), "moving.md", str(HANDOFF))
+    reference_all = read(root, HANDOFF)
+    for source, text, adjectives in (
+        (f"{SKILL} moving.md section", skill_moving, ("corto", "estable", "navegacional")),
+        (f"{HANDOFF} moving.md section", reference_moving, ("short", "stable", "navigational")),
     ):
-        require(openai, behavior, "agents/openai.yaml")
+        for adjective in adjectives:
+            require(text.lower(), adjective, source)
+        require_regex(text, r"(no usar|do not use).*(diario|diary)", source)
 
-    require(skill, "`10minuteswebsite/agente-redes-frontend` está fuera de alcance", "SKILL.md")
-    if "/Users/" in "\n".join(
+    for destination in ("HANDOFF.md", "TODO.md", "docs/CURRENT_STATE.md"):
+        require(skill_handoff, destination, f"{SKILL} handoff section")
+        require(reference_all, destination, str(HANDOFF))
+    require_regex(
+        skill_handoff,
+        r"estado operativo mutable[\s\S]*HANDOFF\.md[\s\S]*TODO\.md[\s\S]*docs/CURRENT_STATE\.md",
+        f"{SKILL} handoff section",
+    )
+    require_regex(
+        reference_all,
+        r"Mutable operational state belongs[\s\S]*HANDOFF\.md[\s\S]*TODO\.md[\s\S]*docs/CURRENT_STATE\.md[\s\S]*not in `moving\.md`",
+        str(HANDOFF),
+    )
+    # These affirmative formulations turn moving.md into mutable session memory.
+    forbidden = (
+        r"moving\.md\s+(?:must|should|debe|incluye|contains|registra|records).*(?:current state|estado actual)",
+        r"moving\.md\s+(?:must|should|debe|incluye|contains|registra|records).*(?:completed work|trabajo completado)",
+        r"moving\.md\s+(?:must|should|debe|incluye|contains|registra|records).*(?:operational risks|riesgos operativos)",
+        r"moving\.md\s+(?:must|should|debe|incluye|contains|registra|records).*(?:PRs?|commits?).*(?:history|historial|log|registro)",
+        r"(?:use|usar) `?moving\.md`?.*(?:work diary|session diary|diario de trabajo|diario de sesi[oó]n)",
+    )
+    combined = f"{skill_handoff}\n{reference_all}"
+    for pattern in forbidden:
+        forbid_regex(combined, pattern, "moving.md policy")
+
+
+def validate_canonicality(root: Path) -> None:
+    install = read(root, "skills/omnichannel-agent-architect/INSTALL.md")
+    skill_compatibility = section(
+        read(root, SKILL), "11. Compatibilidad multiagente", str(SKILL)
+    )
+    context = read(root, "docs/PROJECT_CONTEXT.md")
+    for source, text in (
+        ("INSTALL.md", install),
+        (f"{SKILL} compatibility section", skill_compatibility),
+        ("docs/PROJECT_CONTEXT.md", context),
+    ):
+        require_regex(text, r"(candidate|proposed).*canonical", source)
+        require_regex(
+            text,
+            r"(?:becomes?|vuelve).*can[oó]nic[ao].*(?:after.*human-approved.*merge|despu[eé]s.*merge aprobado)",
+            source,
+        )
+    package = "\n".join(
         path.read_text(encoding="utf-8")
-        for path in SKILL_ROOT.rglob("*")
+        for path in sorted((root / "skills/omnichannel-agent-architect").rglob("*"))
         if path.is_file()
-    ):
-        raise AssertionError("skill package contains a personal local path")
+    )
+    forbid_regex(
+        package,
+        r"(?:draft\s+)?\b(?:branch|rama|PR|pull request)\b.{0,50}\b(?:is|es|becomes?|se vuelve)\b.{0,20}(?:the |la )?(?:effective )?(?:canonical|can[oó]nic[ao])",
+        "skill canonicality policy",
+    )
+    todo = read(root, "TODO.md")
+    require_regex(todo, r"^- \[ \] \*\*TODO-006\b", "TODO.md Now")
+    if re.search(r"^- \[[xX]\].*TODO-006\b", todo, re.MULTILINE):
+        raise ValidationError("TODO.md: TODO-006 cannot be open and completed simultaneously")
 
-    print("Omnichannel architect skill checks passed.")
+
+def yaml_scalar(text: str, key: str, source: str) -> str:
+    match = re.search(rf"^\s*{re.escape(key)}:\s*(.+?)\s*$", text, re.MULTILINE)
+    if not match:
+        raise ValidationError(f"{source}: missing YAML key {key!r}")
+    value = match.group(1).strip()
+    if len(value) < 2 or value[0] != value[-1] or value[0] not in "\"'":
+        raise ValidationError(f"{source}: {key!r} must be a quoted scalar")
+    return value[1:-1]
+
+
+def validate_openai(root: Path) -> None:
+    prompt = yaml_scalar(read(root, OPENAI), "default_prompt", str(OPENAI))
+    for capability in (
+        "crear", "continuar", "inspeccionar", "revisar", "implementar", "depurar", "migrar", "handoff"
+    ):
+        require_regex(prompt, rf"\b{capability}\b", f"{OPENAI} default_prompt")
+    for constraint in (
+        r"GitHub.*fuente durable",
+        r"reconstruye.*estado",
+        r"sin depender de chats anteriores",
+        r"Codex.*Claude Code.*OpenCode",
+        r"nunca.*merge.*sin autorizaci[oó]n humana",
+        r"nunca.*deploy.*sin autorizaci[oó]n humana",
+    ):
+        require_regex(prompt, constraint, f"{OPENAI} default_prompt")
+
+
+SECRET_PATTERNS = {
+    "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    "GitHub token": re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"),
+    "AWS access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+    "secret assignment": re.compile(
+        r"(?i)\b(?:api[_-]?key|client[_-]?secret|password)\s*[:=]\s*['\"][^'\"<>]{12,}['\"]"
+    ),
+}
+
+
+def validate_security(root: Path) -> None:
+    skill = read(root, SKILL)
+    routing = read(root, ROUTING)
+    excluded = section(routing, "Excluded", str(ROUTING))
+    require(skill, "`10minuteswebsite/agente-redes-frontend` está fuera de alcance", str(SKILL))
+    require(excluded, "`10minuteswebsite/agente-redes-frontend`", f"{ROUTING} Excluded section")
+    require_regex(excluded, r"No modificar salvo autorizaci[oó]n expl[ií]cita", f"{ROUTING} Excluded section")
+    security = section(read(root, SKILL), "14. Seguridad y autoridad humana", str(SKILL))
+    require_regex(security, r"merge sin autorizaci[oó]n", f"{SKILL} security section")
+    require_regex(security, r"desplegar sin autorizaci[oó]n", f"{SKILL} security section")
+
+    for path in sorted((root / "skills/omnichannel-agent-architect").rglob("*")):
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        if "/Users/mariodavila" in text:
+            raise ValidationError(f"{path.relative_to(root)}: personal path found")
+        for name, pattern in SECRET_PATTERNS.items():
+            if pattern.search(text):
+                raise ValidationError(f"{path.relative_to(root)}: possible embedded {name}")
+
+
+def validate_scope_description(root: Path) -> None:
+    validation = read(root, VALIDATION)
+    require_regex(validation, r"Automated structural invariants", str(VALIDATION))
+    require_regex(validation, r"Separate PR checks", str(VALIDATION))
+    require_regex(validation, r"Human review", str(VALIDATION))
+    for item in ("secret", "diff", "dependenc", "functional", "deploy"):
+        require_regex(validation, item, str(VALIDATION))
+
+
+def validate_repository(root: Path) -> None:
+    validate_routing(root)
+    validate_creation(root)
+    validate_moving(root)
+    validate_canonicality(root)
+    validate_openai(root)
+    validate_security(root)
+    validate_scope_description(root)
+
+
+@dataclass(frozen=True)
+class Mutation:
+    name: str
+    path: Path
+    mutate: Callable[[str], str]
+
+
+def replace_once(old: str, new: str) -> Callable[[str], str]:
+    def mutation(text: str) -> str:
+        if text.count(old) != 1:
+            raise AssertionError(f"mutation fixture expected exactly one occurrence of {old!r}")
+        return text.replace(old, new, 1)
+
+    return mutation
+
+
+MUTATIONS = (
+    Mutation(
+        "routing-active-before-explicit-alias",
+        SKILL,
+        replace_once(
+            "3. Alias o proyecto explícitamente mencionado por el usuario.\n4. Repositorio activo de la tarea/herramienta, solamente cuando no existe una intención explícita.",
+            "3. Repositorio activo de la tarea/herramienta, solamente cuando no existe una intención explícita.\n4. Alias o proyecto explícitamente mencionado por el usuario.",
+        ),
+    ),
+    Mutation(
+        "bootstrap-remove-handoff",
+        SKILL,
+        replace_once(
+            "- `TODO.md`\n- `HANDOFF.md`\n- `docs/PROJECT_CONTEXT.md`",
+            "- `TODO.md`\n- `docs/PROJECT_CONTEXT.md`",
+        ),
+    ),
+    Mutation(
+        "bootstrap-remove-project-context",
+        CREATION,
+        replace_once("- docs/PROJECT_CONTEXT.md\n", ""),
+    ),
+    Mutation(
+        "moving-becomes-mutable-state-log",
+        HANDOFF,
+        replace_once(
+            "Keep it short, stable, and navigational. It routes the next agent to the durable collaboration contract, backlog, current state, and other appropriate sources. Do not use it as a mutable operational diary.",
+            "moving.md must contain current state, completed work, operational risks, PR/commit history, and a session diary.",
+        ),
+    ),
+    Mutation(
+        "premature-canonicality",
+        Path("skills/omnichannel-agent-architect/INSTALL.md"),
+        replace_once(
+            "that directory is the proposed canonical skill source. It becomes canonical after the human-approved merge",
+            "that Draft PR branch is the effective canonical skill source. It becomes canonical after the human-approved merge",
+        ),
+    ),
+    Mutation(
+        "todo-006-open-and-completed",
+        Path("TODO.md"),
+        lambda text: text + "\n- [x] **TODO-006 — Publish the canonical Arquitecto Omnicanal skill**\n",
+    ),
+    Mutation(
+        "openai-remove-debug-capability",
+        OPENAI,
+        replace_once(", depurar", ""),
+    ),
+    Mutation(
+        "remove-human-merge-prohibition",
+        OPENAI,
+        replace_once("nunca hagas merge ni deploy sin autorización humana", "nunca hagas deploy sin autorización humana"),
+    ),
+    Mutation(
+        "frontend-repo-enters-scope",
+        ROUTING,
+        replace_once("No modificar salvo autorización explícita.", "Repositorio activo dentro del alcance normal."),
+    ),
+    Mutation(
+        "introduce-personal-path",
+        Path("skills/omnichannel-agent-architect/INSTALL.md"),
+        lambda text: text + "\nInstall from `/Users/mariodavila/private-skill`.\n",
+    ),
+)
+
+
+def run_mutations(root: Path) -> list[tuple[str, str]]:
+    results: list[tuple[str, str]] = []
+    with tempfile.TemporaryDirectory(prefix="omnichannel-validator-") as temp:
+        fixture = Path(temp) / "repo"
+        for mutation in MUTATIONS:
+            if fixture.exists():
+                shutil.rmtree(fixture)
+            shutil.copytree(root, fixture, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            target = fixture / mutation.path
+            target.write_text(mutation.mutate(target.read_text(encoding="utf-8")), encoding="utf-8")
+            try:
+                validate_repository(fixture)
+            except ValidationError as error:
+                results.append((mutation.name, str(error)))
+            else:
+                raise AssertionError(
+                    f"mutation {mutation.name!r} was incorrectly accepted by the validator"
+                )
+    return results
+
+
+def main() -> int:
+    validate_repository(ROOT)
+    print("Structural validation passed for the real repository content.")
+    results = run_mutations(ROOT)
+    for name, reason in results:
+        print(f"MUTATION DETECTED: {name}: {reason}")
+    print(f"Mutation testing passed: {len(results)}/{len(MUTATIONS)} invalid variants rejected.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

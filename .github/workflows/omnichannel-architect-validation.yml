@@ -1,0 +1,25 @@
+name: omnichannel-architect-validation
+
+on:
+  pull_request:
+    paths:
+      - "skills/omnichannel-agent-architect/**"
+      - "scripts/test_omnichannel_architect_skill.py"
+      - ".github/workflows/omnichannel-architect-validation.yml"
+  push:
+    paths:
+      - "skills/omnichannel-agent-architect/**"
+      - "scripts/test_omnichannel_architect_skill.py"
+      - ".github/workflows/omnichannel-architect-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  structural-validation:
+    name: omnichannel-architect-structural-validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate real content and reject mutations
+        run: python3 scripts/test_omnichannel_architect_skill.py

@@ -1,6 +1,6 @@
 # Current State
 
-**Status:** awaiting independent rereview
+**Status:** validator strengthened; awaiting remote CI and third independent review
 **Active backlog item:** TODO-006
 **Last verified:** 2026-08-13
 
@@ -29,7 +29,10 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 - Added ADR-0005 defining OpenCode as the primary operating model.
 - Added Agent Interoperability Standard v1, ADR-0006, reusable instructions/PR assets, and the `agent-handoff-check` workflow/script.
 - Corrected PR #15 routing precedence, new-repository bootstrap requirements, `moving.md` semantics, pre-merge canonicality language, OpenAI agent behavior, and cross-document consistency after independent review returned `CHANGES REQUIRED`.
-- Added `scripts/test_omnichannel_architect_skill.py`, a dependency-free regression check covering every review finding and the explicit scope exclusions.
+- Replaced the original string-search regression check with a dependency-free structural validator that extracts concrete Markdown sections and the OpenAI YAML prompt before checking localized invariants.
+- Added 10 mutation tests using only the Python standard library and temporary copies; each required invalid variant is rejected.
+- Added `.github/workflows/omnichannel-architect-validation.yml` so skill/validator changes run as a dedicated remote check.
+- Clarified that structural validation does not replace secret scanning, diff/dependency review, functional testing, deployment review, or human review.
 
 ### Decisions
 
@@ -42,13 +45,13 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 
 ### Verification
 
-- Passed after the corrections: documentation validation (94 Markdown files), secret scan, project handoff/bootstrap, GitHub-first architect, finite discovery, global instruction consistency, the dedicated Omnichannel Architect regression check, agent-handoff-check fixtures and direct PR evidence, JSON syntax, skill/agent YAML syntax, and `git diff --check`.
+- Passed after the validator changes: documentation validation (94 Markdown files), secret scan, project handoff/bootstrap, GitHub-first architect, finite discovery, global instruction consistency, structural validation of real content, all 10 mutation tests, agent-handoff-check fixtures, JSON syntax, skill/agent/workflow YAML syntax, and `git diff --check`.
 - The agent-handoff-check fixture suite passed its positive case and correctly rejected its expected negative case missing `## Durable handoff`.
 - Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15), draft, targeting `main`; no merge or deployment performed.
 
 ## Next exact step
 
-Obtain a new independent review of PR #15. TODO-006 remains active until human-approved merge; do not merge or deploy without explicit human approval.
+Commit and push the strengthened validator to the existing Draft PR #15, wait for remote CI, then obtain a third independent review. TODO-006 remains active until human-approved merge; do not merge or deploy without explicit human approval.
 
 ## Important files
 

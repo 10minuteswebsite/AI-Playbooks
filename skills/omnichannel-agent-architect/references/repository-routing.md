@@ -24,6 +24,7 @@ No modificar salvo autorización explícita.
 - explicit GitHub URL beats aliases and active tool context
 - an alias or project explicitly named by the user beats incidental active tool context
 - use the active tool repository only when the user expressed no repository/project intent
+- use GitHub search by name only after explicit intent and active context fail to resolve a repository
 - ambiguous mapping -> ask
 - if explicit intent conflicts with active context and cannot be resolved with certainty -> ask before acting
 - `continúa con el enrutador` -> `10minuteswebsite/agente-enrutador`, even when another repository is active

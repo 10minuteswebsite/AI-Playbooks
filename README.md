@@ -105,6 +105,14 @@ python3 scripts/test_omnichannel_architect_skill.py
 python3 scripts/validate_global_instructions.py
 ```
 
+The Omnichannel Architect check validates structural invariants and runs mutation
+tests against deliberately invalid temporary copies. Secret scanning, diff and
+dependency review, functional testing, deployment review, and human PR review
+remain separate checks as described in the skill's validation reference.
+
+Changes to the skill package or its validator run automatically through
+`.github/workflows/omnichannel-architect-validation.yml`.
+
 The global-instruction check is local-only because CI does not have access to a user's home-directory configuration.
 
 `templates/github-actions/documentation-quality.yml` is ready to copy into `.github/workflows/` to run both checks automatically after the publishing account is authorized with GitHub's `workflow` scope.

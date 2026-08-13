@@ -7,9 +7,9 @@ This repository is the canonical method for software and AI-agent delivery. It c
 
 - Branch: `agent/canonical-omnichannel-architect-skill`.
 - Objective: correct PR #15 so the installed Arquitecto Omnicanal v2 skill can become the canonical shared source for Codex, Claude Code, and OpenCode after independent approval and human merge.
-- Completed: reviewed merged interoperability PR #14, added the complete installed skill, resolved all requested corrections from the independent `CHANGES REQUIRED` review, and added a dependency-free regression check for those requirements. Applicable local validations pass.
+- Completed: reviewed merged interoperability PR #14, added the complete installed skill, resolved the substantive review findings, and replaced the superficial regression check with a section-aware structural validator plus 10 mutation tests. Added dedicated path-filtered CI and documented the boundary between automated invariants, separate PR checks, and human review. Applicable local validations pass.
 - Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15), draft, targeting `main`.
-- Pending: obtain a new independent review of the corrected PR #15. TODO-006 remains active until human-approved merge; merge is outside this task and no deployment applies.
+- Pending: push the validator commit, wait for its remote checks, then obtain a third independent review of PR #15. TODO-006 remains active until human-approved merge; merge is outside this task and no deployment applies.
 
 ## Decisions and constraints
 
@@ -19,7 +19,7 @@ This repository is the canonical method for software and AI-agent delivery. It c
 - Agent Interoperability Standard v1 requires durable handoff, remote commit verification, PR evidence, explicit `BLOCKED` reporting, and human-only merge/deploy by default.
 - `skills/omnichannel-agent-architect/` is the proposed canonical skill source in PR #15. It becomes canonical only after human-approved merge; local and product-managed installations are operational copies.
 - This migration does not change application code, dependencies, or deployment.
-- `scripts/test_omnichannel_architect_skill.py` protects routing order, bootstrap contents, stable `moving.md` semantics, pre-merge canonicality, OpenAI behavior, and scope safety from regression.
+- `scripts/test_omnichannel_architect_skill.py` extracts concrete Markdown/YAML sections, checks deterministic structural invariants, and rejects 10 known-invalid temporary mutations. It does not replace secret scanning, diff/dependency review, functional/deploy checks, or human judgment.
 
 ## Continuation
 
