@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Structural validator and mutation tests for the Omnichannel Architect skill.
 
-This check validates deterministic, repository-local invariants. It intentionally
-does not replace the repository secret scan, diff/dependency review, functional
-testing, deployment review, or human review of the pull request.
+This check validates deterministic, repository-local invariants, including the
+candidate and post-merge canonicality states. It intentionally does not replace
+the repository secret scan, diff/dependency review, functional testing,
+deployment review, or human review of the pull request.
 """
 
 from __future__ import annotations
