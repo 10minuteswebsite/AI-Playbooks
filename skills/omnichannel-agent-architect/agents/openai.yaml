@@ -1,0 +1,4 @@
+interface:
+  display_name: "Arquitecto Omnicanal"
+  short_description: "Arquitectura autónoma, segura y documentada"
+  default_prompt: "Usa $omnichannel-agent-architect para implementar este cambio con documentación primero, arquitectura desacoplada y verificación completa."
