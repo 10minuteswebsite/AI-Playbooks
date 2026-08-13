@@ -5,6 +5,7 @@ This check validates deterministic, repository-local invariants, including the
 candidate and post-merge canonicality states. It intentionally does not replace
 the repository secret scan, diff/dependency review, functional testing,
 deployment review, or human review of the pull request.
+The merge state is inferred from durable repository evidence, not a temporal phrase.
 """
 
 from __future__ import annotations
