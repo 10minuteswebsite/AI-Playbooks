@@ -1,6 +1,6 @@
 # Current State
 
-**Status:** validator strengthened; awaiting remote CI and third independent review
+**Status:** isolated mutation regression fixed; awaiting remote CI and third independent review
 **Active backlog item:** TODO-006
 **Last verified:** 2026-08-13
 
@@ -30,7 +30,7 @@ Correct PR #15 so the proposed Arquitecto Omnicanal v2 skill can become the sing
 - Added Agent Interoperability Standard v1, ADR-0006, reusable instructions/PR assets, and the `agent-handoff-check` workflow/script.
 - Corrected PR #15 routing precedence, new-repository bootstrap requirements, `moving.md` semantics, pre-merge canonicality language, OpenAI agent behavior, and cross-document consistency after independent review returned `CHANGES REQUIRED`.
 - Replaced the original string-search regression check with a dependency-free structural validator that extracts concrete Markdown sections and the OpenAI YAML prompt before checking localized invariants.
-- Added 10 mutation tests using only the Python standard library and temporary copies; each required invalid variant is rejected.
+- Added 10 mutation tests using only the Python standard library and temporary copies; each required invalid variant is rejected. The `moving-becomes-mutable-state-log` fixture now preserves `short`, `stable`, and `navigational` and asserts rejection specifically from the mutable `moving.md` policy.
 - Added `.github/workflows/omnichannel-architect-validation.yml` so skill/validator changes run as a dedicated remote check.
 - Clarified that structural validation does not replace secret scanning, diff/dependency review, functional testing, deployment review, or human review.
 - Corrected a contradiction exposed by remote CI: `agent-handoff-check` now requires `HANDOFF.md`, `TODO.md`, and `docs/CURRENT_STATE.md` for substantive changes instead of requiring a mutable update to stable, navigational `moving.md`.

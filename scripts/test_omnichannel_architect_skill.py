@@ -338,7 +338,7 @@ MUTATIONS = (
         HANDOFF,
         replace_once(
             "Keep it short, stable, and navigational. It routes the next agent to the durable collaboration contract, backlog, current state, and other appropriate sources. Do not use it as a mutable operational diary.",
-            "moving.md must contain current state, completed work, operational risks, PR/commit history, and a session diary.",
+            "Keep it short, stable, and navigational. It routes the next agent to the durable collaboration contract, backlog, current state, and other appropriate sources. Do not use it as a mutable operational diary. moving.md must contain current state, completed work, operational risks, PR/commit history, and a session diary.",
         ),
     ),
     Mutation(
@@ -388,8 +388,20 @@ def run_mutations(root: Path) -> list[tuple[str, str]]:
             target = fixture / mutation.path
             target.write_text(mutation.mutate(target.read_text(encoding="utf-8")), encoding="utf-8")
             try:
+                if mutation.name == "moving-becomes-mutable-state-log":
+                    mutated_moving = section(
+                        read(fixture, HANDOFF), "moving.md", f"{HANDOFF} moving.md section"
+                    ).lower()
+                    for adjective in ("short", "stable", "navigational"):
+                        require(mutated_moving, adjective, "moving.md mutation preservation")
                 validate_repository(fixture)
             except ValidationError as error:
+                if mutation.name == "moving-becomes-mutable-state-log":
+                    if "moving.md policy" not in str(error):
+                        raise AssertionError(
+                            "moving-becomes-mutable-state-log was rejected for a reason "
+                            f"other than mutable moving.md policy: {error}"
+                        ) from error
                 results.append((mutation.name, str(error)))
             else:
                 raise AssertionError(
