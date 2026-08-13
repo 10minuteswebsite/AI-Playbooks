@@ -34,10 +34,10 @@ Keep `AGENTS.md` and `opencode.json` in each repository.
 
 Do not fork the skill into a separate "OpenCode architect".
 
-## Canonical GitHub source
+## Candidate canonical GitHub source
 
-After validation, commit the canonical copy to:
+Commit the candidate source under review to:
 
 `10minuteswebsite/AI-Playbooks/skills/omnichannel-agent-architect/`
 
-Future changes happen there first, then operational installations are updated from that source.
+Until its introducing Pull Request receives human approval and is merged, that directory is the proposed canonical skill source. It becomes canonical after the human-approved merge; future changes then happen there first and operational installations are updated from that source.

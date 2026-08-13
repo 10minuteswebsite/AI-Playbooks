@@ -6,10 +6,12 @@ Prioridad:
 
 1. owner/repo explícito
 2. URL GitHub
-3. repo activo en herramientas
-4. alias inequívoco
+3. alias o proyecto explícitamente mencionado por el usuario
+4. repo activo en herramientas, solo si no existe intención explícita
 5. búsqueda GitHub
 6. pregunta corta
+
+La intención explícita prevalece sobre un repositorio activo incidental. Si ambos contextos se contradicen y la intención no se puede resolver con certeza, preguntar antes de actuar.
 
 ## B. Verificar existencia
 

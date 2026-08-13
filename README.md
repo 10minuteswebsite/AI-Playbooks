@@ -18,7 +18,7 @@ playbooks/
   profiles/                   Project-type guidance
   roles/                      Responsibility-specific guidance
 skills/
-  omnichannel-agent-architect/ Canonical shared Architect skill
+  omnichannel-agent-architect/ Candidate shared Architect skill (PR #15)
 templates/
   ...                         Planning, architecture, risk, AI, release, and operations
   project/                    OpenCode project structure and compatibility files
@@ -40,7 +40,7 @@ The architect works GitHub-first. It identifies or requests the repository, veri
 
 The [Agent Interoperability Standard v1](docs/standards/agent-interoperability-v1.md) defines durable session bootstrap, handoff, commit/push/PR evidence, `BLOCKED` behavior, and human-only merge/deploy boundaries for Codex, OpenCode, Claude Code, and future agents.
 
-The canonical shared Arquitecto Omnicanal skill lives in [`skills/omnichannel-agent-architect/`](skills/omnichannel-agent-architect/). Codex, Claude Code, and OpenCode installations use that same version; product-local copies are operational installations, not independent sources of truth.
+PR #15 proposes [`skills/omnichannel-agent-architect/`](skills/omnichannel-agent-architect/) as the single shared Arquitecto Omnicanal skill source. It becomes canonical only after a human-approved merge. Codex, Claude Code, and OpenCode installations will then use that same version; product-local copies remain operational installations, not independent sources of truth.
 
 Every newly bootstrapped project includes a compact OpenCode entry point. When starting a new OpenCode session, say:
 

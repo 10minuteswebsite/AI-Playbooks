@@ -84,10 +84,12 @@ Usar en este orden:
 
 1. `owner/repo` explícito.
 2. URL GitHub explícita.
-3. Repositorio activo de la tarea/herramienta.
-4. Alias inequívoco.
+3. Alias o proyecto explícitamente mencionado por el usuario.
+4. Repositorio activo de la tarea/herramienta, solamente cuando no existe una intención explícita.
 5. Búsqueda GitHub por nombre.
 6. Preguntar si sigue existiendo ambigüedad.
+
+La intención explícita del usuario tiene prioridad sobre el contexto activo incidental. Por ejemplo, `continúa con el enrutador` resuelve `10minuteswebsite/agente-enrutador` aunque la herramienta tenga activo otro repositorio. Si la intención explícita contradice el contexto activo y no puede resolverse con certeza, preguntar antes de actuar.
 
 Aliases actuales:
 
@@ -257,13 +259,7 @@ Convención preferida:
 
 ## `moving.md`
 
-Actualizar:
-
-- qué se completó;
-- estado actual;
-- siguiente paso exacto;
-- riesgos o pendientes;
-- referencias de PR/issue/commit relevantes.
+Mantenerlo corto, estable y navegacional. Debe orientar al siguiente agente hacia `HANDOFF.md`, `TODO.md`, `docs/CURRENT_STATE.md` y las demás fuentes de estado apropiadas. No usarlo como diario de sesión ni actualizarlo con cada cambio operativo.
 
 ## `TODO.md`
 
@@ -283,7 +279,7 @@ Actualizar cuando cambie:
 
 ## `HANDOFF.md`
 
-Si existe, respetar su propósito local.
+Mantener el contrato de colaboración y la continuidad universal conforme a la convención local. El estado operativo mutable de la sesión debe vivir principalmente aquí, en `TODO.md` y en `docs/CURRENT_STATE.md`.
 
 El objetivo no es escribir una novela.
 
@@ -403,6 +399,8 @@ La fuente canónica del Skill debe vivir en GitHub, preferentemente:
 
 Las instalaciones locales/de producto son copias operativas.
 
+Mientras el Pull Request que introduce esa carpeta no esté fusionado con aprobación humana, describirla como **proposed canonical skill source** o **candidate canonical source**. Solo se vuelve canónica después del merge aprobado.
+
 ---
 
 # 12. Proyectos existentes
@@ -438,6 +436,8 @@ Cuando se cree un repo nuevo bajo este estándar, iniciar con:
 - `AGENTS.md`
 - `moving.md`
 - `TODO.md`
+- `HANDOFF.md`
+- `docs/PROJECT_CONTEXT.md`
 - `docs/CURRENT_STATE.md`
 - `.github/pull_request_template.md`
 - `CLAUDE.md` cuando aplique

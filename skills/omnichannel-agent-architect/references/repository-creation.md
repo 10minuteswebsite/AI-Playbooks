@@ -36,10 +36,13 @@ New 10minuteswebsite project should start with:
 - AGENTS.md
 - moving.md
 - TODO.md
+- HANDOFF.md
+- docs/PROJECT_CONTEXT.md
 - docs/CURRENT_STATE.md
 - .github/pull_request_template.md
-- CLAUDE.md if useful
-- opencode.json if OpenCode is intended
+- CLAUDE.md when applicable
+- opencode.json when applicable
+- agent-handoff-check when the canonical standard requires it
 
 Read current AI-Playbooks standard before generating these.
 

@@ -1,12 +1,7 @@
 # Durable handoff
 
 ## moving.md
-Keep current:
-- completed
-- current state
-- next step
-- blockers/risks
-- relevant refs
+Keep it short, stable, and navigational. It routes the next agent to the durable collaboration contract, backlog, current state, and other appropriate sources. Do not use it as a mutable operational diary.
 
 ## TODO.md
 Update when task state changes.
@@ -15,7 +10,9 @@ Update when task state changes.
 Update when architecture/runtime/integration/deploy state changes.
 
 ## HANDOFF.md
-Follow local repo convention if present.
+Follow the local repository convention and keep the collaboration contract usable by any supported agent.
+
+Mutable operational state belongs primarily in `HANDOFF.md`, `TODO.md`, and `docs/CURRENT_STATE.md`, not in `moving.md`.
 
 ## Git evidence
 Before saying complete:

@@ -6,10 +6,10 @@ This repository is the canonical method for software and AI-agent delivery. It c
 ## Current work
 
 - Branch: `agent/canonical-omnichannel-architect-skill`.
-- Objective: publish the installed Arquitecto Omnicanal v2 skill as the canonical shared source for Codex, Claude Code, and OpenCode.
-- Completed: reviewed merged interoperability PR #14, added the complete installed skill plus minimal canonical-source documentation, and passed all applicable validations.
+- Objective: correct PR #15 so the installed Arquitecto Omnicanal v2 skill can become the canonical shared source for Codex, Claude Code, and OpenCode after independent approval and human merge.
+- Completed: reviewed merged interoperability PR #14, added the complete installed skill, and resolved all requested corrections from the independent `CHANGES REQUIRED` review. Applicable local validations pass.
 - Pull Request: [#15](https://github.com/10minuteswebsite/AI-Playbooks/pull/15), draft, targeting `main`.
-- Pending: human review and authorized merge only; no deployment applies.
+- Pending: obtain a new independent review of the corrected PR #15. TODO-006 remains active until human-approved merge; merge is outside this task and no deployment applies.
 
 ## Decisions and constraints
 
@@ -17,12 +17,12 @@ This repository is the canonical method for software and AI-agent delivery. It c
 - `moving.md` is the universal entry point. Context is read progressively through `HANDOFF.md`, `docs/CURRENT_STATE.md`, `TODO.md`, and only the next relevant artifacts.
 - OpenCode is the primary operating platform per ADR-0005. Existing Codex and Claude files are preserved only as legacy compatibility artifacts. OpenCode receives a standard `opencode.json` remote instruction pointing to the public canonical bootstrap; no keys or secrets belong there.
 - Agent Interoperability Standard v1 requires durable handoff, remote commit verification, PR evidence, explicit `BLOCKED` reporting, and human-only merge/deploy by default.
-- `skills/omnichannel-agent-architect/` is the canonical shared skill; local and product-managed installations are operational copies.
+- `skills/omnichannel-agent-architect/` is the proposed canonical skill source in PR #15. It becomes canonical only after human-approved merge; local and product-managed installations are operational copies.
 - This migration does not change application code, dependencies, or deployment.
 
 ## Continuation
 
-Read `docs/CURRENT_STATE.md`, then `TODO.md` item `TODO-006`. Use current Git history as evidence. Do not reconstruct this work from chat.
+Read `docs/CURRENT_STATE.md`, then active item `TODO-006` in `TODO.md`. Use current Git history and PR #15 as evidence. Do not reconstruct this work from chat.
 
 ## Session close
 
